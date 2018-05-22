@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.lrony.iread.R;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
+import com.lrony.iread.util.KLog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -88,7 +89,7 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
             @Override
             public void onPageSelected(int position) {
                 // Fragment切换了
-                Log.d(TAG, "onPageSelected: " + position);
+                KLog.d(TAG, "onPageSelected: " + position);
                 swichTab(position);
             }
 
@@ -122,7 +123,7 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
 
     // 切换Tab
     private void swichTab(int position) {
-        Log.d(TAG, "swichTab: " + position);
+        KLog.d(TAG, "swichTab: " + position);
         if (position == 0) {
             mTvLocal.setSelected(true);
             mTvOnline.setSelected(false);
@@ -138,7 +139,9 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (AppConfig.isNightMode()) {
+                boolean isNight = AppConfig.isNightMode();
+                KLog.d(TAG, "isNight = " + isNight);
+                if (isNight) {
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     AppConfig.setNightMode(false);
                 } else {
