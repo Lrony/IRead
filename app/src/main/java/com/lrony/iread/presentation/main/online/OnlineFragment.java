@@ -50,6 +50,6 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         super.onViewCreated(view, savedInstanceState);
         getPresenter().start();
 
-        mStatusView.showEmpty();
+        mStatusView.showLoading();
     }
 }
