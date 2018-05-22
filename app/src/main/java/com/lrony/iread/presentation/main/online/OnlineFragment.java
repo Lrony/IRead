@@ -1,6 +1,5 @@
 package com.lrony.iread.presentation.main.online;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import com.lrony.iread.R;
 import com.lrony.iread.mvp.MvpFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Lrony on 18-5-22.
