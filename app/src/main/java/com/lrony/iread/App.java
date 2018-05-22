@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
+import com.lrony.iread.model.db.DBRepository;
 import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.util.KLog;
 
@@ -32,6 +33,7 @@ public class App extends Application {
         super.onCreate();
 
         AppManager.init(this);
+        DBRepository.initDatabase(this);
         KLog.init(BuildConfig.DEBUG);
         initTheme();
     }
