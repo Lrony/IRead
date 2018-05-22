@@ -1,5 +1,6 @@
 package com.lrony.iread.presentation.main.local;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

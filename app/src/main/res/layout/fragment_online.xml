@@ -5,8 +5,5 @@
 
     <!-- 由于加入了夜间模式，背景色和前景色都需要注意 -->
 
-    <TextView
-        android:text="@string/tab_main_online"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/include_recycler_status_view" />
 </RelativeLayout>
