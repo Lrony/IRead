@@ -31,8 +31,8 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        AppManager.init(this);
         KLog.init(BuildConfig.DEBUG);
-
         initTheme();
     }
 

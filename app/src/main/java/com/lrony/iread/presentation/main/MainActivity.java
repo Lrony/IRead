@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -16,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lrony.iread.AppManager;
 import com.lrony.iread.R;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
@@ -180,7 +180,7 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
                     firstTime = secondTime;
                     return true;
                 } else {
-                    System.exit(0);
+                    AppManager.getInstance().exit();
                 }
                 break;
         }
