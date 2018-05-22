@@ -1,6 +1,8 @@
 package com.lrony.iread.model.remote;
 
 import com.lrony.iread.model.bean.BookDetailBean;
+import com.lrony.iread.model.bean.packages.BillBookPackage;
+import com.lrony.iread.model.bean.packages.BillboardPackage;
 import com.lrony.iread.model.bean.packages.BookChapterPackage;
 import com.lrony.iread.model.bean.packages.BookSortPackage;
 import com.lrony.iread.model.bean.packages.BookSubSortPackage;
@@ -143,4 +145,23 @@ public interface BookApi {
      */
     @GET("/book/fuzzy-search")
     Single<SearchBookPackage> getSearchBookPackage(@Query("query") String query);
+
+    /**
+     * 获取所有排行榜
+     *
+     * @return
+     */
+    @GET("/ranking/gender")
+    Single<BillboardPackage> getBillboardPackage();
+
+    /**
+     * 获取单一排行榜
+     * 周榜：rankingId-> _id
+     * 月榜：rankingId-> monthRank
+     * 总榜：rankingId-> totalRank
+     *
+     * @return
+     */
+    @GET("/ranking/{rankingId}")
+    Single<BillBookPackage> getBillBookPackage(@Path("rankingId") String rankingId);
 }
