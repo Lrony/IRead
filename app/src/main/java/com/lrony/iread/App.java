@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.lrony.iread.pref.AppConfig;
+import com.lrony.iread.util.KLog;
 
 /**
  * Created by Lrony on 18-5-21.
@@ -18,6 +19,7 @@ public class App extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+
         mContext = this;
     }
 
@@ -28,6 +30,9 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        KLog.init(BuildConfig.DEBUG);
+
         initTheme();
     }
 
