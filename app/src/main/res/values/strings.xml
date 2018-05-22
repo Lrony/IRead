@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">IRead</string>
+
+    <string name="tab_main_local">本地图书</string>
+    <string name="tab_main_online">在线图书</string>
+    <string name="menu_main_settings">系统设置</string>
+    <string name="menu_main_night">夜间模式</string>
 </resources>

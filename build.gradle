@@ -19,7 +19,8 @@ ext {
             rxandroidVersion    : "2.0.1",
             retrofitVersion     : "2.4.0",
             greendaoVersion     : "3.2.2",
-            loggerVersion       : "2.2.0"
+            loggerVersion       : "2.2.0",
+            butterknifeVersion  : "8.8.1"
     ]
 
 }

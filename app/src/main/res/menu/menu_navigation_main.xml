@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_setting"
+            android:icon="@drawable/ic_vct_settings"
+            android:title="@string/menu_main_settings" />
+        <item
+            android:id="@+id/action_night"
+            android:icon="@drawable/ic_vct_brightness"
+            android:title="@string/menu_main_night" />
+    </group>
+</menu>

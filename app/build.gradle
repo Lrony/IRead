@@ -52,6 +52,8 @@ dependencies {
         transitive = true
     }
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    implementation 'com.jakewharton:butterknife:' + libs.butterknifeVersion
+    annotationProcessor 'com.jakewharton:butterknife-compiler:' + libs.butterknifeVersion
     // RxJava
     implementation 'io.reactivex.rxjava2:rxandroid:' + libs.rxjavaVersion
     implementation 'io.reactivex.rxjava2:rxjava:' + libs.rxandroidVersion
