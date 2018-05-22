@@ -17,4 +17,6 @@
 
     <dimen name="self_line_height">48dp</dimen>
     <dimen name="load_more_height">48dp</dimen>
+
+    <dimen name="tab_text_padding">8dp</dimen>
 </resources>

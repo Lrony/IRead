@@ -1,4 +1,4 @@
-package com.lrony.iread.presentation;
+package com.lrony.iread.presentation.main;
 
 import com.lrony.iread.mvp.MvpBasePresenter;
 

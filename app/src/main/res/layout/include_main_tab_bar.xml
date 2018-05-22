@@ -27,6 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:paddingBottom="@dimen/tab_text_padding"
+            android:paddingLeft="@dimen/tab_text_padding"
+            android:paddingTop="@dimen/tab_text_padding"
             android:text="@string/tab_main_local"
             android:textColor="@drawable/selector_main_tab_bar_text_color"
             android:textSize="15sp" />
@@ -37,6 +40,9 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:gravity="center"
+            android:paddingBottom="@dimen/tab_text_padding"
+            android:paddingRight="@dimen/tab_text_padding"
+            android:paddingTop="@dimen/tab_text_padding"
             android:text="@string/tab_main_online"
             android:textColor="@drawable/selector_main_tab_bar_text_color"
             android:textSize="15sp" />
