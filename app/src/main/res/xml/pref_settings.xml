@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--CheckBoxPreference-->
+    <!--DialogPreference-->
+    <!--EditTextPreference-->
+    <!--ListPreference-->
+    <!--MultiSelectListPreference-->
+    <!--RingtonPreference-->
+    <!--SwitchPreference-->
+    <!--TowStatePreference-->
+
+    <PreferenceCategory
+        android:key="@string/pref_key_group_settings"
+        android:title="@string/pref_title_group_settings">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_mode_night"
+            android:title="@string/pref_title_mode_night" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_key_group_read"
+        android:title="@string/pref_title_group_read">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_mode_read_volumekey"
+            android:title="@string/pref_title_mode_read_volumekey" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_mode_read_fullscreen"
+            android:title="@string/pref_title_mode_read_fullscreen" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -151,10 +151,11 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
         mDrawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.action_setting:
-                showToast("Who do it...");
+                AppRouter.showSettingsActivity(this);
                 break;
             case R.id.action_night:
-                swichNightMode();
+                // 加个延时，等待侧边栏关闭后再切换模式
+                new Handler().postDelayed(() -> swichNightMode(), 500);
                 break;
         }
         return false;

@@ -29,19 +29,16 @@ public class BaseActivity extends BaseSuperActivity {
 
     // 设置夜间模式
     public void swichNightMode() {
-        // 加个延时，等待侧边栏关闭后再切换模式
-        new Handler().postDelayed(() -> {
-            boolean isNight = AppConfig.isNightMode();
-            KLog.d(TAG, "isNight = " + isNight);
-            if (isNight) {
-                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                AppConfig.setNightMode(false);
-            } else {
-                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                AppConfig.setNightMode(true);
-            }
-            recreate();
-        }, 500);
+        boolean isNight = AppConfig.isNightMode();
+        KLog.d(TAG, "isNight = " + isNight);
+        if (isNight) {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            AppConfig.setNightMode(false);
+        } else {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            AppConfig.setNightMode(true);
+        }
+        recreate();
     }
 
     public void bindOnClickLister(View.OnClickListener listener, @IdRes int... ids) {

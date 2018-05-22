@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 
 import com.lrony.iread.presentation.search.SearchActivity;
+import com.lrony.iread.presentation.settings.SettingsActivity;
 
 /**
  * Created by Lrony on 18-5-21.
@@ -38,5 +39,10 @@ public class AppRouter {
     // 打开搜索，带搜索内容
     public static void showSearchActivity(Context context, String keyword) {
         context.startActivity(SearchActivity.newIntent(context, keyword));
+    }
+
+    // 打开设置
+    public static void showSettingsActivity(Context context) {
+        context.startActivity(SettingsActivity.newIntent(context));
     }
 }

@@ -2,7 +2,7 @@
     <string name="app_name">IRead</string>
     <string name="app_double_click_exit">再按一次退出</string>
 
-    <string name="tab_main_local">本地图书</string>
+    <string name="tab_main_local">本地书架</string>
     <string name="tab_main_online">在线图书</string>
     <string name="menu_main_settings">系统设置</string>
     <string name="menu_main_night">夜间模式</string>
@@ -12,4 +12,6 @@
     <string name="search_clear_history">清除搜索记录</string>
 
     <string name="empty_book">多读书，读好书，马上去书城发现好书</string>
+
+    <string name="settings_title">系统设置</string>
 </resources>

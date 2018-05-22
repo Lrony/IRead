@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--key-->
+    <string name="pref_key_group_settings">pref_key_app_settings</string>
+    <string name="pref_key_mode_night">pref_key_app_night</string>
+    <string name="pref_key_group_read">pref_key_app_read</string>
+    <string name="pref_key_mode_read_volumekey">pref_key_mode_read_volumekey</string>
+    <string name="pref_key_mode_read_fullscreen">pref_key_mode_read_fullscreen</string>
+
+    <!--title-->
+    <string name="pref_title_group_settings">软件设置</string>
+    <string name="pref_title_mode_night">夜间模式</string>
+    <string name="pref_title_group_read">阅读器</string>
+    <string name="pref_title_mode_read_volumekey">音量键翻页</string>
+    <string name="pref_title_mode_read_fullscreen">全屏阅读</string>
+</resources>
