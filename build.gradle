@@ -1,14 +1,38 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+ext {
+    //项目版本
+    configuration = [
+            package              : "com.lrony.iread",
+            buildToolsVersion    : "27.0.3",
+            compileVersion       : 27,
+            minSdk               : 15,
+            targetSdk            : 27,
+            version_code         : 100,
+            version_name         : "v1.0.0",
+    ]
+
+    //对一些库的版本进行统一管理
+    libraries = [
+            supportVersion      : "27.1.1",
+            rxjavaVersion       : "2.0.1",
+            rxandroidVersion    : "2.0.1",
+            retrofitVersion     : "2.4.0",
+            greendaoVersion     : "3.2.2",
+            loggerVersion       : "2.2.0"
+    ]
+
+}
+
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
-        
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -19,6 +43,13 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
+        maven { url "https://jitpack.io" }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
     }
 }
 
