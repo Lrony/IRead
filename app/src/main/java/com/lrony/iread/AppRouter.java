@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
+import com.lrony.iread.presentation.search.SearchActivity;
+
 /**
  * Created by Lrony on 18-5-21.
  * APP路由，Activity跳转等操作在这包装好方法
@@ -26,5 +28,15 @@ public class AppRouter {
             localIntent.putExtra("com.android.settings.ApplicationPkgName", context.getPackageName());
         }
         context.startActivity(localIntent);
+    }
+
+    // 打开搜索
+    public static void showSearchActivity(Context context) {
+        showSearchActivity(context, null);
+    }
+
+    // 打开搜索，带搜索内容
+    public static void showSearchActivity(Context context, String keyword) {
+        context.startActivity(SearchActivity.newIntent(context, keyword));
     }
 }

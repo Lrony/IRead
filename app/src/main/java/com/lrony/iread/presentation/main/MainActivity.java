@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lrony.iread.AppManager;
+import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
@@ -48,6 +49,17 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 判断是否需要刷新Activity来应用夜间模式切换所导致的更改，Activity必须配置
+        if (savedInstanceState == null) {
+            boolean isNight = AppConfig.isNightMode();
+            KLog.d(TAG, "initTheme isNight = " + isNight);
+            if (isNight) {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }
+
         setContentView(R.layout.activity_main);
         // 使用ButterKnife代替findview
         ButterKnife.bind(this);
@@ -110,7 +122,7 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.iv_search:
-                showToast("Who do it...");
+                AppRouter.showSearchActivity(this);
                 break;
             case R.id.tv_local:
                 mViewPager.setCurrentItem(0);
@@ -133,26 +145,6 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
         }
     }
 
-    // 设置夜间模式
-    private void setNightMode() {
-        // 加个延时，等待侧边栏关闭后再切换模式
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                boolean isNight = AppConfig.isNightMode();
-                KLog.d(TAG, "isNight = " + isNight);
-                if (isNight) {
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    AppConfig.setNightMode(false);
-                } else {
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    AppConfig.setNightMode(true);
-                }
-                recreate();
-            }
-        }, 500);
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // 关闭侧边栏
@@ -162,7 +154,7 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
                 showToast("Who do it...");
                 break;
             case R.id.action_night:
-                setNightMode();
+                swichNightMode();
                 break;
         }
         return false;

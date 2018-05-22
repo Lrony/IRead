@@ -9,9 +9,22 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorGrounding</item>
+        <item name="android:listDivider">@drawable/bg_list_divider</item>
 
         <item name="android:textColor">@color/textPrimary</item>
         <item name="android:textColorSecondary">@color/textSecondary</item>
+    </style>
+
+    <style name="ToolbarMenu">
+        <item name="android:background">?attr/actionBarItemBackground</item>
+        <item name="android:minWidth">36dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingRight">8dp</item>
     </style>
 
 </resources>

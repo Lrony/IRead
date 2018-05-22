@@ -8,6 +8,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorGrounding</item>
+        <item name="android:listDivider">@drawable/bg_list_divider</item>
 
         <item name="android:textColor">@color/textPrimary</item>
         <item name="android:textColorSecondary">@color/textSecondary</item>
