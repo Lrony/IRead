@@ -25,5 +25,17 @@
     </string>
     <string name="bookdetail_similar_book_recommend">同类小说推荐</string>
     <string name="bookdetail_more">更多</string>
+    <string name="bookdetail_book_download">缓存全书</string>
+    <string name="bookdetail_add_bookcase">加入书架</string>
+    <string name="bookdetail_add_book_have">已在书架</string>
+    <string name="bookdetail_open_book">免费阅读</string>
+    <string name="bookdetail_finished">已完结</string>
+    <string name="bookdetail_newchapter">最新章节: </string>
+    <string name="bookdetail_not_finished">连载中</string>
+    <string name="bookdetail_book_create_date">上架时间: </string>
+    <string name="bookdetail_open_error">信息加载失败</string>
+    <string name="bookdetail_recommend_book_list_load_error">推荐书籍获取失败</string>
+    <string name="bookdetail_is_delete_book">是否从书架移除</string>
+    <string name="bookdetail_add_book_ok">已加入书架</string>
 
 </resources>

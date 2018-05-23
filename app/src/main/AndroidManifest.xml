@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".presentation.search.SearchActivity" />
         <activity android:name=".presentation.settings.SettingsActivity"></activity>
-        <activity android:name=".presentation.main.book.detail.BookDetailActivity"></activity>
+        <activity android:name=".presentation.book.detail.BookDetailActivity"></activity>
     </application>
 
 </manifest>

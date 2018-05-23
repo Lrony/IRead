@@ -1,4 +1,4 @@
-package com.lrony.iread.presentation.main.book.detail;
+package com.lrony.iread.presentation.book.detail;
 
 import com.lrony.iread.model.remote.RemoteRepository;
 import com.lrony.iread.mvp.MvpBasePresenter;

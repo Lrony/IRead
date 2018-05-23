@@ -100,7 +100,7 @@
             </android.support.v4.widget.NestedScrollView>
         </FrameLayout>
 
-        <!--<include layout="@layout/compat_layout_book_detail_bottom" />-->
+        <include layout="@layout/compat_layout_book_detail_bottom" />
 
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>
