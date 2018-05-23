@@ -1,6 +1,7 @@
 package com.lrony.iread.model.remote;
 
 import com.lrony.iread.model.bean.BookDetailBean;
+import com.lrony.iread.model.bean.BookDetailRecommendBookBean;
 import com.lrony.iread.model.bean.packages.RecommendBookPackage;
 import com.lrony.iread.model.bean.packages.SearchBookPackage;
 
@@ -69,6 +70,17 @@ public class RemoteRepository {
      */
     public Single<BookDetailBean> getBookDetail(String bookId) {
         return mBookApi.getBookDetail(bookId);
+    }
+
+    /**
+     * 获取书籍推荐书籍
+     *
+     * @param bookId
+     * @return
+     */
+    public Single<List<BookDetailRecommendBookBean>> getDetailRecommendBookPackage(String bookId) {
+        return mBookApi.getDetailRecommendBookPackage(bookId)
+                .map(bean -> bean.getBooks());
     }
 
 }

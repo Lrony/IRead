@@ -7,6 +7,7 @@ import com.lrony.iread.model.bean.packages.BookChapterPackage;
 import com.lrony.iread.model.bean.packages.BookSortPackage;
 import com.lrony.iread.model.bean.packages.BookSubSortPackage;
 import com.lrony.iread.model.bean.packages.ChapterInfoPackage;
+import com.lrony.iread.model.bean.packages.DetailRecommendBookPackage;
 import com.lrony.iread.model.bean.packages.HotCommentPackage;
 import com.lrony.iread.model.bean.packages.KeyWordPackage;
 import com.lrony.iread.model.bean.packages.RecommendBookListPackage;
@@ -95,6 +96,15 @@ public interface BookApi {
      */
     @GET("/post/review/best-by-book")
     Single<HotCommentPackage> getHotCommnentPackage(@Query("book") String book);
+
+    /**
+     * 根据书籍ID获取推荐书籍
+     *
+     * @param bookId
+     * @return
+     */
+    @GET("/book/{bookId}/recommend")
+    Single<DetailRecommendBookPackage> getDetailRecommendBookPackage(@Path("bookId") String bookId);
 
     /**
      * 书籍推荐书单
