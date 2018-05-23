@@ -2,6 +2,7 @@ package com.lrony.iread.model.remote;
 
 import com.lrony.iread.model.bean.BookDetailBean;
 import com.lrony.iread.model.bean.BookDetailRecommendBookBean;
+import com.lrony.iread.model.bean.SortBookBean;
 import com.lrony.iread.model.bean.packages.RecommendBookPackage;
 import com.lrony.iread.model.bean.packages.SearchBookPackage;
 
@@ -80,6 +81,22 @@ public class RemoteRepository {
      */
     public Single<List<BookDetailRecommendBookBean>> getDetailRecommendBookPackage(String bookId) {
         return mBookApi.getDetailRecommendBookPackage(bookId)
+                .map(bean -> bean.getBooks());
+    }
+
+    /**
+     * 按分类获取书籍列表
+     *
+     * @param gender
+     * @param type
+     * @param major
+     * @param minor
+     * @param start
+     * @param limit
+     * @return
+     */
+    public Single<List<SortBookBean>> getSortBookPackage(String gender, String type, String major, String minor, int start, int limit) {
+        return mBookApi.getSortBookPackage(gender, type, major, minor, start, limit)
                 .map(bean -> bean.getBooks());
     }
 

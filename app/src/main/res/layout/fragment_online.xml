@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <!-- 由于加入了夜间模式，背景色和前景色都需要注意 -->
 
-    <RelativeLayout
-        android:background="@color/colorForeground"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <View
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@color/colorPrimary" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorForeground">
 
-        <com.youth.banner.Banner
-            android:id="@+id/banner"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/colorPrimary" />
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp" />
+        </RelativeLayout>
+
+        <include layout="@layout/view_online_type" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp" />
-    </RelativeLayout>
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
-    <include layout="@layout/view_online_type" />
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

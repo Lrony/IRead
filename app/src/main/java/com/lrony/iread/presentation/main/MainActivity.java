@@ -122,8 +122,7 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.iv_search:
-//                AppRouter.showSearchActivity(this);
-                AppRouter.showBookDetailActivity(this,"1");
+                AppRouter.showSearchActivity(this);
                 break;
             case R.id.tv_local:
                 mViewPager.setCurrentItem(0);
