@@ -5,8 +5,8 @@
 
     <!-- 由于加入了夜间模式，背景色和前景色都需要注意 -->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/colorPrimary" />
+    <TextView
+        android:text="@string/tab_main_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
