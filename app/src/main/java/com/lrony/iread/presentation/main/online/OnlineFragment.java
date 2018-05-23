@@ -30,12 +30,6 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
     @BindView(R.id.banner)
     Banner mBanner;
-    @BindView(R.id.multiple_status_view)
-    MultipleStatusView mStatusView;
-    @BindView(R.id.refresh_view)
-    SwipeRefreshLayout mRefreshView;
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
 
     private List<String> mBanners = new ArrayList<>();
 
@@ -60,7 +54,6 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         super.onViewCreated(view, savedInstanceState);
         getPresenter().start();
         initView();
-        mStatusView.showLoading();
     }
 
     private void initView() {

@@ -26,6 +26,4 @@
     </RelativeLayout>
 
     <include layout="@layout/view_online_type" />
-
-    <include layout="@layout/include_recycler_status_view" />
 </LinearLayout>
