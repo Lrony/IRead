@@ -13,8 +13,10 @@ public interface OnlineContract {
 
     interface View extends MvpView {
 
+        // 男生热门书籍获取完毕
         void finishLoadMaleBooks(List<SortBookBean> books);
 
+        // 女生热门书籍获取完毕
         void finishLoadFemaleBooks(List<SortBookBean> books);
     }
 

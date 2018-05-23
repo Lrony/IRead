@@ -45,6 +45,8 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
     // 轮播图滚动间隔
     private static final int BANNER_SCROLL_TIME = 2300;
+    // 热门书籍获取数量
+    private static final int HOT_BOOK_GET_NUMBER = 5;
 
     private List<String> mBanners = new ArrayList<>();
 
@@ -78,8 +80,8 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         getPresenter().start();
         initView();
 
-        getPresenter().loadMaleHotBooks(5);
-        getPresenter().loadFemaleHotBooks(5);
+        getPresenter().loadFemaleHotBooks(HOT_BOOK_GET_NUMBER);
+        getPresenter().loadMaleHotBooks(HOT_BOOK_GET_NUMBER);
     }
 
     private void initView() {
