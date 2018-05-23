@@ -14,4 +14,16 @@
     <string name="empty_book">多读书，读好书，马上去书城发现好书</string>
 
     <string name="settings_title">系统设置</string>
+
+    <string name="bookdetail_book_more_info">小说更多信息</string>
+    <string name="bookdetail_book_word_count">字数: </string>
+    <string name="bookdetail_retention_ratio">留存率: </string>
+    <string name="bookdetail_copyright">
+        免责声明：本小说为转载作品,所有章节均由网友上传,转载至本站只是为了宣传本书让更多读者欣赏。
+        如有侵犯版权,请来信告知,我们将立即予以处理。
+        若小说含有不良信息请书友积极告知客服 xxxxxxx@qq.com
+    </string>
+    <string name="bookdetail_similar_book_recommend">同类小说推荐</string>
+    <string name="bookdetail_more">更多</string>
+
 </resources>

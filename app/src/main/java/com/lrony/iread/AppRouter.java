@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
+import com.lrony.iread.presentation.main.book.detail.BookDetailActivity;
 import com.lrony.iread.presentation.search.SearchActivity;
 import com.lrony.iread.presentation.settings.SettingsActivity;
 
@@ -44,5 +45,10 @@ public class AppRouter {
     // 打开设置
     public static void showSettingsActivity(Context context) {
         context.startActivity(SettingsActivity.newIntent(context));
+    }
+
+    //打开详情
+    public static void showBookDetailActivity(Context context, String bookid) {
+        context.startActivity(BookDetailActivity.newIntent(context, bookid));
     }
 }
