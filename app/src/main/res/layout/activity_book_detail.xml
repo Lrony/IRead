@@ -59,7 +59,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorGrounding"
                     android:orientation="vertical"
-                    android:paddingBottom="56dp">
+                    android:paddingBottom="@dimen/bookdetail_bootom_pad">
 
                     <include layout="@layout/layout_book_detail_catalog" />
 

@@ -1,19 +1,34 @@
 package com.lrony.iread;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.lrony.iread.presentation.book.detail.BookDetailActivity;
 import com.lrony.iread.presentation.search.SearchActivity;
 import com.lrony.iread.presentation.settings.SettingsActivity;
+import com.lrony.iread.util.DensityUtil;
 
 /**
  * Created by Lrony on 18-5-21.
  * APP路由，Activity跳转等操作在这包装好方法
  */
 public class AppRouter {
+
+    /**
+     * 获取全局加载dialog
+     */
+    public static Dialog getLoadingDialog(Context context) {
+        Dialog dialog = new Dialog(context, R.style.AlertDialogStyle);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
+        dialog.setContentView(view, new ViewGroup.LayoutParams(DensityUtil.dp2px(context, 96), DensityUtil.dp2px(context, 96)));
+        return dialog;
+    }
 
     /**
      * 跳转到当前应用设置界面
