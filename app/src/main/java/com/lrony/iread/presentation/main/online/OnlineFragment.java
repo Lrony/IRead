@@ -166,7 +166,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         KLog.d(TAG, "finishLoadMaleBooks");
         mItems.add(new Type(getString(R.string.noline_male_hot_recommend)));
         for (SortBookBean bean : books) {
-            mItems.add(new BookInfo(bean.getTitle(), bean.getShortIntro(), bean.getAuthor()
+            mItems.add(new BookInfo(bean.get_id(), bean.getTitle(), bean.getShortIntro(), bean.getAuthor()
                     , Constant.IMG_BASE_URL + bean.getCover(), bean.getMajorCate(), bean.getRetentionRatio()));
         }
         isLoadMaleBooks = true;
@@ -178,7 +178,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         KLog.d(TAG, "finishLoadFemaleBooks");
         mItems.add(new Type(getString(R.string.noline_female_hot_recommend)));
         for (SortBookBean bean : books) {
-            mItems.add(new BookInfo(bean.getTitle(), bean.getShortIntro(), bean.getAuthor()
+            mItems.add(new BookInfo(bean.get_id(), bean.getTitle(), bean.getShortIntro(), bean.getAuthor()
                     , Constant.IMG_BASE_URL + bean.getCover(), bean.getMajorCate(), bean.getRetentionRatio()));
         }
         isLoadFemaleBooks = true;

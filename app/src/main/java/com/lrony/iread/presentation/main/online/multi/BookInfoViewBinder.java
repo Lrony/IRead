@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.ui.widget.ShapeTextView;
 import com.lrony.iread.util.ImageLoader;
+import com.lrony.iread.util.KLog;
 
 import me.drakeet.multitype.ItemViewBinder;
 
@@ -20,7 +22,9 @@ import me.drakeet.multitype.ItemViewBinder;
  */
 public class BookInfoViewBinder extends ItemViewBinder<BookInfo, BookInfoViewBinder.ViewHolder> {
 
-    private Context context;
+    private static final String TAG = "BookInfoViewBinder";
+
+    private static Context context;
 
     public BookInfoViewBinder(Context context) {
         this.context = context;
@@ -35,6 +39,7 @@ public class BookInfoViewBinder extends ItemViewBinder<BookInfo, BookInfoViewBin
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull BookInfo item) {
+        holder.bookInfo = item;
         holder.title.setText(item.title);
         holder.author.setText(item.author);
         holder.shortIntro.setText(item.shortIntro);
@@ -45,6 +50,8 @@ public class BookInfoViewBinder extends ItemViewBinder<BookInfo, BookInfoViewBin
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private BookInfo bookInfo;
 
         @NonNull
         private final ImageView cover;
@@ -68,6 +75,16 @@ public class BookInfoViewBinder extends ItemViewBinder<BookInfo, BookInfoViewBin
             this.shortIntro = itemView.findViewById(R.id.tv_describe);
             this.majorCate = itemView.findViewById(R.id.tv_type);
             this.retentionRatio = itemView.findViewById(R.id.tv_retention_ratio);
+
+            itemView.setOnClickListener(v -> {
+                if (bookInfo != null) {
+                    String bookid = bookInfo.id;
+                    KLog.d(TAG, "bookid: " + bookid);
+                    AppRouter.showBookDetailActivity(context, bookid);
+                } else {
+                    KLog.d(TAG, "bookInfo is null !!!");
+                }
+            });
         }
     }
 }

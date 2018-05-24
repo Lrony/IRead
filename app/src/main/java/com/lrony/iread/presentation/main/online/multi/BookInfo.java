@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
  */
 public class BookInfo {
 
+    // ID
+    @NonNull
+    public final String id;
     // 标题
     @NonNull
     public final String title;
@@ -26,7 +29,8 @@ public class BookInfo {
     @NonNull
     public final double retentionRatio;
 
-    public BookInfo(@NonNull String title, @NonNull String shortIntro, @NonNull String author, @NonNull String cover, @NonNull String majorCate, @NonNull double retentionRatio) {
+    public BookInfo(@NonNull String id, @NonNull String title, @NonNull String shortIntro, @NonNull String author, @NonNull String cover, @NonNull String majorCate, @NonNull double retentionRatio) {
+        this.id = id;
         this.title = title;
         this.shortIntro = shortIntro;
         this.author = author;

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.classic.common.MultipleStatusView;
+import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.packages.SearchBookPackage;
 import com.lrony.iread.model.db.DBManger;
@@ -200,7 +201,9 @@ public class SearchActivity extends MvpActivity<SearchContract.Presenter> implem
         });
 
         mSearchBookAdapter.setOnItemClickListener((adapter, view, position) -> {
-            //TODO 等待详情页面
+            String bookid = mSearchBooks.get(position).get_id();
+            KLog.d(TAG, "bookid: " + bookid);
+            AppRouter.showBookDetailActivity(this, bookid);
         });
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
