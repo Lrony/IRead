@@ -40,6 +40,8 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
     private static final String TAG = "OnlineFragment";
 
+    @BindView(R.id.multiple_status_view)
+    MultipleStatusView mStatusView;
     @BindView(R.id.banner)
     Banner mBanner;
     @BindView(R.id.recycler)
@@ -81,7 +83,13 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         super.onViewCreated(view, savedInstanceState);
         getPresenter().start();
         initView();
+        initListener();
 
+        loadData();
+    }
+
+    private void loadData() {
+        KLog.d(TAG, "loadData");
         getPresenter().loadFemaleHotBooks(HOT_BOOK_GET_NUMBER);
         getPresenter().loadMaleHotBooks(HOT_BOOK_GET_NUMBER);
     }
@@ -116,11 +124,17 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         mAdapter.register(Type.class, new TypeViewBinder());
         mAdapter.register(BookInfo.class, new BookInfoViewBinder(getContext()));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorForeground));
         mRecyclerView.addItemDecoration(new RecyclerViewItemDecoration.Builder(getContext())
                 .color(ContextCompat.getColor(getContext(), R.color.colorDivider))
                 .thickness(1)
                 .create());
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void initListener() {
+        // 加载失败重试监听
+        mStatusView.setOnRetryClickListener((view) -> loadData());
     }
 
     @Override
@@ -146,6 +160,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
             KLog.d(TAG, "load ok");
             mAdapter.setItems(mItems);
             mAdapter.notifyDataSetChanged();
+            complete();
         } else {
             KLog.d(TAG, "loading data... isLoadMaleBooks: " + isLoadMaleBooks + ",isLoadFemaleBooks: " + isLoadFemaleBooks);
         }
@@ -176,12 +191,23 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
     }
 
     @Override
+    public void loading() {
+        super.loading();
+        KLog.d(TAG, "loading");
+        mStatusView.showLoading();
+    }
+
+    @Override
     public void complete() {
         super.complete();
+        KLog.d(TAG, "complete");
+        mStatusView.showContent();
     }
 
     @Override
     public void error() {
         super.error();
+        KLog.d(TAG, "error");
+        mStatusView.showError();
     }
 }

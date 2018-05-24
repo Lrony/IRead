@@ -23,6 +23,8 @@ public class OnlinePresenter extends MvpBasePresenter<OnlineContract.View> imple
         // View无效
         if (!isViewAttached()) return;
 
+        getView().loading();
+
         Disposable disp = RemoteRepository.getInstance()
                 .getSortBookPackage("male", "hot", "玄幻", "", 0, num)
                 .compose(RxUtils::toSimpleSingle)
@@ -32,7 +34,8 @@ public class OnlinePresenter extends MvpBasePresenter<OnlineContract.View> imple
                             getView().finishLoadMaleBooks(bean);
                         },
                         e -> {
-
+                            if (!isViewAttached()) return;
+                            getView().error();
                         }
                 );
     }
@@ -41,6 +44,8 @@ public class OnlinePresenter extends MvpBasePresenter<OnlineContract.View> imple
     public void loadFemaleHotBooks(int num) {
         // View无效
         if (!isViewAttached()) return;
+
+        getView().loading();
 
         Disposable disp = RemoteRepository.getInstance()
                 .getSortBookPackage("female", "hot", "古代言情", "", 0, num)
@@ -51,7 +56,8 @@ public class OnlinePresenter extends MvpBasePresenter<OnlineContract.View> imple
                             getView().finishLoadFemaleBooks(bean);
                         },
                         e -> {
-
+                            if (!isViewAttached()) return;
+                            getView().error();
                         }
                 );
     }
