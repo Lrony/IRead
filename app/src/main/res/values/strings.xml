@@ -15,6 +15,13 @@
 
     <string name="settings_title">系统设置</string>
 
+    <string name="noline_male_hot_recommend">男频热推</string>
+    <string name="noline_female_hot_recommend">女频热推</string>
+    <string name="online_type_0_title">民主</string>
+    <string name="online_type_1_title">平等</string>
+    <string name="online_type_2_title">友爱</string>
+    <string name="online_type_3_title">富强</string>
+
     <string name="bookdetail_book_more_info">小说更多信息</string>
     <string name="bookdetail_book_word_count">字数: </string>
     <string name="bookdetail_retention_ratio">留存率: </string>

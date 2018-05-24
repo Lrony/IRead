@@ -169,7 +169,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
     @Override
     public void finishLoadMaleBooks(List<SortBookBean> books) {
         KLog.d(TAG, "finishLoadMaleBooks");
-        mItems.add(new Type("男频热推"));
+        mItems.add(new Type(getString(R.string.noline_male_hot_recommend)));
         for (SortBookBean bean : books) {
             mItems.add(new BookInfo(bean.getTitle(), bean.getShortIntro(), bean.getAuthor()
                     , Constant.IMG_BASE_URL + bean.getCover(), bean.getMajorCate(), bean.getRetentionRatio()));
@@ -181,7 +181,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
     @Override
     public void finishLoadFemaleBooks(List<SortBookBean> books) {
         KLog.d(TAG, "finishLoadFemaleBooks");
-        mItems.add(new Type("女频热推"));
+        mItems.add(new Type(getString(R.string.noline_female_hot_recommend)));
         for (SortBookBean bean : books) {
             mItems.add(new BookInfo(bean.getTitle(), bean.getShortIntro(), bean.getAuthor()
                     , Constant.IMG_BASE_URL + bean.getCover(), bean.getMajorCate(), bean.getRetentionRatio()));

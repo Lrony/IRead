@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="民主"
+            android:text="@string/online_type_0_title"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="平等"
+            android:text="@string/online_type_1_title"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="友爱"
+            android:text="@string/online_type_2_title"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="富强"
+            android:text="@string/online_type_3_title"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
