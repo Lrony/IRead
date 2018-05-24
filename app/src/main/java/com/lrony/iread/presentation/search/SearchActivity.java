@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.classic.common.MultipleStatusView;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.packages.SearchBookPackage;
 import com.lrony.iread.model.db.DBManger;
@@ -42,6 +43,8 @@ public class SearchActivity extends MvpActivity<SearchContract.Presenter> implem
 
     private static final String K_KEYWORD = "search";
 
+    @BindView(R.id.multiple_status_view)
+    MultipleStatusView mStatusView;
     @BindView(R.id.iv_arrow_back)
     ImageView mIvArrowBack;
     @BindView(R.id.iv_action_search)
@@ -287,6 +290,14 @@ public class SearchActivity extends MvpActivity<SearchContract.Presenter> implem
     @Override
     public void error() {
         super.error();
-        showToast(R.string.search_error);
+        KLog.d(TAG, "error");
+        mStatusView.showError();
+    }
+
+    @Override
+    public void empty() {
+        super.empty();
+        KLog.d(TAG, "empty");
+        mStatusView.showEmpty();
     }
 }
