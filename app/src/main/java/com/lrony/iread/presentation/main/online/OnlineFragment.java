@@ -96,9 +96,10 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
     private void initView() {
         // 模拟数据
-        for (int i = 0; i < 5; i++) {
-            mBanners.add("http://img.hb.aicdn.com/37f6e8c621a4f6a0be117c6c7240ab7a5a2c02ee2da03-KkT9Rr_fw658");
-        }
+        mBanners.add("http://img.hb.aicdn.com/869326eae314f5efd1ba5998dfb05350a99a79f317a48-OQQQ0G_fw658");
+        mBanners.add("http://img.hb.aicdn.com/b7ed8a8ccdd1b99cfe300598e22b902b5667cc8d195a2-6lQTVT_fw658");
+        mBanners.add("http://img.hb.aicdn.com/b98863aaec3b80555981330f54e4316b0247753c1ec500-3IX0hY_fw658");
+        mBanners.add("http://img.hb.aicdn.com/37f6e8c621a4f6a0be117c6c7240ab7a5a2c02ee2da03-KkT9Rr_fw658");
 
         //设置banner样式
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
