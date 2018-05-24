@@ -10,15 +10,15 @@
     <!--SwitchPreference-->
     <!--TowStatePreference-->
 
-    <PreferenceCategory
-        android:key="@string/pref_key_group_settings"
-        android:title="@string/pref_title_group_settings">
+    <!--<PreferenceCategory-->
+    <!--android:key="@string/pref_key_group_settings"-->
+    <!--android:title="@string/pref_title_group_settings">-->
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="@string/pref_key_mode_night"
-            android:title="@string/pref_title_mode_night" />
-    </PreferenceCategory>
+    <!--<SwitchPreference-->
+    <!--android:defaultValue="false"-->
+    <!--android:key="@string/pref_key_mode_night"-->
+    <!--android:title="@string/pref_title_mode_night" />-->
+    <!--</PreferenceCategory>-->
 
     <PreferenceCategory
         android:key="@string/pref_key_group_read"

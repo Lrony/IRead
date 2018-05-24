@@ -41,13 +41,23 @@ public class PreferencesHelper {
 
     // *********************************
 
-    // 是否是夜间模式
-    public boolean isNightMode() {
-        return getBoolean(R.string.pref_key_mode_night, false);
+//    // 是否是夜间模式
+//    public boolean isNightMode() {
+//        return getBoolean(R.string.pref_key_mode_night, false);
+//    }
+//
+//    // 设置模式
+//    public void setNightMode(boolean value) {
+//        putBoolean(R.string.pref_key_mode_night, value);
+//    }
+
+    // 是否支持音量键翻页
+    public boolean isSupportVolumekey() {
+        return getBoolean(R.string.pref_key_mode_read_volumekey, false);
     }
 
-    // 设置模式
-    public void setNightMode(boolean value) {
-        putBoolean(R.string.pref_key_mode_night, value);
+    // 是否全屏阅读
+    public boolean isFullscreen() {
+        return getBoolean(R.string.pref_key_mode_read_fullscreen, false);
     }
 }
