@@ -124,11 +124,6 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         mAdapter.register(Type.class, new TypeViewBinder());
         mAdapter.register(BookInfo.class, new BookInfoViewBinder(getContext()));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorForeground));
-        mRecyclerView.addItemDecoration(new RecyclerViewItemDecoration.Builder(getContext())
-                .color(ContextCompat.getColor(getContext(), R.color.colorDivider))
-                .thickness(1)
-                .create());
         mRecyclerView.setAdapter(mAdapter);
     }
 
