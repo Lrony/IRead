@@ -79,6 +79,8 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
         // 添加侧滑菜单的头部VIEW
         mNavigationHeader = LayoutInflater.from(this).inflate(R.layout.view_navigation_header, mNavigationView, false);
         mNavigationView.addHeaderView(mNavigationHeader);
+        // 更新天气信息
+        new WeatherExecutor(this, mNavigationHeader).execute();
 
         // 默认选中本地图书
         mTvLocal.setSelected(true);
