@@ -3,6 +3,7 @@ package com.lrony.iread.presentation.main.online;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import com.lrony.iread.presentation.main.online.multi.BookInfoViewBinder;
 import com.lrony.iread.presentation.main.online.multi.Type;
 import com.lrony.iread.presentation.main.online.multi.TypeViewBinder;
 import com.lrony.iread.ui.help.BannerImageLoader;
+import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.util.KLog;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -114,6 +116,10 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         mAdapter.register(Type.class, new TypeViewBinder());
         mAdapter.register(BookInfo.class, new BookInfoViewBinder(getContext()));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.addItemDecoration(new RecyclerViewItemDecoration.Builder(getContext())
+                .color(ContextCompat.getColor(getContext(), R.color.colorDivider))
+                .thickness(1)
+                .create());
         mRecyclerView.setAdapter(mAdapter);
     }
 
