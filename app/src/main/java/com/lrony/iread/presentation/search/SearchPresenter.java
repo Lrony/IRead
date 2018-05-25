@@ -29,6 +29,7 @@ public class SearchPresenter extends MvpBasePresenter<SearchContract.View> imple
                         bean -> {
                             if (!isViewAttached()) return;
                             getView().finishKeyWords(bean);
+                            getView().complete();
                         },
                         e -> {
 
@@ -50,6 +51,7 @@ public class SearchPresenter extends MvpBasePresenter<SearchContract.View> imple
                                 getView().empty();
                             } else {
                                 getView().finishBooks(bean);
+                                getView().complete();
                             }
                         },
                         e -> {
