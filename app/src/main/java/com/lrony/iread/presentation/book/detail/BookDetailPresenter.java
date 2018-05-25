@@ -24,6 +24,8 @@ public class BookDetailPresenter extends MvpBasePresenter<BookDetailContract.Vie
     @Override
     public void loadBookInfo(String id) {
         KLog.d(TAG, "loadBookInfo: " + id);
+
+        getView().loading();
         Disposable disp = RemoteRepository.getInstance()
                 .getBookDetail(id)
                 .compose(RxUtils::toSimpleSingle)

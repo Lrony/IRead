@@ -209,6 +209,16 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         mRvRecommendBook.setAdapter(mRecommendAdapter);
     }
 
+    @Override
+    public void loading() {
+        super.loading();
+        if (mDialogHandler != null) {
+            mDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
+        } else {
+            Log.d(TAG, "loading mDialogHandler is null");
+        }
+    }
+
     @NonNull
     @Override
     public BookDetailContract.Presenter createPresenter() {
@@ -239,6 +249,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         mRecommendBooks.clear();
         mRecommendBooks.addAll(books);
         mRvRecommendBook.setAdapter(mRecommendAdapter);
+        mRecommendLoadOK = true;
         jugeCloseDialog();
     }
 
