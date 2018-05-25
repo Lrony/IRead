@@ -20,6 +20,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        greendao {
+            schemaVersion 2
+        }
     }
     //是否移除lint检查的error
     lintOptions {
