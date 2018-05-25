@@ -16,7 +16,8 @@
         <TextView
             android:id="@+id/tv_book_status"
             style="@style/BottomNavigation.ItemView.Title"
-            android:textColor="@color/textPrimary" />
+            android:textColor="@color/textPrimary"
+            android:text="@string/bookdetail_add_bookcase"/>
 
     </FrameLayout>
 

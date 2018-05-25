@@ -46,4 +46,12 @@
     <string name="bookdetail_is_delete_book">是否从书架移除</string>
     <string name="bookdetail_add_book_ok">已加入书架</string>
 
+    <string name="commom_confirm">确认</string>
+    <string name="commom_cancel">取消</string>
+
+    <string name="menu_home_search">搜索</string>
+    <string name="menu_home_more">更多</string>
+    <string name="menu_book_catalog_swich">倒序</string>
+    <string name="menu_bookdetail_share">分享</string>
+
 </resources>

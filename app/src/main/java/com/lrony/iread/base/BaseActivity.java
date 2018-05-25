@@ -18,15 +18,6 @@ public class BaseActivity extends BaseSuperActivity {
 
     private static final String TAG = "BaseActivity";
 
-    public void bindOnClickLister(View rootView, View.OnClickListener listener, @IdRes int... ids) {
-        for (int id : ids) {
-            View view = rootView.findViewById(id);
-            if (view != null) {
-                view.setOnClickListener(listener);
-            }
-        }
-    }
-
     // 设置夜间模式
     public void swichNightMode() {
         boolean isNight = AppConfig.isNightMode();
@@ -50,9 +41,20 @@ public class BaseActivity extends BaseSuperActivity {
         }
     }
 
+    public void bindOnClickLister(View rootView, View.OnClickListener listener, @IdRes int... ids) {
+        for (int id : ids) {
+            View view = rootView.findViewById(id);
+            if (view != null) {
+                view.setOnClickListener(listener);
+            }
+        }
+    }
+
     public void bindOnClickLister(View.OnClickListener listener, View... views) {
         for (View view : views) {
             view.setOnClickListener(listener);
         }
     }
+
+
 }

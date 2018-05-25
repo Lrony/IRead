@@ -21,7 +21,7 @@ public class BookDetailRecommendAdapter extends CommonAdapter<BookDetailRecommen
     private Context context;
 
     public BookDetailRecommendAdapter(Context context, List<BookDetailRecommendBookBean> data) {
-        super(R.layout.layout_book_detail_recommend, data);
+        super(R.layout.item_grid_book, data);
         this.context = context;
     }
 
