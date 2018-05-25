@@ -50,10 +50,21 @@ public class CollBookBean implements Parcelable {
     //是否是本地文件
     private boolean isLocal = false;
 
-    @Generated(hash = 757968961)
+    private int readNumber; //阅读次数
+
+    private long latestReadTimestamp;//最后一次的阅读时间
+
+    private int sort; //保存自定义排序的顺序
+
+    private long createTimestamp;
+
+    private long updateTimestamp;
+
+    @Generated(hash = 170912018)
     public CollBookBean(String _id, String title, String author, String shortIntro, String cover,
                         boolean hasCp, int latelyFollower, double retentionRatio, String updated, String lastRead,
-                        int chaptersCount, String lastChapter, boolean isUpdate, boolean isLocal) {
+                        int chaptersCount, String lastChapter, boolean isUpdate, boolean isLocal, int readNumber,
+                        long latestReadTimestamp, int sort, long createTimestamp, long updateTimestamp) {
         this._id = _id;
         this.title = title;
         this.author = author;
@@ -68,6 +79,11 @@ public class CollBookBean implements Parcelable {
         this.lastChapter = lastChapter;
         this.isUpdate = isUpdate;
         this.isLocal = isLocal;
+        this.readNumber = readNumber;
+        this.latestReadTimestamp = latestReadTimestamp;
+        this.sort = sort;
+        this.createTimestamp = createTimestamp;
+        this.updateTimestamp = updateTimestamp;
     }
 
     @Generated(hash = 149378998)
@@ -89,6 +105,11 @@ public class CollBookBean implements Parcelable {
         lastChapter = in.readString();
         isUpdate = in.readByte() != 0;
         isLocal = in.readByte() != 0;
+        readNumber = in.readInt();
+        latestReadTimestamp = in.readLong();
+        sort = in.readInt();
+        createTimestamp = in.readLong();
+        updateTimestamp = in.readLong();
     }
 
     public static final Creator<CollBookBean> CREATOR = new Creator<CollBookBean>() {
@@ -215,6 +236,46 @@ public class CollBookBean implements Parcelable {
         this.isLocal = isLocal;
     }
 
+    public int getReadNumber() {
+        return this.readNumber;
+    }
+
+    public void setReadNumber(int readNumber) {
+        this.readNumber = readNumber;
+    }
+
+    public long getLatestReadTimestamp() {
+        return this.latestReadTimestamp;
+    }
+
+    public void setLatestReadTimestamp(long latestReadTimestamp) {
+        this.latestReadTimestamp = latestReadTimestamp;
+    }
+
+    public int getSort() {
+        return this.sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
+
+    public long getCreateTimestamp() {
+        return this.createTimestamp;
+    }
+
+    public void setCreateTimestamp(long createTimestamp) {
+        this.createTimestamp = createTimestamp;
+    }
+
+    public long getUpdateTimestamp() {
+        return this.updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(long updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -236,5 +297,10 @@ public class CollBookBean implements Parcelable {
         dest.writeString(lastChapter);
         dest.writeByte((byte) (isUpdate ? 1 : 0));
         dest.writeByte((byte) (isLocal ? 1 : 0));
+        dest.writeInt(readNumber);
+        dest.writeLong(latestReadTimestamp);
+        dest.writeInt(sort);
+        dest.writeLong(createTimestamp);
+        dest.writeLong(updateTimestamp);
     }
 }
