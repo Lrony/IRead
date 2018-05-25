@@ -13,6 +13,7 @@ public interface OtherApi {
 
     /**
      * 获取天气信息
+     * 网上找的临时接口，请勿详细接口返回的任何广告信息
      *
      * @param city 城市名
      * @return
