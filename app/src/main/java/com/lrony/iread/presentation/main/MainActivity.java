@@ -169,6 +169,13 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
+                // 侧边栏打开的话先关掉
+                if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    KLog.d(TAG, "DrawerLayout is open");
+                    mDrawerLayout.closeDrawers();
+                    return true;
+                }
+
                 long secondTime = System.currentTimeMillis();
                 if (secondTime - firstTime > 2000) {
                     showToast(R.string.app_double_click_exit);

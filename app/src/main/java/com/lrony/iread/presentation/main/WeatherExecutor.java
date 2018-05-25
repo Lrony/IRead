@@ -66,9 +66,12 @@ public class WeatherExecutor {
                     mTvWind.setText(response.body().getData().getQuality() + " PM2.5: "
                             + response.body().getData().getPm25() + " 湿度: " + response.body().getData().getShidu());
                     // 数据加载完成后显示
-                    mWeatherView.setVisibility(View.VISIBLE);
+                    // mWeatherView.setVisibility(View.VISIBLE);
                 } else {
                     KLog.d(TAG, "接口信息获取失败");
+                    mTvTemp.setVisibility(View.INVISIBLE);
+                    mTvCity.setText(city);
+                    mTvWind.setText("愿你拥有比阳光明媚的心情");
                 }
 
             }
