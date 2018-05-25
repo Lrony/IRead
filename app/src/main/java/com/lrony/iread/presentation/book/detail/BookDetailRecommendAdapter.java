@@ -20,9 +20,12 @@ public class BookDetailRecommendAdapter extends CommonAdapter<BookDetailRecommen
 
     private Context context;
 
-    public BookDetailRecommendAdapter(Context context, List<BookDetailRecommendBookBean> data) {
+    private int showCount;
+
+    public BookDetailRecommendAdapter(Context context, List<BookDetailRecommendBookBean> data, int showCount) {
         super(R.layout.item_grid_book, data);
         this.context = context;
+        this.showCount = showCount;
     }
 
     /**
@@ -36,5 +39,17 @@ public class BookDetailRecommendAdapter extends CommonAdapter<BookDetailRecommen
         helper.setText(R.id.tv_title, item.getTitle());
         ImageLoader.load(context, Constant.IMG_BASE_URL + item.getCover()
                 , (ImageView) helper.getView(R.id.iv_cover));
+    }
+
+    @Override
+    public int getItemCount() {
+        if (getData() == null) {
+            return 0;
+        }
+        if (getData().size() >= showCount) {
+            return showCount;
+        }
+
+        return getData().size();
     }
 }

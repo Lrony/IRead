@@ -32,7 +32,11 @@ public class BookDetailPresenter extends MvpBasePresenter<BookDetailContract.Vie
                 .subscribe(
                         bean -> {
                             if (!isViewAttached()) return;
-                            getView().finshLoadBookInfo(bean);
+                            if (bean.isOk()){
+                                getView().finshLoadBookInfo(bean);
+                            } else {
+                                getView().error();
+                            }
                         },
                         e -> {
                             if (!isViewAttached()) return;

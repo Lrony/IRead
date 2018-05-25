@@ -204,8 +204,10 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         mDialogHandler = new ProgressDialogHandler(this, this, true);
         mRvRecommendBook.setNestedScrollingEnabled(false);
         //设置layoutManager,根据横屏竖屏分别设置每行item数量
-        mRvRecommendBook.setLayoutManager(new GridLayoutManager(this, ScreenUtil.isLAndscape(this) ? 4 : 3));
-        mRecommendAdapter = new BookDetailRecommendAdapter(this, mRecommendBooks);
+        mRvRecommendBook.setLayoutManager(new GridLayoutManager(
+                this, ScreenUtil.isLAndscape(this) ? 4 : 3));
+        mRecommendAdapter = new BookDetailRecommendAdapter(
+                this, mRecommendBooks, ScreenUtil.isLAndscape(this) ? 8 : 6);
         mRvRecommendBook.setAdapter(mRecommendAdapter);
     }
 
@@ -237,6 +239,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void finshLoadBookInfo(BookDetailBean book) {
         KLog.d(TAG, "finshLoadBookInfo");
+        if (null == book) {
+            AppManager.getInstance().finishActivity(this);
+        }
         mBook = book;
         refreshBookInfo();
         mInfoLoadOK = true;
@@ -353,4 +358,10 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void error() {
+        super.error();
+       onCancelProgress();
+       showToast("书籍打开失败");
+    }
 }
