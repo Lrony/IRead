@@ -291,6 +291,13 @@ public class SearchActivity extends MvpActivity<SearchContract.Presenter> implem
     }
 
     @Override
+    public void complete() {
+        super.complete();
+        KLog.d(TAG, "complete");
+        mStatusView.showContent();
+    }
+
+    @Override
     public void error() {
         super.error();
         KLog.d(TAG, "error");
