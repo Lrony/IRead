@@ -80,7 +80,7 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
         mNavigationHeader = LayoutInflater.from(this).inflate(R.layout.view_navigation_header, mNavigationView, false);
         mNavigationView.addHeaderView(mNavigationHeader);
         // 更新天气信息
-        new WeatherExecutor(this, mNavigationHeader).execute("上海");
+        new WeatherExecutor(this, mNavigationHeader).execute("上海市");
 
         // 默认选中本地图书
         mTvLocal.setSelected(true);
