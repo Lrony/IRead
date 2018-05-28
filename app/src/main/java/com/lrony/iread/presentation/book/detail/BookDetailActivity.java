@@ -176,14 +176,14 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
                             min = Math.max(0, Math.min(selStart, selEnd));
                             max = Math.max(0, Math.max(selStart, selEnd));
                         } else {
-                            Log.d(TAG, "onActionItemClicked: mTvDescribe not focused");
+                            KLog.d(TAG, "onActionItemClicked: mTvDescribe not focused");
                         }
                         String content = String.valueOf(mTvDescribe.getText().subSequence(min, max));
-                        Log.d(TAG, "onActionItemClicked: select content is " + content);
+                        KLog.d(TAG, "onActionItemClicked: select content is " + content);
                         if (!TextUtils.isEmpty(content)) {
                             AppRouter.showSearchActivity(BookDetailActivity.this, content);
                         } else {
-                            Log.d(TAG, "onActionItemClicked: select content is empty");
+                            KLog.d(TAG, "onActionItemClicked: select content is empty");
                         }
 
 
@@ -217,7 +217,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         if (mDialogHandler != null) {
             mDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
         } else {
-            Log.d(TAG, "loading mDialogHandler is null");
+            KLog.e(TAG, "loading mDialogHandler is null");
         }
     }
 
@@ -269,7 +269,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     }
 
     private void refreshBookInfo() {
-        Log.d(TAG, "refreshBookInfo");
+        KLog.d(TAG, "refreshBookInfo");
         if (mBook == null) return;
 
         ImageLoader.load(this, Constant.IMG_BASE_URL + mBook.getCover(), mIvCover);
@@ -293,7 +293,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     }
 
     private void refreshBookAddStatus() {
-        Log.d(TAG, "refreshBookAddStatus");
+        KLog.d(TAG, "refreshBookAddStatus");
     }
 
     /**
@@ -327,7 +327,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     }
 
     private void jugeCloseDialog() {
-        Log.d(TAG, "jugeCloseDialog mInfoLoadOK: " + mInfoLoadOK + ",mRecommendLoadOK: " + mRecommendLoadOK);
+        KLog.d(TAG, "jugeCloseDialog mInfoLoadOK: " + mInfoLoadOK + ",mRecommendLoadOK: " + mRecommendLoadOK);
         if (mInfoLoadOK == true && mRecommendLoadOK == true) {
             if (mDialogHandler != null) {
                 mDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
