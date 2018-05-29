@@ -306,7 +306,14 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         switch (v.getId()) {
             case R.id.fl_add_bookcase:
                 KLog.d(TAG, "onClick: fl_add_bookcase");
-                showComfirmDialog();
+                boolean hasBook = DBManger.getInstance().hasBookTb(mBookId);
+                KLog.d(TAG, "onClick: fl_add_bookcase hasBook = " + hasBook);
+                if (hasBook) {
+                    showComfirmDialog();
+                } else {
+                    DBManger.getInstance().saveBookTb(mBook.getCollBookBean());
+                }
+
                 break;
             case R.id.fl_download_book:
                 KLog.d(TAG, "onClick: fl_add_bookcase");
@@ -342,6 +349,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         builder.setPositiveButton(R.string.commom_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                DBManger.getInstance().deleteBookTb(mBookId);
             }
         });
         builder.show();
@@ -361,7 +369,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void error() {
         super.error();
-       onCancelProgress();
-       showToast("书籍打开失败");
+        onCancelProgress();
+        showToast("书籍打开失败");
     }
 }
