@@ -125,12 +125,9 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
 
     }
 
-    private View.OnClickListener mRetryClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            KLog.d(TAG, "mRetryClickListener onClick()");
-            getPresenter().doLoadData(true);
-        }
+    private View.OnClickListener mRetryClickListener = v -> {
+        KLog.d(TAG, "mRetryClickListener onClick()");
+        getPresenter().doLoadData(true);
     };
 
     private OnItemClickListener onItemClickListener = new OnItemClickListener() {
