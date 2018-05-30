@@ -195,6 +195,13 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
             }
         });
+
+        mRecommendAdapter.setOnItemClickListener((adapter, view, position) ->
+                AppRouter.showBookDetailActivity(
+                        BookDetailActivity.this, mRecommendBooks.get(position).get_id())
+        );
+
+        mIvCover.setOnClickListener(this);
     }
 
     private void initView() {
@@ -352,12 +359,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.bookdetail_is_delete_book) + "《" + mBook.getTitle() + "》");
         builder.setNegativeButton(R.string.commom_cancel, null);
-        builder.setPositiveButton(R.string.commom_confirm, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                DBManger.getInstance().deleteBookTb(mBookId);
-                refreshBookAddStatus();
-            }
+        builder.setPositiveButton(R.string.commom_confirm, (dialog, which) -> {
+            DBManger.getInstance().deleteBookTb(mBookId);
+            refreshBookAddStatus();
         });
         builder.show();
     }
