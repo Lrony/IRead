@@ -5,6 +5,7 @@ import android.util.Log;
 import com.lrony.iread.pref.Constant;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -24,8 +25,15 @@ public class RemoteHelper {
     private Retrofit mRetrofit;
     private OkHttpClient mOkHttpClient;
 
+    private static final int CONNECT_TIME_OUT_SECONDS = 20;
+    private static final int READ_TIME_OUT_SECONDS = 20;
+    private static final int WRITE_TIME_OUT_SECONDS = 20;
+
     private RemoteHelper() {
         mOkHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(CONNECT_TIME_OUT_SECONDS, TimeUnit.SECONDS)
+                .writeTimeout(WRITE_TIME_OUT_SECONDS, TimeUnit.SECONDS)
+                .readTimeout(READ_TIME_OUT_SECONDS, TimeUnit.SECONDS)
                 .addNetworkInterceptor(
                         new Interceptor() {
                             @Override
