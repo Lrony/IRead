@@ -6,12 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -108,6 +104,8 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     TextView mTvWordCountCopyright;
     @BindView(R.id.tv_create_date_copyright)
     TextView mTvCreateDateCopyright;
+    @BindView(R.id.tv_book_status)
+    TextView mTvBookStatus;
 
     public static Intent newIntent(Context context, String str) {
         Intent intent = new Intent(context, BookDetailActivity.class);
@@ -294,6 +292,13 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     private void refreshBookAddStatus() {
         KLog.d(TAG, "refreshBookAddStatus");
+        if (DBManger.getInstance().hasBookTb(mBook.getCollBookBean())) {
+            Log.d(TAG, "refreshBookAddStatus: have it");
+            mTvBookStatus.setText(R.string.bookdetail_add_book_have);
+        } else {
+            Log.d(TAG, "refreshBookAddStatus: not have it");
+            mTvBookStatus.setText(R.string.bookdetail_add_bookcase);
+        }
     }
 
     /**
@@ -312,6 +317,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
                     showComfirmDialog();
                 } else {
                     DBManger.getInstance().saveBookTb(mBook.getCollBookBean());
+                    refreshBookAddStatus();
                 }
 
                 break;
@@ -350,6 +356,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 DBManger.getInstance().deleteBookTb(mBookId);
+                refreshBookAddStatus();
             }
         });
         builder.show();
