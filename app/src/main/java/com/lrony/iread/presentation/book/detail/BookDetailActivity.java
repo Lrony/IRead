@@ -202,6 +202,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         );
 
         mIvCover.setOnClickListener(this);
+        mRlRecommendMore.setOnClickListener(this);
     }
 
     private void initView() {
