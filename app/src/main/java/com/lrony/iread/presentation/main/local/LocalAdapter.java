@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @author wangdan
  */
-public class LocalAdapter extends BaseQuickAdapter<CollBookBean,BaseViewHolder>{
+public class LocalAdapter extends BaseQuickAdapter<CollBookBean, BaseViewHolder> {
 
     private Context mContext;
 
@@ -28,8 +28,7 @@ public class LocalAdapter extends BaseQuickAdapter<CollBookBean,BaseViewHolder>{
 
     @Override
     protected void convert(BaseViewHolder helper, CollBookBean item) {
-        helper.setText(R.id.tv_title,item.getTitle());
-        Context context ;
-        ImageLoader.load( mContext , Constant.IMG_BASE_URL + item.getCover(),helper.getView(R.id.iv_cover));
+        helper.setText(R.id.tv_title, item.getTitle());
+        ImageLoader.load(mContext, Constant.IMG_BASE_URL + item.getCover(), helper.getView(R.id.iv_cover));
     }
 }

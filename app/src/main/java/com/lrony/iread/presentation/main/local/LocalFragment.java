@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +28,7 @@ import butterknife.BindView;
 /**
  * Created by Lrony on 18-5-22.
  */
-public class LocalFragment extends MvpFragment<LocalContract.Presenter> implements LocalContract.View,SwipeRefreshLayout.OnRefreshListener {
+public class LocalFragment extends MvpFragment<LocalContract.Presenter> implements LocalContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "LocalFragment";
 
@@ -65,9 +66,9 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        KLog.d(TAG,"onViewCreated()");
+        KLog.d(TAG, "onViewCreated()");
         getPresenter().start();
-        
+
         initView();
         initListener();
 
@@ -75,13 +76,13 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
     }
 
     private void initListener() {
-        KLog.d(TAG,"initListener()");
+        KLog.d(TAG, "initListener()");
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView.addOnItemTouchListener(onItemClickListener);
     }
 
     private void initView() {
-        KLog.d(TAG,"initView()");
+        KLog.d(TAG, "initView()");
 
         mContext = getContext();
 
@@ -89,27 +90,28 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
             mMultipleStatusView.setOnRetryClickListener(mRetryClickListener);
         }
 
-        if (null != mRecyclerView){
-            mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, ScreenUtil.isLAndscape(mContext)?4:3));
+        if (null != mRecyclerView) {
+            mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, ScreenUtil.isLAndscape(mContext) ? 4 : 3));
+            mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorForeground));
         }
-        
+
         initAdapter();
     }
 
     private void initAdapter() {
-        KLog.d(TAG,"initAdapter()");
-        mAdapter = new LocalAdapter(mCollBookbeans,mContext);
+        KLog.d(TAG, "initAdapter()");
+        mAdapter = new LocalAdapter(mCollBookbeans, mContext);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void finishLoad(List<CollBookBean> collBookBeans) {
-        KLog.d(TAG,"finishLoad()");
+        KLog.d(TAG, "finishLoad()");
         refreshData(collBookBeans);
     }
 
     private void refreshData(List<CollBookBean> collBookBeans) {
-        KLog.d(TAG,"refreshData()");
+        KLog.d(TAG, "refreshData()");
         mCollBookbeans.clear();
         mCollBookbeans.addAll(collBookBeans);
         mAdapter.notifyDataSetChanged();
@@ -118,7 +120,7 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
 
     @Override
     public void finishDelete() {
-        KLog.d(TAG,"finishDelete");
+        KLog.d(TAG, "finishDelete");
         getPresenter().doLoadData(false);
 
     }
@@ -126,7 +128,7 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
     private View.OnClickListener mRetryClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            KLog.d(TAG,"mRetryClickListener onClick()");
+            KLog.d(TAG, "mRetryClickListener onClick()");
             getPresenter().doLoadData(true);
         }
     };
@@ -134,35 +136,35 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
     private OnItemClickListener onItemClickListener = new OnItemClickListener() {
         @Override
         public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-            KLog.d(TAG,"onSimpleItemClick() position = " + position);
-            AppRouter.showBookDetailActivity(mContext,mCollBookbeans.get(position).get_id());
+            KLog.d(TAG, "onSimpleItemClick() position = " + position);
+            AppRouter.showBookDetailActivity(mContext, mCollBookbeans.get(position).get_id());
         }
 
         @Override
         public void onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
             super.onItemLongClick(adapter, view, position);
-            KLog.d(TAG,"onItemLongClick() position = " + position);
+            KLog.d(TAG, "onItemLongClick() position = " + position);
             getPresenter().deleteData(mCollBookbeans.get(position));
         }
     };
 
     @Override
     public void onRefresh() {
-        KLog.d(TAG,"swipe refresh onRefresh()");
+        KLog.d(TAG, "swipe refresh onRefresh()");
         getPresenter().doLoadData(false);
     }
 
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
-        KLog.d(TAG,"onSupportVisible()");
+        KLog.d(TAG, "onSupportVisible()");
         getPresenter().doLoadData(false);
     }
 
     @Override
     public void complete() {
         super.complete();
-      KLog.d(TAG,"complete()");
+        KLog.d(TAG, "complete()");
         mSwipeRefreshLayout.setRefreshing(false);
         mMultipleStatusView.showContent();
         mAdapter.loadMoreComplete();
@@ -171,21 +173,21 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
     @Override
     public void loading() {
         super.loading();
-        KLog.d(TAG,"loading()");
+        KLog.d(TAG, "loading()");
         mMultipleStatusView.showLoading();
     }
 
     @Override
     public void empty() {
         super.empty();
-        KLog.d(TAG,"empty()");
+        KLog.d(TAG, "empty()");
         mMultipleStatusView.showEmpty();
     }
 
     @Override
     public void error() {
         super.error();
-        KLog.d(TAG,"error()");
+        KLog.d(TAG, "error()");
         mMultipleStatusView.showError();
     }
 }
