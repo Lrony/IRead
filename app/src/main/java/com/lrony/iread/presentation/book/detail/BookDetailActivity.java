@@ -247,7 +247,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         if (mDialogHandler != null) {
             mDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
         }
-        AppManager.getInstance().finishActivity();
+//        AppManager.getInstance().finishActivity();
     }
 
     @Override
