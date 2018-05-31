@@ -59,5 +59,6 @@
     <string name="nb.mode.morning">日间</string>
 
     <string name="recommend_title">相关书籍</string>
+    <string name="book_retention_ratio">%留存率</string>
 
 </resources>

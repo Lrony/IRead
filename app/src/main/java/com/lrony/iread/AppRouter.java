@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lrony.iread.presentation.book.detail.BookDetailActivity;
+import com.lrony.iread.presentation.book.recommend.RecommendActivity;
 import com.lrony.iread.presentation.search.SearchActivity;
 import com.lrony.iread.presentation.settings.SettingsActivity;
 import com.lrony.iread.util.DensityUtil;
@@ -65,5 +66,10 @@ public class AppRouter {
     //打开详情
     public static void showBookDetailActivity(Context context, String bookid) {
         context.startActivity(BookDetailActivity.newIntent(context, bookid));
+    }
+
+    //打开相关推荐
+    public static void showRecommendActivity(Context context, String bookid) {
+        context.startActivity(RecommendActivity.newIntent(context, bookid));
     }
 }

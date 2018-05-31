@@ -24,6 +24,7 @@ public class RecommendPresenter extends MvpBasePresenter<RecommendContract.View>
     @Override
     public void loadRecommendBook(boolean showStatusView, String id) {
         KLog.d(TAG, "loadBookInfo: " + id);
+
         getView().loading();
         Disposable disp = RemoteRepository.getInstance()
                 .getDetailRecommendBookPackage(id)
@@ -31,7 +32,6 @@ public class RecommendPresenter extends MvpBasePresenter<RecommendContract.View>
                 .subscribe(
                         bean -> {
                             if (!isViewAttached()) return;
-                            ;
                             getView().finshLoadRecommend(bean);
                             getView().complete();
                         },
@@ -41,6 +41,7 @@ public class RecommendPresenter extends MvpBasePresenter<RecommendContract.View>
                             getView().error();
                         }
                 );
+        addDisposable(disp);
 
     }
 

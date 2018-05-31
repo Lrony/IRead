@@ -1,13 +1,10 @@
 package com.lrony.iread.presentation.book.detail;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.GridLayoutManager;
@@ -206,7 +203,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         });
 
         mRecommendAdapter.setOnItemClickListener((adapter, view, position) ->
-                AppRouter.showBookDetailActivity(
+                AppRouter.showRecommendActivity(
                         BookDetailActivity.this, mRecommendBooks.get(position).get_id())
         );
 
@@ -383,22 +380,24 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
                 break;
             case R.id.fl_download_book:
-                KLog.d(TAG, "onClick: fl_add_bookcase");
+                KLog.d(TAG, "onClick: fl_download_book");
                 break;
             case R.id.fl_open_book:
-                KLog.d(TAG, "onClick: fl_add_bookcase");
+                KLog.d(TAG, "onClick: fl_open_book");
                 startActivityForResult(new Intent(this, ReadActivity.class)
                         .putExtra(ReadActivity.EXTRA_IS_COLLECTED, isCollected)
                         .putExtra(ReadActivity.EXTRA_COLL_BOOK, mCollBookBean), REQUEST_READ);
                 break;
             case R.id.ll_book_detail_catalog:
-                KLog.d(TAG, "onClick: fl_add_bookcase");
+                KLog.d(TAG, "onClick: ll_book_detail_catalog");
                 break;
             case R.id.rl_recommend_more:
-                KLog.d(TAG, "onClick: fl_add_bookcase");
+                KLog.d(TAG, "onClick: rl_recommend_more");
+                AppRouter.showRecommendActivity(
+                        BookDetailActivity.this, mBookId);
                 break;
             case R.id.iv_cover:
-                KLog.d(TAG, "onClick: fl_add_bookcase");
+                KLog.d(TAG, "onClick: iv_cover");
                 break;
         }
     }
