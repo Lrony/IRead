@@ -23,12 +23,9 @@ public class RecommendAdapter extends CommonAdapter<BookDetailRecommendBookBean>
 
     private Context context;
 
-    private List<BookDetailRecommendBookBean> data = new ArrayList<>();
-
     public RecommendAdapter(Context context, List<BookDetailRecommendBookBean> data) {
         super(R.layout.item_list_book, data);
         this.context = context;
-        this.data = data;
     }
 
     /**
@@ -47,15 +44,5 @@ public class RecommendAdapter extends CommonAdapter<BookDetailRecommendBookBean>
                 + StringUtils.getStringByID(R.string.book_retention_ratio));
         ImageLoader.load(context, Constant.IMG_BASE_URL + item.getCover()
                 , (ImageView) helper.getView(R.id.iv_cover));
-    }
-
-    @NonNull
-    @Override
-    public List<BookDetailRecommendBookBean> getData() {
-        return data;
-    }
-
-    public void setData(List<BookDetailRecommendBookBean> data) {
-        this.data = data;
     }
 }
