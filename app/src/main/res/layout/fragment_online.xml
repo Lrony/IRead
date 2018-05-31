@@ -11,43 +11,59 @@
 
     <!-- 由于加入了夜间模式，背景色和前景色都需要注意 -->
 
-    <android.support.v4.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/ll_father"
-            android:layout_width="match_parent"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_up"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_vct_arrow_up" />
 
-            <RelativeLayout
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/ns_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_father"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorForeground">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <View
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:background="@color/colorPrimary" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorForeground">
 
-                <com.youth.banner.Banner
-                    android:id="@+id/banner"
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:background="@color/colorPrimary" />
+
+                    <com.youth.banner.Banner
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp" />
+                </RelativeLayout>
+
+                <include layout="@layout/view_online_type" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp" />
-            </RelativeLayout>
-
-            <include layout="@layout/view_online_type" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </RelativeLayout>
 </com.classic.common.MultipleStatusView>

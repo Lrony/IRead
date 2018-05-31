@@ -3,7 +3,9 @@ package com.lrony.iread.presentation.main.online;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +46,10 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
     @BindView(R.id.ll_father)
     LinearLayout mFather;
+    @BindView(R.id.ns_view)
+    NestedScrollView mNestedScrollView;
+    @BindView(R.id.fab_up)
+    FloatingActionButton mFloatingBtnUp;
     @BindView(R.id.multiple_status_view)
     MultipleStatusView mStatusView;
     @BindView(R.id.banner)
@@ -143,6 +149,8 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         KLog.d(TAG, "initListener");
         // 加载失败重试监听
         mStatusView.setOnRetryClickListener((view) -> loadData());
+
+        mFloatingBtnUp.setOnClickListener(v -> mNestedScrollView.scrollTo(0, 0));
     }
 
     @Override
