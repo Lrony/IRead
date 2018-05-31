@@ -41,6 +41,7 @@ import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.Constant;
+import com.lrony.iread.pref.PreferencesHelper;
 import com.lrony.iread.pref.ReadSettingManager;
 import com.lrony.iread.presentation.book.detail.BookDetailActivity;
 import com.lrony.iread.ui.adapter.CategoryAdapter;
@@ -759,8 +760,8 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        boolean isVolumeTurnPage = ReadSettingManager
-                .getInstance().isVolumeTurnPage();
+        boolean isVolumeTurnPage = PreferencesHelper.getInstance().isSupportVolumekey();
+        KLog.d(TAG, "isVolumeTurnPage = " + isVolumeTurnPage);
         switch (keyCode) {
             case KeyEvent.KEYCODE_VOLUME_UP:
                 if (isVolumeTurnPage) {
