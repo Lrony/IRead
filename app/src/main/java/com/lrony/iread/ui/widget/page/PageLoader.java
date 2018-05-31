@@ -21,6 +21,7 @@ import com.lrony.iread.util.KLog;
 import com.lrony.iread.util.RxUtils;
 import com.lrony.iread.util.ScreenUtil;
 import com.lrony.iread.util.StringUtils;
+import com.lrony.iread.util.ToastUtil;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -1025,6 +1026,8 @@ public abstract class PageLoader {
         }
 
         if (!hasNextChapter()) {
+            // TODO 需要抛出个Listener给View使用
+            ToastUtil.showToast("读完啦～快去书城发现更多小说");
             return false;
         }
 
