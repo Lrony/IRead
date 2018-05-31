@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.lrony.iread.R;
 import com.lrony.iread.pref.ReadSettingManager;
 import com.lrony.iread.presentation.read.ReadActivity;
+import com.lrony.iread.presentation.settings.SettingsActivity;
 import com.lrony.iread.ui.adapter.PageStyleAdapter;
 import com.lrony.iread.ui.widget.page.PageLoader;
 import com.lrony.iread.ui.widget.page.PageMode;
@@ -314,11 +315,10 @@ public class ReadSettingDialog extends Dialog {
         //更多设置
         mTvMore.setOnClickListener(
                 (v) -> {
-                    //TODO
-//                    Intent intent = new Intent(getContext(), MoreSettingActivity.class);
-//                    mActivity.startActivityForResult(intent, ReadActivity.REQUEST_MORE_SETTING);
-//                    //关闭当前设置
-//                    dismiss();
+                    Intent intent = new Intent(getContext(), SettingsActivity.class);
+                    mActivity.startActivityForResult(intent, ReadActivity.REQUEST_MORE_SETTING);
+                    //关闭当前设置
+                    dismiss();
                 }
         );
     }

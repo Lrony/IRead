@@ -229,7 +229,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
         mCollBook = getIntent().getParcelableExtra(EXTRA_COLL_BOOK);
         isCollected = getIntent().getBooleanExtra(EXTRA_IS_COLLECTED, false);
         isNightMode = ReadSettingManager.getInstance().isNightMode();
-        isFullScreen = ReadSettingManager.getInstance().isFullScreen();
+        isFullScreen = PreferencesHelper.getInstance().isFullscreen();
 
         mBookId = mCollBook.get_id();
     }
@@ -525,7 +525,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     private void initBottomMenu() {
         KLog.d(TAG, "initBottomMenu");
         //判断是否全屏
-        if (ReadSettingManager.getInstance().isFullScreen()) {
+        if (PreferencesHelper.getInstance().isFullscreen()) {
             //还需要设置mBottomMenu的底部高度
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLlBottomMenu.getLayoutParams();
             params.bottomMargin = ScreenUtil.getNavigationBarHeight();
@@ -696,7 +696,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
                 KLog.d(TAG, "onKeyUp KEYCODE_BACK");
                 if (mAblTopMenu.getVisibility() == View.VISIBLE) {
                     // 非全屏下才收缩，全屏下直接退出
-                    if (!ReadSettingManager.getInstance().isFullScreen()) {
+                    if (!PreferencesHelper.getInstance().isFullscreen()) {
                         toggleMenu(true);
                         return true;
                     }
@@ -816,7 +816,8 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
         super.onActivityResult(requestCode, resultCode, data);
         SystemBarUtils.hideStableStatusBar(this);
         if (requestCode == REQUEST_MORE_SETTING) {
-            boolean fullScreen = ReadSettingManager.getInstance().isFullScreen();
+            boolean fullScreen = PreferencesHelper.getInstance().isFullscreen();
+            KLog.d(TAG, "fullScreen = " + fullScreen);
             if (isFullScreen != fullScreen) {
                 isFullScreen = fullScreen;
                 // 刷新BottomMenu
