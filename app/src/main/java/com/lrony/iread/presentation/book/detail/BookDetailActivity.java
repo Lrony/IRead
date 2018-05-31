@@ -41,6 +41,7 @@ import com.lrony.iread.ui.widget.ShapeTextView;
 import com.lrony.iread.util.ImageLoader;
 import com.lrony.iread.util.KLog;
 import com.lrony.iread.util.ScreenUtil;
+import com.lrony.iread.util.Shares;
 import com.lrony.iread.util.StringUtils;
 
 import java.text.ParseException;
@@ -408,6 +409,8 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         if (mInfoLoadOK == true && mRecommendLoadOK == true) {
             if (mDialogHandler != null) {
                 mDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
+            } else {
+                KLog.d(TAG, "mDialogHandler is null !!!");
             }
         }
     }
@@ -432,6 +435,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Shares.share(this,mBook.getLongIntro()+R.string.share_end);
         return super.onOptionsItemSelected(item);
     }
 

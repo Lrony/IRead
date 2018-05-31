@@ -60,5 +60,8 @@
 
     <string name="recommend_title">相关书籍</string>
     <string name="book_retention_ratio">%留存率</string>
+    <string name="share">分享</string>
+    <string name="share_content">发现了一款非常好用的小说App「悦读小说&amp;xxxxxx.com」，绿色健康、无广告，而且完全开源不收费，实在是太赞了! 推荐~：https://www.xxxxxx.com </string>
+    <string name="share_end">--来自于</string>
 
 </resources>
