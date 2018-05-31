@@ -22,10 +22,11 @@ public class RecommendPresenter extends MvpBasePresenter<RecommendContract.View>
     }
 
     @Override
-    public void loadRecommendBook(boolean showStatusView, String id) {
+    public void loadRecommendBook(boolean isRefresh, String id) {
         KLog.d(TAG, "loadBookInfo: " + id);
 
-        getView().loading();
+        if (isRefresh) getView().loading();
+
         Disposable disp = RemoteRepository.getInstance()
                 .getDetailRecommendBookPackage(id)
                 .compose(RxUtils::toSimpleSingle)

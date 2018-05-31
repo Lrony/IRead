@@ -17,6 +17,6 @@ public interface RecommendContract {
     }
 
     interface Presenter extends MvpPresenter<View> {
-        void loadRecommendBook(boolean showStatusView, String id);
+        void loadRecommendBook(boolean isRefresh, String id);
     }
 }
