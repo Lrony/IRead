@@ -16,8 +16,8 @@
         <TextView
             android:id="@+id/tv_book_status"
             style="@style/BottomNavigation.ItemView.Title"
-            android:textColor="@color/textPrimary"
-            android:text="@string/bookdetail_add_bookcase"/>
+            android:text="@string/bookdetail_add_bookcase"
+            android:textColor="@color/textPrimary" />
 
     </FrameLayout>
 
@@ -39,7 +39,8 @@
 
     <FrameLayout
         android:id="@+id/fl_download_book"
-        style="@style/BottomNavigation.ItemView">
+        style="@style/BottomNavigation.ItemView"
+        android:visibility="gone">
 
         <android.support.v7.widget.AppCompatImageView
             style="@style/BottomNavigation.ItemView.Icon"

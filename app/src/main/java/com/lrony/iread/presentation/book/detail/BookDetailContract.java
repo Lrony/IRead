@@ -29,5 +29,7 @@ public interface BookDetailContract {
 
         //添加到书架上
         void addToBookShelf(CollBookBean collBook);
+
+        void createDownloadTask(CollBookBean collBookBean);
     }
 }

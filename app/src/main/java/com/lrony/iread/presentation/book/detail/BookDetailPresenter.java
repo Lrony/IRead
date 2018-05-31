@@ -1,7 +1,9 @@
 package com.lrony.iread.presentation.book.detail;
 
+import com.lrony.iread.RxBus;
 import com.lrony.iread.model.bean.BookChapterBean;
 import com.lrony.iread.model.bean.CollBookBean;
+import com.lrony.iread.model.bean.DownloadTaskBean;
 import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.model.remote.RemoteRepository;
 import com.lrony.iread.mvp.MvpBasePresenter;
@@ -38,7 +40,7 @@ public class BookDetailPresenter extends MvpBasePresenter<BookDetailContract.Vie
                 .subscribe(
                         bean -> {
                             if (!isViewAttached()) return;
-                            if (bean.isOk()){
+                            if (bean.isOk()) {
                                 getView().finshLoadBookInfo(bean);
                             } else {
                                 getView().error();
@@ -87,7 +89,7 @@ public class BookDetailPresenter extends MvpBasePresenter<BookDetailContract.Vie
                         beans -> {
                             if (!isViewAttached()) return;
                             //设置 id
-                            for(BookChapterBean bean :beans){
+                            for (BookChapterBean bean : beans) {
                                 bean.setId(MD5Utils.strToMd5By16(bean.getLink()));
                             }
 
@@ -107,5 +109,16 @@ public class BookDetailPresenter extends MvpBasePresenter<BookDetailContract.Vie
                         }
                 );
         addDisposable(disposable);
+    }
+
+    @Override
+    public void createDownloadTask(CollBookBean collBookBean) {
+        DownloadTaskBean task = new DownloadTaskBean();
+        task.setTaskName(collBookBean.getTitle());
+        task.setBookId(collBookBean.get_id());
+        task.setBookChapters(collBookBean.getBookChapters());
+        task.setLastChapter(collBookBean.getBookChapters().size());
+
+        RxBus.getInstance().post(task);
     }
 }
