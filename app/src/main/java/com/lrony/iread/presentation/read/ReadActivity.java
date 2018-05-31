@@ -210,6 +210,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        KLog.d(TAG, "onCreate");
         setContentView(R.layout.activity_read);
         // 使用ButterKnife代替findview
         ButterKnife.bind(this);
@@ -224,6 +225,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     }
 
     private void initData() {
+        KLog.d(TAG, "initData");
         mCollBook = getIntent().getParcelableExtra(EXTRA_COLL_BOOK);
         isCollected = getIntent().getBooleanExtra(EXTRA_IS_COLLECTED, false);
         isNightMode = ReadSettingManager.getInstance().isNightMode();
@@ -233,6 +235,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     }
 
     private void initToolbar() {
+        KLog.d(TAG, "initToolbar");
         //设置标题
         mToolbar.setTitle(mCollBook.getTitle());
         //半透明化StatusBar
@@ -240,6 +243,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     }
 
     private void initWidget() {
+        KLog.d(TAG, "initWidget");
         // 如果 API < 18 取消硬件加速
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2
                 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -294,11 +298,13 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
                     @Override
                     public void onChapterChange(int pos) {
+                        KLog.d(TAG, "mPageLoader onChapterChange pos = " + pos);
                         mCategoryAdapter.setChapter(pos);
                     }
 
                     @Override
                     public void requestChapters(List<TxtChapter> requestChapters) {
+                        KLog.d(TAG, "mPageLoader requestChapters");
                         getPresenter().loadChapter(mBookId, requestChapters);
                         mHandler.sendEmptyMessage(WHAT_CATEGORY);
                         //隐藏提示
@@ -307,6 +313,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
                     @Override
                     public void onCategoryFinish(List<TxtChapter> chapters) {
+                        KLog.d(TAG, "mPageLoader onCategoryFinish");
                         for (TxtChapter chapter : chapters) {
                             chapter.setTitle(chapter.getTitle());
                         }
@@ -315,6 +322,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
                     @Override
                     public void onPageCountChange(int count) {
+                        KLog.d(TAG, "mPageLoader onPageCountChange count = " + count);
                         mSbChapterProgress.setMax(Math.max(0, count - 1));
                         mSbChapterProgress.setProgress(0);
                         // 如果处于错误状态，那么就冻结使用
@@ -328,6 +336,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
                     @Override
                     public void onPageChange(int pos) {
+                        KLog.d(TAG, "mPageLoader onPageChange");
                         mSbChapterProgress.post(
                                 () -> mSbChapterProgress.setProgress(pos)
                         );
@@ -339,6 +348,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        KLog.d(TAG, "mSbChapterProgress onProgressChanged");
                         if (mLlBottomMenu.getVisibility() == VISIBLE) {
                             //显示标题
                             mTvPageTip.setText((progress + 1) + "/" + (mSbChapterProgress.getMax() + 1));
@@ -352,6 +362,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
+                        KLog.d(TAG, "mSbChapterProgress onStopTrackingTouch");
                         //进行切换
                         int pagePos = mSbChapterProgress.getProgress();
                         if (pagePos != mPageLoader.getPagePos()) {
@@ -366,11 +377,13 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
         mPvPage.setTouchListener(new PageView.TouchListener() {
             @Override
             public boolean onTouch() {
+                KLog.d(TAG, "mPvPage onTouch");
                 return !hideReadMenu();
             }
 
             @Override
             public void center() {
+                KLog.d(TAG, "mPvPage center");
                 toggleMenu(true);
             }
 
@@ -459,6 +472,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     }
 
     private void processLogic() {
+        KLog.d(TAG, "processLogic isCollected = " + isCollected);
         // 如果是已经收藏的，那么就从数据库中获取目录
         if (isCollected) {
             DBManger.getInstance()
@@ -489,6 +503,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     }
 
     private void toggleNightMode() {
+        KLog.d(TAG, "toggleNightMode");
         if (isNightMode) {
             mTvNightMode.setText(R.string.nb_mode_morning);
             Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_read_menu_morning);
@@ -501,12 +516,14 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     }
 
     private void initTopMenu() {
+        KLog.d(TAG, "initTopMenu");
         if (Build.VERSION.SDK_INT >= 19) {
             mAblTopMenu.setPadding(0, ScreenUtil.getStatusBarHeight(), 0, 0);
         }
     }
 
     private void initBottomMenu() {
+        KLog.d(TAG, "initBottomMenu");
         //判断是否全屏
         if (ReadSettingManager.getInstance().isFullScreen()) {
             //还需要设置mBottomMenu的底部高度
@@ -522,12 +539,14 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     }
 
     private void setUpAdapter() {
+        KLog.d(TAG, "setUpAdapter");
         mCategoryAdapter = new CategoryAdapter();
         mLvCategory.setAdapter(mCategoryAdapter);
         mLvCategory.setFastScrollEnabled(true);
     }
 
     private void showSystemBar() {
+        KLog.d(TAG, "showSystemBar");
         //显示
         SystemBarUtils.showUnStableStatusBar(this);
         if (isFullScreen) {
@@ -536,6 +555,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     }
 
     private void hideSystemBar() {
+        KLog.d(TAG, "hideSystemBar");
         //隐藏
         SystemBarUtils.hideStableStatusBar(this);
         if (isFullScreen) {
@@ -549,6 +569,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
      * @return 是否隐藏成功
      */
     private boolean hideReadMenu() {
+        KLog.d(TAG, "hideReadMenu");
         hideSystemBar();
         if (mAblTopMenu.getVisibility() == VISIBLE) {
             toggleMenu(true);
@@ -562,6 +583,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
     //初始化菜单动画
     private void initMenuAnim() {
+        KLog.d(TAG, "initMenuAnim");
         if (mTopInAnim != null) return;
 
         mTopInAnim = AnimationUtils.loadAnimation(this, R.anim.slide_top_in);
@@ -578,6 +600,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
      * 默认是隐藏的
      */
     private void toggleMenu(boolean hideStatusBar) {
+        KLog.d(TAG, "toggleMenu");
         initMenuAnim();
 
         if (mAblTopMenu.getVisibility() == View.VISIBLE) {
@@ -603,6 +626,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
     // 注册亮度观察者
     private void registerBrightObserver() {
+        KLog.d(TAG, "registerBrightObserver");
         try {
             if (mBrightObserver != null) {
                 if (!isRegistered) {
@@ -621,6 +645,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
     //解注册
     private void unregisterBrightObserver() {
+        KLog.d(TAG, "unregisterBrightObserver");
         try {
             if (mBrightObserver != null) {
                 if (isRegistered) {
@@ -635,6 +660,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
     @Override
     public void showCategory(List<BookChapterBean> bookChapterList) {
+        KLog.d(TAG, "showCategory");
         mPageLoader.getCollBook().setBookChapters(bookChapterList);
         mPageLoader.refreshChapterList();
 
@@ -647,6 +673,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
     @Override
     public void finishChapter() {
+        KLog.d(TAG, "finishChapter");
         if (mPageLoader.getPageStatus() == PageLoader.STATUS_LOADING) {
             mHandler.sendEmptyMessage(WHAT_CHAPTER);
         }
@@ -656,6 +683,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
     @Override
     public void errorChapter() {
+        KLog.d(TAG, "errorChapter");
         if (mPageLoader.getPageStatus() == PageLoader.STATUS_LOADING) {
             mPageLoader.chapterError();
         }
@@ -711,6 +739,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
 
     // 退出
     private void exit() {
+        KLog.d(TAG, "exit");
         // 返回给BookDetail。
         Intent result = new Intent();
         result.putExtra(BookDetailActivity.RESULT_IS_COLLECTED, isCollected);
@@ -722,18 +751,21 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     @Override
     protected void onStart() {
         super.onStart();
+        KLog.d(TAG, "onStart");
         registerBrightObserver();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        KLog.d(TAG, "onResume");
         mWakeLock.acquire();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        KLog.d(TAG, "onPause");
         mWakeLock.release();
         if (isCollected) {
             mPageLoader.saveRecord();
@@ -743,12 +775,14 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     @Override
     protected void onStop() {
         super.onStop();
+        KLog.d(TAG, "onStop");
         unregisterBrightObserver();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        KLog.d(TAG, "onDestroy");
         unregisterReceiver(mReceiver);
 
         mHandler.removeMessages(WHAT_CATEGORY);
