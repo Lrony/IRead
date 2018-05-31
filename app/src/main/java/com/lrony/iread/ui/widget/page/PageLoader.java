@@ -17,6 +17,7 @@ import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.pref.Constant;
 import com.lrony.iread.pref.ReadSettingManager;
 import com.lrony.iread.util.IOUtils;
+import com.lrony.iread.util.KLog;
 import com.lrony.iread.util.RxUtils;
 import com.lrony.iread.util.ScreenUtil;
 import com.lrony.iread.util.StringUtils;
@@ -1338,6 +1339,10 @@ public abstract class PageLoader {
      * @return:获取初始显示的页面
      */
     private TxtPage getCurPage(int pos) {
+        KLog.d(TAG, "pos = " + pos + ",size = " + mCurPageList.size());
+        if (pos >= mCurPageList.size()) {
+            pos = mCurPageList.size() - 1;
+        }
         if (mPageChangeListener != null) {
             mPageChangeListener.onPageChange(pos);
         }

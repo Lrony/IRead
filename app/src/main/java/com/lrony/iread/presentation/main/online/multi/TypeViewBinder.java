@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lrony.iread.R;
@@ -19,7 +20,7 @@ public class TypeViewBinder extends ItemViewBinder<Type, TypeViewBinder.ViewHold
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View root = inflater.inflate(R.layout.view_online_item_type,parent,false);
+        View root = inflater.inflate(R.layout.view_online_item_type, parent, false);
         return new ViewHolder(root);
     }
 
@@ -28,14 +29,21 @@ public class TypeViewBinder extends ItemViewBinder<Type, TypeViewBinder.ViewHold
         holder.title.setText(item.title);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         @NonNull
         private final TextView title;
+        @NonNull
+        private final RelativeLayout more;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.title = itemView.findViewById(R.id.tv_title);
+            this.more = itemView.findViewById(R.id.rl_recommend_more);
+
+            more.setOnClickListener(v -> {
+
+            });
         }
     }
 }
