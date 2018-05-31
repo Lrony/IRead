@@ -69,7 +69,8 @@
                         android:id="@+id/read_tv_community"
                         style="@style/NB.Theme.TextAppearance.Read.TopMenu"
                         android:layout_toLeftOf="@id/read_tv_brief"
-                        android:text="社区" />
+                        android:text="社区"
+                        android:visibility="invisible" />
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
