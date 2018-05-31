@@ -54,4 +54,6 @@
     <string name="menu_book_catalog_swich">倒序</string>
     <string name="menu_bookdetail_share">分享</string>
 
+    <string name="recommend_title">相关书籍</string>
+
 </resources>
