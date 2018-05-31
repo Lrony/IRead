@@ -1,11 +1,16 @@
 package com.lrony.iread.model.remote;
 
+import android.util.Log;
+
+import com.lrony.iread.model.bean.BookChapterBean;
 import com.lrony.iread.model.bean.BookDetailBean;
 import com.lrony.iread.model.bean.BookDetailRecommendBookBean;
+import com.lrony.iread.model.bean.ChapterInfoBean;
 import com.lrony.iread.model.bean.SortBookBean;
 import com.lrony.iread.model.bean.packages.RecommendBookPackage;
 import com.lrony.iread.model.bean.packages.SearchBookPackage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -98,6 +103,35 @@ public class RemoteRepository {
     public Single<List<SortBookBean>> getSortBookPackage(String gender, String type, String major, String minor, int start, int limit) {
         return mBookApi.getSortBookPackage(gender, type, major, minor, start, limit)
                 .map(bean -> bean.getBooks());
+    }
+
+    /**
+     * 获取章节列表
+     *
+     * @param bookId
+     * @return
+     */
+    public Single<List<BookChapterBean>> getBookChapters(String bookId) {
+        return mBookApi.getBookChapterPackage(bookId, "chapter")
+                .map(bean -> {
+                    if (bean.getMixToc() == null) {
+                        return new ArrayList<BookChapterBean>(1);
+                    } else {
+                        return bean.getMixToc().getChapters();
+                    }
+                });
+    }
+
+    /**
+     * 注意这里用的是同步请求
+     *
+     * @param url
+     * @return
+     */
+    public Single<ChapterInfoBean> getChapterInfo(String url) {
+        Log.d(TAG, "getChapterInfo: " + url);
+        return mBookApi.getChapterInfoPackage(url)
+                .map(bean -> bean.getChapter());
     }
 
 }

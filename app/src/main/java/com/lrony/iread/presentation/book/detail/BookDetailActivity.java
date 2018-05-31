@@ -3,9 +3,11 @@ package com.lrony.iread.presentation.book.detail;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.GridLayoutManager;
@@ -28,11 +30,13 @@ import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.BookDetailBean;
 import com.lrony.iread.model.bean.BookDetailRecommendBookBean;
+import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.model.remote.BookApi;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.pref.Constant;
+import com.lrony.iread.presentation.read.ReadActivity;
 import com.lrony.iread.ui.help.ProgressCancelListener;
 import com.lrony.iread.ui.help.ProgressDialogHandler;
 import com.lrony.iread.ui.help.ToolbarHelper;
@@ -57,7 +61,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     private final static String TAG = "BookDetailActivity";
 
+    public static final String RESULT_IS_COLLECTED = "result_is_collected";
     private static final String K_EXTRA_BOOK = "book";
+    private static final int REQUEST_READ = 1;
 
     private BookApi mBookApi = null;
 
@@ -65,12 +71,15 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     private String mBookId;
 
     private ProgressDialogHandler mDialogHandler;
+    private ProgressDialogHandler mAddDialogHandler;
     private BookDetailRecommendAdapter mRecommendAdapter;
     private BookDetailBean mBook;
+    private CollBookBean mCollBookBean;
     private List<BookDetailRecommendBookBean> mRecommendBooks = new ArrayList<>();
 
     private boolean mInfoLoadOK = false;
     private boolean mRecommendLoadOK = false;
+    private boolean isCollected = false;
 
     @BindView(R.id.iv_cover)
     ImageView mIvCover;
@@ -208,6 +217,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     private void initView() {
         KLog.d(TAG, "initView");
         mDialogHandler = new ProgressDialogHandler(this, this, true);
+        mAddDialogHandler = new ProgressDialogHandler(this, this, false);
         mRvRecommendBook.setNestedScrollingEnabled(false);
         //设置layoutManager,根据横屏竖屏分别设置每行item数量
         mRvRecommendBook.setLayoutManager(new GridLayoutManager(
@@ -264,6 +274,34 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         jugeCloseDialog();
     }
 
+    @Override
+    public void addBookLoading() {
+        if (mAddDialogHandler != null) {
+            mAddDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
+        } else {
+            KLog.e(TAG, "loading mAddDialogHandler is null");
+        }
+    }
+
+    @Override
+    public void addBookError() {
+        if (mAddDialogHandler != null) {
+            mAddDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
+        }
+        isCollected = false;
+        showToast("加入书架失败，请检查网络");
+    }
+
+    @Override
+    public void succeed() {
+        super.succeed();
+        if (mAddDialogHandler != null) {
+            mAddDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
+        }
+        isCollected = true;
+
+    }
+
     /**
      * Called when pointer capture is enabled or disabled for the current window.
      *
@@ -295,6 +333,14 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         mTvCreateDateCopyright.setText(mTvCreateDateCopyright.getText().toString() + mBook.getRetentionRatio() + "%");
         mTvDescribe.setText(mBook.getLongIntro());
 
+        mCollBookBean = DBManger.getInstance().loadBookTbById(mBookId);
+        //判断是否收藏
+        if (mCollBookBean != null) {
+            isCollected = true;
+        } else {
+            mCollBookBean = mBook.getCollBookBean();
+        }
+
         refreshBookAddStatus();
     }
 
@@ -319,13 +365,20 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         switch (v.getId()) {
             case R.id.fl_add_bookcase:
                 KLog.d(TAG, "onClick: fl_add_bookcase");
-                boolean hasBook = DBManger.getInstance().hasBookTb(mBookId);
-                KLog.d(TAG, "onClick: fl_add_bookcase hasBook = " + hasBook);
-                if (hasBook) {
+//                boolean hasBook = DBManger.getInstance().hasBookTb(mBookId);
+//                KLog.d(TAG, "onClick: fl_add_bookcase hasBook = " + hasBook);
+//                if (hasBook) {
+//                    showComfirmDialog();
+//                } else {
+//                    DBManger.getInstance().saveBookTb(mBook.getCollBookBean());
+//                    refreshBookAddStatus();
+//                }
+
+                //点击存储
+                if (isCollected) {
                     showComfirmDialog();
                 } else {
-                    DBManger.getInstance().saveBookTb(mBook.getCollBookBean());
-                    refreshBookAddStatus();
+                    getPresenter().addToBookShelf(mCollBookBean);
                 }
 
                 break;
@@ -334,6 +387,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
                 break;
             case R.id.fl_open_book:
                 KLog.d(TAG, "onClick: fl_add_bookcase");
+                startActivityForResult(new Intent(this, ReadActivity.class)
+                        .putExtra(ReadActivity.EXTRA_IS_COLLECTED, isCollected)
+                        .putExtra(ReadActivity.EXTRA_COLL_BOOK, mCollBookBean), REQUEST_READ);
                 break;
             case R.id.ll_book_detail_catalog:
                 KLog.d(TAG, "onClick: fl_add_bookcase");
@@ -362,6 +418,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         builder.setNegativeButton(R.string.commom_cancel, null);
         builder.setPositiveButton(R.string.commom_confirm, (dialog, which) -> {
             DBManger.getInstance().deleteBookTb(mBookId);
+            isCollected = false;
             refreshBookAddStatus();
         });
         builder.show();
@@ -383,5 +440,31 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         super.error();
         onCancelProgress();
         showToast("书籍打开失败");
+    }
+
+    @Override
+    public void complete() {
+        super.complete();
+        refreshBookAddStatus();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(K_EXTRA_BOOK, mBookId);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //如果进入阅读页面收藏了，页面结束的时候，就需要返回改变收藏按钮
+        if (requestCode == REQUEST_READ) {
+            if (data == null) {
+                return;
+            }
+
+            isCollected = data.getBooleanExtra(RESULT_IS_COLLECTED, false);
+            refreshBookAddStatus();
+        }
     }
 }

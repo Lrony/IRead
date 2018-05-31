@@ -17,6 +17,7 @@ import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.mvp.MvpFragment;
+import com.lrony.iread.presentation.read.ReadActivity;
 import com.lrony.iread.util.KLog;
 import com.lrony.iread.util.ScreenUtil;
 
@@ -134,7 +135,7 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
         @Override
         public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
             KLog.d(TAG, "onSimpleItemClick() position = " + position);
-            AppRouter.showBookDetailActivity(mContext, mCollBookbeans.get(position).get_id());
+            ReadActivity.startActivity(mContext, mCollBookbeans.get(position), true);
         }
 
         @Override

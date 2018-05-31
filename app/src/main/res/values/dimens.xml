@@ -23,4 +23,8 @@
     <dimen name="online_type_icon_size">36dp</dimen>
 
     <dimen name="bookdetail_bootom_pad">56dp</dimen>
+
+    <!--read setting-->
+    <dimen name="nb.read_setting.divider">20dp</dimen>
+    <dimen name="nb.read_setting.btn_height">35dp</dimen>
 </resources>

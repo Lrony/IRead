@@ -6,6 +6,13 @@ import android.os.Parcelable;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.ToMany;
+
+import java.util.List;
+
+import org.greenrobot.greendao.DaoException;
+
+import com.lrony.iread.model.db.table.DaoSession;
 
 /**
  * Created by Lrony on 18-5-22.
@@ -50,21 +57,23 @@ public class CollBookBean implements Parcelable {
     //是否是本地文件
     private boolean isLocal = false;
 
-    private int readNumber; //阅读次数
+    @ToMany(referencedJoinProperty = "bookId")
+    private List<BookChapterBean> bookChapterList;
+    /**
+     * Used to resolve relations
+     */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+    /**
+     * Used for active entity operations.
+     */
+    @Generated(hash = 1552163441)
+    private transient CollBookBeanDao myDao;
 
-    private long latestReadTimestamp;//最后一次的阅读时间
-
-    private int sort; //保存自定义排序的顺序
-
-    private long createTimestamp;
-
-    private long updateTimestamp;
-
-    @Generated(hash = 170912018)
+    @Generated(hash = 757968961)
     public CollBookBean(String _id, String title, String author, String shortIntro, String cover,
                         boolean hasCp, int latelyFollower, double retentionRatio, String updated, String lastRead,
-                        int chaptersCount, String lastChapter, boolean isUpdate, boolean isLocal, int readNumber,
-                        long latestReadTimestamp, int sort, long createTimestamp, long updateTimestamp) {
+                        int chaptersCount, String lastChapter, boolean isUpdate, boolean isLocal) {
         this._id = _id;
         this.title = title;
         this.author = author;
@@ -79,11 +88,6 @@ public class CollBookBean implements Parcelable {
         this.lastChapter = lastChapter;
         this.isUpdate = isUpdate;
         this.isLocal = isLocal;
-        this.readNumber = readNumber;
-        this.latestReadTimestamp = latestReadTimestamp;
-        this.sort = sort;
-        this.createTimestamp = createTimestamp;
-        this.updateTimestamp = updateTimestamp;
     }
 
     @Generated(hash = 149378998)
@@ -105,11 +109,6 @@ public class CollBookBean implements Parcelable {
         lastChapter = in.readString();
         isUpdate = in.readByte() != 0;
         isLocal = in.readByte() != 0;
-        readNumber = in.readInt();
-        latestReadTimestamp = in.readLong();
-        sort = in.readInt();
-        createTimestamp = in.readLong();
-        updateTimestamp = in.readLong();
     }
 
     public static final Creator<CollBookBean> CREATOR = new Creator<CollBookBean>() {
@@ -236,44 +235,96 @@ public class CollBookBean implements Parcelable {
         this.isLocal = isLocal;
     }
 
-    public int getReadNumber() {
-        return this.readNumber;
+    public void setBookChapters(List<BookChapterBean> beans){
+        bookChapterList = beans;
+        for (BookChapterBean bean : bookChapterList){
+            bean.setBookId(get_id());
+        }
     }
 
-    public void setReadNumber(int readNumber) {
-        this.readNumber = readNumber;
+    public List<BookChapterBean> getBookChapters(){
+        if (daoSession == null){
+            return bookChapterList;
+        }
+        else {
+            return getBookChapterList();
+        }
     }
 
-    public long getLatestReadTimestamp() {
-        return this.latestReadTimestamp;
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 711740787)
+    public List<BookChapterBean> getBookChapterList() {
+        if (bookChapterList == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            BookChapterBeanDao targetDao = daoSession.getBookChapterBeanDao();
+            List<BookChapterBean> bookChapterListNew = targetDao
+                    ._queryCollBookBean_BookChapterList(_id);
+            synchronized (this) {
+                if (bookChapterList == null) {
+                    bookChapterList = bookChapterListNew;
+                }
+            }
+        }
+        return bookChapterList;
     }
 
-    public void setLatestReadTimestamp(long latestReadTimestamp) {
-        this.latestReadTimestamp = latestReadTimestamp;
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
+    @Generated(hash = 1077762221)
+    public synchronized void resetBookChapterList() {
+        bookChapterList = null;
     }
 
-    public int getSort() {
-        return this.sort;
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
     }
 
-    public void setSort(int sort) {
-        this.sort = sort;
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.refresh(this);
     }
 
-    public long getCreateTimestamp() {
-        return this.createTimestamp;
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.update(this);
     }
 
-    public void setCreateTimestamp(long createTimestamp) {
-        this.createTimestamp = createTimestamp;
-    }
-
-    public long getUpdateTimestamp() {
-        return this.updateTimestamp;
-    }
-
-    public void setUpdateTimestamp(long updateTimestamp) {
-        this.updateTimestamp = updateTimestamp;
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 159260324)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getCollBookBeanDao() : null;
     }
 
     @Override
@@ -297,10 +348,5 @@ public class CollBookBean implements Parcelable {
         dest.writeString(lastChapter);
         dest.writeByte((byte) (isUpdate ? 1 : 0));
         dest.writeByte((byte) (isLocal ? 1 : 0));
-        dest.writeInt(readNumber);
-        dest.writeLong(latestReadTimestamp);
-        dest.writeInt(sort);
-        dest.writeLong(createTimestamp);
-        dest.writeLong(updateTimestamp);
     }
 }
