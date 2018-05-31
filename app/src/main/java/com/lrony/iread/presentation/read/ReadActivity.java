@@ -712,7 +712,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
                         && !mCollBook.getBookChapters().isEmpty()) {
                     AlertDialog alertDialog = new AlertDialog.Builder(this)
                             .setTitle("加入书架")
-                            .setMessage("喜欢本书就加入书架吧")
+                            .setMessage("喜欢《" + mCollBook.getTitle() + "》就加入书架吧")
                             .setPositiveButton("确定", (dialog, which) -> {
                                 //设置为已收藏
                                 isCollected = true;
