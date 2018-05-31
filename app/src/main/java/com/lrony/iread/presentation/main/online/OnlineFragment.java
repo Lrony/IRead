@@ -8,6 +8,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.classic.common.MultipleStatusView;
 import com.lrony.iread.R;
@@ -40,6 +42,8 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
     private static final String TAG = "OnlineFragment";
 
+    @BindView(R.id.ll_father)
+    LinearLayout mFather;
     @BindView(R.id.multiple_status_view)
     MultipleStatusView mStatusView;
     @BindView(R.id.banner)
@@ -95,6 +99,13 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
     }
 
     private void initView() {
+        KLog.d(TAG, "initView");
+
+        // Fragment切换界面跳动问题，临时对应
+        mFather.setFocusable(true);
+        mFather.setFocusableInTouchMode(true);
+        mFather.requestFocus();
+
         // 模拟数据
         mBanners.add("http://img.hb.aicdn.com/869326eae314f5efd1ba5998dfb05350a99a79f317a48-OQQQ0G_fw658");
         mBanners.add("http://img.hb.aicdn.com/b7ed8a8ccdd1b99cfe300598e22b902b5667cc8d195a2-6lQTVT_fw658");
@@ -129,6 +140,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
     }
 
     private void initListener() {
+        KLog.d(TAG, "initListener");
         // 加载失败重试监听
         mStatusView.setOnRetryClickListener((view) -> loadData());
     }
@@ -136,6 +148,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
     @Override
     public void onStart() {
         super.onStart();
+        KLog.d(TAG, "onStart");
         //开始轮播
         if (mBanner != null) mBanner.startAutoPlay();
     }
@@ -143,6 +156,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
     @Override
     public void onStop() {
         super.onStop();
+        KLog.d(TAG, "onStop");
         //结束轮播
         if (mBanner != null) mBanner.stopAutoPlay();
     }
@@ -152,6 +166,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
      * 只有全部的数据获取到了才能设置
      */
     private void jugeSetItems() {
+        KLog.d(TAG, "jugeSetItems");
         if (isLoadMaleBooks == true && isLoadFemaleBooks == true) {
             KLog.d(TAG, "load ok");
             mAdapter.setItems(mItems);
