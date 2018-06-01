@@ -25,8 +25,9 @@
         <activity android:name=".presentation.book.detail.BookDetailActivity" />
         <activity android:name=".presentation.book.recommend.RecommendActivity" />
         <activity android:name=".presentation.read.ReadActivity" />
-        <activity android:name=".presentation.main.online.more.OnlineMoreActivity"></activity>
-        <activity android:name=".presentation.book.catalog.BookCatalogActivity"></activity>
+        <activity android:name=".presentation.main.online.more.OnlineMoreActivity" />
+        <activity android:name=".presentation.book.catalog.BookCatalogActivity" />
+        <activity android:name=".presentation.about.AboutActivity"></activity>
     </application>
 
 </manifest>
