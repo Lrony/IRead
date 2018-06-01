@@ -119,6 +119,9 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
         mAdapter.setOnLoadMoreListener(this);
         mRefreshView.setOnRefreshListener(this);
         mFloatingBtnUp.setOnClickListener(v -> mRecyclerView.smoothScrollToPosition(0));
+
+        // 加载失败重试监听
+        mStatusView.setOnRetryClickListener((view) -> loadData(true));
     }
 
     private void initData() {
@@ -133,7 +136,12 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
 
         KLog.d(TAG, "mGender: " + mGender + ",mMajor: " + mMajor);
 
-        getPresenter().loadData(true, mGender, mType, mMajor, mMinor, mStart, mLimit);
+        loadData(true);
+    }
+
+    private void loadData(boolean show) {
+        KLog.d(TAG, "loadData");
+        getPresenter().loadData(show, mGender, mType, mMajor, mMinor, mStart, mLimit);
     }
 
     @Override
@@ -200,6 +208,6 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
     @Override
     public void onRefresh() {
         mStart = 0;
-        getPresenter().loadData(false, mGender, mType, mMajor, mMinor, mStart, mLimit);
+        loadData(false);
     }
 }
