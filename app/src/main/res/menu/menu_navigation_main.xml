@@ -9,5 +9,9 @@
             android:id="@+id/action_night"
             android:icon="@drawable/ic_vct_brightness"
             android:title="@string/menu_main_night" />
+        <item
+            android:id="@+id/action_about"
+            android:icon="@drawable/ic_vct_emoticon"
+            android:title="@string/menu_main_about" />
     </group>
 </menu>

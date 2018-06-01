@@ -8,6 +8,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.pref.Constant;
+import com.lrony.iread.ui.help.CommonAdapter;
+import com.lrony.iread.ui.help.CommonViewHolder;
 import com.lrony.iread.util.ImageLoader;
 
 import java.util.List;
@@ -16,18 +18,17 @@ import java.util.List;
 /**
  * @author wangdan
  */
-public class LocalAdapter extends BaseQuickAdapter<CollBookBean, BaseViewHolder> {
+public class LocalAdapter extends CommonAdapter<CollBookBean> {
 
     private Context mContext;
 
-    public LocalAdapter(@Nullable List<CollBookBean> data, Context context) {
+    public LocalAdapter(List<CollBookBean> data, Context context) {
         super(R.layout.item_grid_book, data);
         this.mContext = context;
-
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, CollBookBean item) {
+    protected void convert(CommonViewHolder helper, CollBookBean item) {
         helper.setText(R.id.tv_title, item.getTitle());
         ImageLoader.load(mContext, Constant.IMG_BASE_URL + item.getCover(), helper.getView(R.id.iv_cover));
     }
