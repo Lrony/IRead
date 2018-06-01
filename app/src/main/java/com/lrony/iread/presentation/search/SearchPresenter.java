@@ -47,6 +47,12 @@ public class SearchPresenter extends MvpBasePresenter<SearchContract.View> imple
                 .subscribe(
                         bean -> {
                             if (!isViewAttached()) return;
+
+                            if (bean == null) {
+                                getView().empty();
+                                return;
+                            }
+
                             if (bean.size() <= 0) {
                                 getView().empty();
                             } else {
