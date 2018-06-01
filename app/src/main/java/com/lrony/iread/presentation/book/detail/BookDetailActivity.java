@@ -323,11 +323,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         mTvWordCount.setText(isFinished + " | " + StringUtils.formatCount(mBook.getWordCount()) + "字");
         mTvWordCountCopyright.setText(mTvWordCountCopyright.getText() + StringUtils.formatCount(mBook.getWordCount()) + "字");
         mTvCatalogTitle.setText(getString(R.string.bookdetail_newchapter) + mBook.getLastChapter());
-        try {
-            mTvUpdateTime.setText(StringUtils.formatSomeAgo(StringUtils.dealDateFormat(mBook.getUpdated())) + "更新");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        mTvUpdateTime.setText("打开目录");
         mTvCreateDateCopyright.setText(mTvCreateDateCopyright.getText().toString() + mBook.getRetentionRatio() + "%");
         mTvDescribe.setText(mBook.getLongIntro());
 
@@ -435,7 +431,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Shares.share(this,mBook.getLongIntro()+R.string.share_end);
+        Shares.share(this, mBook.getLongIntro() + R.string.share_end);
         return super.onOptionsItemSelected(item);
     }
 

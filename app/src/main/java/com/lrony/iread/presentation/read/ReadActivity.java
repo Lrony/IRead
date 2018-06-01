@@ -198,6 +198,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     private boolean isNightMode = false;
     private boolean isFullScreen = false;
     private boolean isRegistered = false;
+    private static int openChapter = -1;
 
     private String mBookId;
 
@@ -207,10 +208,17 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
                 .putExtra(EXTRA_COLL_BOOK, collBook));
     }
 
+    public static void startActivity(Context context, CollBookBean collBook, boolean isCollected, int chapter) {
+        openChapter = chapter;
+        context.startActivity(new Intent(context, ReadActivity.class)
+                .putExtra(EXTRA_IS_COLLECTED, isCollected)
+                .putExtra(EXTRA_COLL_BOOK, collBook));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        KLog.d(TAG, "onCreate");
+        KLog.d(TAG, "onCreate openChapter: " + openChapter);
         setContentView(R.layout.activity_read);
         // 使用ButterKnife代替findview
         ButterKnife.bind(this);
@@ -222,6 +230,12 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
         initWidget();
         initListener();
         processLogic();
+
+        // 需要跳转到指定章节
+        if (openChapter > -1) {
+            mPageLoader.skipToChapter(openChapter - 1);
+            openChapter = -1;
+        }
     }
 
     private void initData() {
