@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatDelegate;
@@ -38,6 +39,8 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.fab_up)
+    FloatingActionButton mFloatingBtnUp;
     @BindView(R.id.multiple_status_view)
     MultipleStatusView mStatusView;
     @BindView(R.id.refresh_view)
@@ -115,6 +118,7 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
         KLog.d(TAG, "initListener");
         mAdapter.setOnLoadMoreListener(this);
         mRefreshView.setOnRefreshListener(this);
+        mFloatingBtnUp.setOnClickListener(v -> mRecyclerView.smoothScrollToPosition(0));
     }
 
     private void initData() {
