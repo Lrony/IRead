@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lrony.iread.presentation.book.catalog.BookCatalogActivity;
+import com.lrony.iread.presentation.book.catalog.BookCatalogContract;
 import com.lrony.iread.presentation.book.detail.BookDetailActivity;
 import com.lrony.iread.presentation.book.recommend.RecommendActivity;
 import com.lrony.iread.presentation.main.online.more.OnlineMoreActivity;
@@ -77,5 +79,10 @@ public class AppRouter {
     // 打开在线更多页面
     public static void showOnlineMoreActivity(Context context, String title) {
         context.startActivity(OnlineMoreActivity.newIntent(context, title));
+    }
+
+    //打开目录页面
+    public static void showBookCatalogActivity(Context context, String bookid) {
+        context.startActivity(BookCatalogActivity.newIntent(context, bookid));
     }
 }

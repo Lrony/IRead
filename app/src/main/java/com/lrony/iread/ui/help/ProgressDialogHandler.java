@@ -7,9 +7,11 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.lrony.iread.AppRouter;
+import com.lrony.iread.util.KLog;
 
 public class ProgressDialogHandler extends Handler {
 
+    private final static String TAG = "ProgressDialogHandler";
     public static final int SHOW_PROGRESS_DIALOG = 1;
     public static final int DISMISS_PROGRESS_DIALOG = 2;
 
@@ -42,6 +44,7 @@ public class ProgressDialogHandler extends Handler {
                 mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
+                        mDialog.dismiss();
                         mContext = null;
                         mDialog = null;
                     }
@@ -55,7 +58,9 @@ public class ProgressDialogHandler extends Handler {
     }
 
     private void dismissProgressDialog() {
+        KLog.d(TAG, "dismissProgressDialog");
         if (mDialog != null && mDialog.isShowing()) {
+            KLog.d(TAG, "dismiss");
             mDialog.dismiss();
         }
     }
@@ -67,6 +72,7 @@ public class ProgressDialogHandler extends Handler {
                 initProgressDialog();
                 break;
             case DISMISS_PROGRESS_DIALOG:
+                KLog.d(TAG, "DISMISS_PROGRESS_DIALOG");
                 dismissProgressDialog();
                 break;
         }
