@@ -11,10 +11,11 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.classic.common.MultipleStatusView;
+import com.lrony.iread.AppManager;
+import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.SortBookBean;
 import com.lrony.iread.mvp.MvpActivity;
@@ -116,12 +117,18 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
 
     private void initListener() {
         KLog.d(TAG, "initListener");
-        mAdapter.setOnLoadMoreListener(this);
+
         mRefreshView.setOnRefreshListener(this);
         mFloatingBtnUp.setOnClickListener(v -> mRecyclerView.smoothScrollToPosition(0));
 
         // 加载失败重试监听
         mStatusView.setOnRetryClickListener((view) -> loadData(true));
+
+        mAdapter.setOnLoadMoreListener(this);
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            AppRouter.showBookDetailActivity(this, mBooks.get(position).get_id());
+            AppManager.getInstance().finishActivity();
+        });
     }
 
     private void initData() {
