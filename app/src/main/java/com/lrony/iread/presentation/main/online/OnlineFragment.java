@@ -138,10 +138,16 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         mBanner.start();
 
         // 使用MultiType完成多布局RecycleView
+        // NestedScrollView嵌套RecyclerView时滑动不流畅问题 https://blog.csdn.net/u010839880/article/details/52672489
         mAdapter = new MultiTypeAdapter();
         mAdapter.register(Type.class, new TypeViewBinder(getContext()));
         mAdapter.register(BookInfo.class, new BookInfoViewBinder(getContext()));
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setSmoothScrollbarEnabled(true);
+        layoutManager.setAutoMeasureEnabled(true);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
     }
 
