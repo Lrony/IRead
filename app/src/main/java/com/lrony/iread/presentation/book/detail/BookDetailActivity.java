@@ -229,6 +229,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     public void loading() {
         super.loading();
         if (mDialogHandler != null) {
+            KLog.e(TAG, "loading SHOW_PROGRESS_DIALOG");
             mDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
         } else {
             KLog.e(TAG, "loading mDialogHandler is null");

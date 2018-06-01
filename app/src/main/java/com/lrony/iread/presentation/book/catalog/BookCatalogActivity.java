@@ -17,8 +17,11 @@ import com.classic.common.MultipleStatusView;
 import com.lrony.iread.AppManager;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.BookChapterBean;
+import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.model.bean.packages.BookChapterPackage;
+import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.mvp.MvpActivity;
+import com.lrony.iread.presentation.read.ReadActivity;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.util.KLog;
 
@@ -49,7 +52,8 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
     private BookCatalogAdapter mAdapter;
 
-    private ArrayList<BookChapterBean> bookBean = new ArrayList<>();
+    private ArrayList<BookChapterBean> mBookBean = new ArrayList<>();
+    private CollBookBean mCollBookBean;
 
     private boolean mIsReverserder = false;
 
@@ -87,9 +91,10 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
         mRefreshView.setOnRefreshListener(this);
 
-        mAdapter.setOnItemClickListener(((adapter, view, position) ->
-                showToast(bookBean.get(position).getTitle())
-        ));
+        mAdapter.setOnItemClickListener(((adapter, view, position) -> {
+            showToast(mBookBean.get(position).getTitle());
+            ReadActivity.startActivity(this, mCollBookBean, true, position+1);
+        }));
 
         mStatusView.setOnRetryClickListener((v ->
                 getPresenter().loadBookInfo(true, mBookId)
@@ -109,7 +114,7 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
         mRefreshView.setColorSchemeResources(R.color.colorAccent);
 
-        mAdapter = new BookCatalogAdapter(bookBean);
+        mAdapter = new BookCatalogAdapter(mBookBean);
         mRecyclerView.setAdapter(mAdapter);
 
     }
@@ -139,8 +144,9 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
         if (null == bean) {
             AppManager.getInstance().finishActivity(this);
         }
-        bookBean.clear();
-        bookBean.addAll(bean);
+        mCollBookBean = DBManger.getInstance().loadBookTbById(mBookId);
+        mBookBean.clear();
+        mBookBean.addAll(bean);
         mAdapter.notifyDataSetChanged();
 
     }
@@ -201,7 +207,7 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
         mStatusView.showContent();
         mRefreshView.setRefreshing(false);
 
-        if (bookBean.size() <= 0) mStatusView.showEmpty();
+        if (mBookBean.size() <= 0) mStatusView.showEmpty();
     }
 
 }
