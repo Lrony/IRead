@@ -106,6 +106,7 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
         mRefreshView.setColorSchemeResources(R.color.colorAccent);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorForeground));
         mRecyclerView.addItemDecoration(new RecyclerViewItemDecoration.Builder(this)
                 .color(ContextCompat.getColor(this, R.color.colorDivider))
                 .thickness(1)
