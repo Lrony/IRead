@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.lrony.iread.presentation.book.detail.BookDetailActivity;
 import com.lrony.iread.presentation.book.recommend.RecommendActivity;
+import com.lrony.iread.presentation.main.online.more.OnlineMoreActivity;
 import com.lrony.iread.presentation.search.SearchActivity;
 import com.lrony.iread.presentation.settings.SettingsActivity;
 import com.lrony.iread.util.DensityUtil;
@@ -71,5 +72,10 @@ public class AppRouter {
     //打开相关推荐
     public static void showRecommendActivity(Context context, String bookid) {
         context.startActivity(RecommendActivity.newIntent(context, bookid));
+    }
+
+    // 打开在线更多页面
+    public static void showOnlineMoreActivity(Context context, String title) {
+        context.startActivity(OnlineMoreActivity.newIntent(context, title));
     }
 }

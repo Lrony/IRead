@@ -11,4 +11,9 @@ public class OnlineMorePresenter extends MvpBasePresenter<OnlineMoreContract.Vie
     public void start() {
         super.start();
     }
+
+    @Override
+    public void loadData(boolean showStatusView, String gender, String type, String major, String minor, int start, int limit) {
+
+    }
 }

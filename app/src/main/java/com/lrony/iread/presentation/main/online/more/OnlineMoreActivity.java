@@ -1,20 +1,53 @@
 package com.lrony.iread.presentation.main.online.more;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
+import com.classic.common.MultipleStatusView;
 import com.lrony.iread.R;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
+import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter> implements OnlineMoreContract.View {
 
     private static final String TAG = "OnlineMoreActivity";
+
+    private static final String K_TITLE = "title";
+
+    private String mTitle;
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.multiple_status_view)
+    MultipleStatusView mStatusView;
+    @BindView(R.id.refresh_view)
+    SwipeRefreshLayout mRefreshView;
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+
+    private String mGender = "male";
+    private String mMajor = "";
+    private String mType = "hot";
+    private String mMinor = "";
+    private int mStart = 0;
+    private int mLimit = 15;
+
+    public static Intent newIntent(Context context, String str) {
+        Intent intent = new Intent(context, OnlineMoreActivity.class);
+        intent.putExtra(K_TITLE, str);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +63,37 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
             }
         }
 
+        mTitle = getIntent().getStringExtra(K_TITLE);
+        KLog.d(TAG, "mTitle: " + mTitle);
         setContentView(R.layout.activity_online_more);
         // 使用ButterKnife代替findview
         ButterKnife.bind(this);
         // 代码规范，必须调用
         getPresenter().start();
+
+        initView();
+        initData();
     }
 
     @NonNull
     @Override
     public OnlineMoreContract.Presenter createPresenter() {
         return new OnlineMorePresenter();
+    }
+
+    private void initView() {
+        KLog.d(TAG, "initView");
+        ToolbarHelper.initToolbar(this, R.id.toolbar, true, mTitle);
+    }
+
+    private void initData() {
+        KLog.d(TAG, "initData");
+        if (mTitle == "男频热推") {
+            mGender = "male";
+        } else if (mTitle == "女频热推") {
+            mGender = "female";
+        }
+
+        getPresenter().loadData(true, mGender, mType, mMajor, mMinor, mStart, mLimit);
     }
 }

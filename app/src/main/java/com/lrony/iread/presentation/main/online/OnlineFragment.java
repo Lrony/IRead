@@ -139,7 +139,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
         // 使用MultiType完成多布局RecycleView
         mAdapter = new MultiTypeAdapter();
-        mAdapter.register(Type.class, new TypeViewBinder());
+        mAdapter.register(Type.class, new TypeViewBinder(getContext()));
         mAdapter.register(BookInfo.class, new BookInfoViewBinder(getContext()));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);

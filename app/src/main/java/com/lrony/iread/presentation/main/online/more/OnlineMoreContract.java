@@ -14,5 +14,15 @@ public class OnlineMoreContract {
 
     interface Presenter extends MvpPresenter<View> {
 
+        /**
+         * @param showStatusView 是否显示StatusView
+         * @param gender
+         * @param type
+         * @param major
+         * @param minor
+         * @param start
+         * @param limit
+         */
+        void loadData(boolean showStatusView, String gender, String type, String major, String minor, int start, int limit);
     }
 }

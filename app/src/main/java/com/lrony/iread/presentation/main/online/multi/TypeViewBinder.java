@@ -1,5 +1,6 @@
 package com.lrony.iread.presentation.main.online.multi;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 
 import me.drakeet.multitype.ItemViewBinder;
@@ -16,6 +18,12 @@ import me.drakeet.multitype.ItemViewBinder;
  * Created by Lrony on 18-5-23.
  */
 public class TypeViewBinder extends ItemViewBinder<Type, TypeViewBinder.ViewHolder> {
+
+    private static Context context;
+
+    public TypeViewBinder(Context context) {
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -26,10 +34,13 @@ public class TypeViewBinder extends ItemViewBinder<Type, TypeViewBinder.ViewHold
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull Type item) {
+        holder.type = item;
         holder.title.setText(item.title);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private Type type;
 
         @NonNull
         private final TextView title;
@@ -42,7 +53,7 @@ public class TypeViewBinder extends ItemViewBinder<Type, TypeViewBinder.ViewHold
             this.more = itemView.findViewById(R.id.rl_recommend_more);
 
             more.setOnClickListener(v -> {
-
+                AppRouter.showOnlineMoreActivity(context, type.title);
             });
         }
     }
