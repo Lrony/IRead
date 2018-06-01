@@ -4,7 +4,7 @@
 
     <string name="tab_main_local">本地书架</string>
     <string name="tab_main_online">在线图书</string>
-    <string name="menu_main_settings">设置</string>
+    <string name="menu_main_settings">系统设置</string>
     <string name="menu_main_night">夜间模式</string>
 
     <string name="search_edit_hint">搜索在线书城</string>
@@ -14,7 +14,7 @@
     <string name="empty_book">多读书，读好书，马上去书城发现好书</string>
     <string name="search_empty_book">抱歉没有找到你要搜索的内容</string>
 
-    <string name="settings_title">系统设置</string>
+    <string name="settings_title">设置</string>
 
     <string name="noline_male_hot_recommend">男频热推</string>
     <string name="noline_female_hot_recommend">女频热推</string>
