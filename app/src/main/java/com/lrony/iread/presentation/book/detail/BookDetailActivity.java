@@ -387,7 +387,8 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
                 break;
             case R.id.ll_book_detail_catalog:
                 KLog.d(TAG, "onClick: ll_book_detail_catalog");
-                ReadActivity.startActivity(this, mCollBookBean, true);
+//                ReadActivity.startActivity(this, mCollBookBean, true);
+                AppRouter.showBookCatalogActivity(this, mBookId);
                 break;
             case R.id.rl_recommend_more:
                 KLog.d(TAG, "onClick: rl_recommend_more");
