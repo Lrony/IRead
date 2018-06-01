@@ -7,7 +7,7 @@ import com.lrony.iread.model.bean.BookDetailBean;
 import com.lrony.iread.model.bean.BookDetailRecommendBookBean;
 import com.lrony.iread.model.bean.ChapterInfoBean;
 import com.lrony.iread.model.bean.SortBookBean;
-import com.lrony.iread.model.bean.packages.RecommendBookPackage;
+import com.lrony.iread.model.bean.packages.BookChapterPackage;
 import com.lrony.iread.model.bean.packages.SearchBookPackage;
 
 import java.util.ArrayList;
@@ -121,6 +121,7 @@ public class RemoteRepository {
                     }
                 });
     }
+
 
     /**
      * 注意这里用的是同步请求
