@@ -38,6 +38,7 @@ public class OnlinePresenter extends MvpBasePresenter<OnlineContract.View> imple
                             getView().error();
                         }
                 );
+        addDisposable(disp);
     }
 
     @Override
@@ -60,5 +61,6 @@ public class OnlinePresenter extends MvpBasePresenter<OnlineContract.View> imple
                             getView().error();
                         }
                 );
+        addDisposable(disp);
     }
 }
