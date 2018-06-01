@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/read_abl_top_menu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/read_menu_container_bg"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/Read.ActionBar"
+        app:layout_scrollFlags="enterAlways|scroll|snap"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextAppearance="@style/Read.TextAppearance.ActionBar.Title">
+
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right">
+
+            <TextView
+                android:id="@+id/read_tv_brief"
+                style="@style/NB.Theme.TextAppearance.Read.TopMenu"
+                android:layout_alignParentRight="true"
+                android:text="简介" />
+
+            <TextView
+                android:id="@+id/read_tv_community"
+                style="@style/NB.Theme.TextAppearance.Read.TopMenu"
+                android:layout_toLeftOf="@id/read_tv_brief"
+                android:text="社区"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+</android.support.design.widget.AppBarLayout>
