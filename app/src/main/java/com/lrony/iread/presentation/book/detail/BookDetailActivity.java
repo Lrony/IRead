@@ -204,7 +204,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         });
 
         mRecommendAdapter.setOnItemClickListener((adapter, view, position) ->
-                AppRouter.showRecommendActivity(
+                AppRouter.showBookDetailActivity(
                         BookDetailActivity.this, mRecommendBooks.get(position).get_id())
         );
 
