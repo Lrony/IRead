@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,8 +22,10 @@ import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.model.bean.packages.BookChapterPackage;
 import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.mvp.MvpActivity;
+import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.presentation.read.ReadActivity;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
+import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
 
 import java.util.ArrayList;
@@ -74,6 +77,18 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 判断是否需要刷新Activity来应用夜间模式切换所导致的更改，Activity必须配置
+        if (savedInstanceState == null) {
+            boolean isNight = AppConfig.isNightMode();
+            KLog.d(TAG, "initTheme isNight = " + isNight);
+            if (isNight) {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }
+
+
         setContentView(R.layout.activity_book_catalog);
         ButterKnife.bind(this);
 
@@ -104,6 +119,9 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
     private void initView() {
         KLog.d(TAG, "initView");
+
+        ToolbarHelper.initToolbar(this, R.id.toolbar, true, "目录");
+
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.addItemDecoration(

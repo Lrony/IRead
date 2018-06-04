@@ -16,7 +16,7 @@ public class BookCatalogAdapter extends CommonAdapter<BookChapterBean> {
 
 
     public BookCatalogAdapter(List<BookChapterBean> book) {
-        super(R.layout.item_category, book);
+        super(R.layout.item_search_key_word, book);
     }
 
 
@@ -28,7 +28,7 @@ public class BookCatalogAdapter extends CommonAdapter<BookChapterBean> {
      */
     @Override
     protected void convert(CommonViewHolder helper, BookChapterBean item) {
-        helper.setText(R.id.category_tv_chapter,item.getTitle());
+        helper.setText(R.id.tv_title,item.getTitle());
 
     }
 }
