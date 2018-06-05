@@ -37,6 +37,7 @@ import com.lrony.iread.presentation.read.ReadActivity;
 import com.lrony.iread.ui.help.ProgressCancelListener;
 import com.lrony.iread.ui.help.ProgressDialogHandler;
 import com.lrony.iread.ui.help.ToolbarHelper;
+import com.lrony.iread.ui.widget.LoadingDialog;
 import com.lrony.iread.ui.widget.ShapeTextView;
 import com.lrony.iread.util.ImageLoader;
 import com.lrony.iread.util.KLog;
@@ -68,8 +69,10 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     //传入的书籍ID
     private String mBookId;
 
-    private ProgressDialogHandler mDialogHandler;
-    private ProgressDialogHandler mAddDialogHandler;
+    //    private ProgressDialogHandler mDialogHandler;
+//    private ProgressDialogHandler mAddDialogHandler;
+    private LoadingDialog mLoadDialog;
+    private LoadingDialog mAddDialog;
     private BookDetailRecommendAdapter mRecommendAdapter;
     private BookDetailBean mBook;
     private CollBookBean mCollBookBean;
@@ -214,8 +217,10 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     private void initView() {
         KLog.d(TAG, "initView");
-        mDialogHandler = new ProgressDialogHandler(this, this, true);
-        mAddDialogHandler = new ProgressDialogHandler(this, this, false);
+//        mDialogHandler = new ProgressDialogHandler(this, this, true);
+//        mAddDialogHandler = new ProgressDialogHandler(this, this, false);
+        mLoadDialog = new LoadingDialog(this);
+        mAddDialog = new LoadingDialog(this);
         mRvRecommendBook.setNestedScrollingEnabled(false);
         //设置layoutManager,根据横屏竖屏分别设置每行item数量
         mRvRecommendBook.setLayoutManager(new GridLayoutManager(
@@ -228,9 +233,10 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void loading() {
         super.loading();
-        if (mDialogHandler != null) {
+        if (mLoadDialog != null) {
             KLog.e(TAG, "loading SHOW_PROGRESS_DIALOG");
-            mDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
+//            mDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
+            mLoadDialog.show();
         } else {
             KLog.e(TAG, "loading mDialogHandler is null");
         }
@@ -245,9 +251,8 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void onCancelProgress() {
         KLog.d(TAG, "onCancelProgress");
-        if (mDialogHandler != null) {
-            mDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
-        }
+        mLoadDialog.close();
+
 //        AppManager.getInstance().finishActivity();
     }
 
@@ -275,8 +280,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     @Override
     public void addBookLoading() {
-        if (mAddDialogHandler != null) {
-            mAddDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
+        if (mAddDialog != null) {
+//            mAddDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
+            mAddDialog.show();
         } else {
             KLog.e(TAG, "loading mAddDialogHandler is null");
         }
@@ -284,9 +290,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     @Override
     public void addBookError() {
-        if (mAddDialogHandler != null) {
-            mAddDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
-        }
+        mAddDialog.close();
         isCollected = false;
         showToast("加入书架失败，请检查网络");
     }
@@ -294,9 +298,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void succeed() {
         super.succeed();
-        if (mAddDialogHandler != null) {
-            mAddDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
-        }
+        mAddDialog.close();
         isCollected = true;
 
     }
@@ -405,11 +407,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     private void jugeCloseDialog() {
         KLog.d(TAG, "jugeCloseDialog mInfoLoadOK: " + mInfoLoadOK + ",mRecommendLoadOK: " + mRecommendLoadOK);
         if (mInfoLoadOK == true && mRecommendLoadOK == true) {
-            if (mDialogHandler != null) {
-                mDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
-            } else {
-                KLog.d(TAG, "mDialogHandler is null !!!");
-            }
+            mLoadDialog.close();
         }
     }
 
