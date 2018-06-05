@@ -275,6 +275,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         mRecommendBooks.addAll(books);
         mRvRecommendBook.setAdapter(mRecommendAdapter);
         mRecommendLoadOK = true;
+        if (books.size() <= 0) mFrmRecommend.setVisibility(View.GONE);
         jugeCloseDialog();
     }
 
