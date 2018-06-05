@@ -16,7 +16,7 @@ public class BookCatalogAdapter extends CommonAdapter<BookChapterBean> {
 
 
     public BookCatalogAdapter(List<BookChapterBean> book) {
-        super(R.layout.item_search_key_word, book);
+        super(R.layout.item_list_book_catalog, book);
     }
 
 

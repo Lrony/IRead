@@ -24,6 +24,8 @@
 
     <dimen name="bookdetail_bootom_pad">56dp</dimen>
 
+    <dimen name="book_catalog_item_height">50dp</dimen>
+
     <!--read setting-->
     <dimen name="nb.read_setting.divider">20dp</dimen>
     <dimen name="nb.read_setting.btn_height">35dp</dimen>
