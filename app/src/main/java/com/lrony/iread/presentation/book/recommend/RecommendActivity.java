@@ -80,6 +80,7 @@ public class RecommendActivity extends MvpActivity<RecommendContract.Presenter> 
         KLog.d(TAG, "initView");
         mRefreshView.setColorSchemeResources(R.color.colorAccent);
 
+        mRecyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorForeground));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new RecyclerViewItemDecoration.Builder(this)
                 .color(ContextCompat.getColor(this, R.color.colorDivider))

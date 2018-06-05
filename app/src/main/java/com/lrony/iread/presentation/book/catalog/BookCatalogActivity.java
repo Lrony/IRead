@@ -122,6 +122,7 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
         ToolbarHelper.initToolbar(this, R.id.toolbar, true, "目录");
 
+        mRecyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorForeground));
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.addItemDecoration(
