@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +19,7 @@ import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.BookDetailRecommendBookBean;
 import com.lrony.iread.mvp.MvpActivity;
+import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
@@ -38,6 +41,8 @@ public class RecommendActivity extends MvpActivity<RecommendContract.Presenter> 
     private static final String K_EXTRA_RECOMMEND = "recommend";
 
     private String mBookId;
+    private int distance = 0;
+    private boolean visible = true;
 
     private RecommendAdapter mAdapter;
 
@@ -51,6 +56,8 @@ public class RecommendActivity extends MvpActivity<RecommendContract.Presenter> 
     SwipeRefreshLayout mRefreshView;
     @BindView(R.id.multiple_status_view)
     MultipleStatusView mStatusView;
+    @BindView(R.id.fab_up)
+    FloatingActionButton mFabUp;
 
     public static Intent newIntent(Context context, String bookid) {
         Intent intent = new Intent(context, RecommendActivity.class);
@@ -61,6 +68,16 @@ public class RecommendActivity extends MvpActivity<RecommendContract.Presenter> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 判断是否需要刷新Activity来应用夜间模式切换所导致的更改，Activity必须配置
+        if (savedInstanceState == null) {
+            boolean isNight = AppConfig.isNightMode();
+            KLog.d(TAG, "initTheme isNight = " + isNight);
+            if (isNight) {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }
         setContentView(R.layout.activity_recommend);
         ButterKnife.bind(this);
 
@@ -103,6 +120,9 @@ public class RecommendActivity extends MvpActivity<RecommendContract.Presenter> 
                     RecommendActivity.this, mRecommendBooks.get(position).get_id());
             AppManager.getInstance().finishActivity();
         }));
+
+        mFabUp.setOnClickListener(v -> mRecyclerView.scrollToPosition(0));
+
     }
 
     @Override
@@ -113,7 +133,7 @@ public class RecommendActivity extends MvpActivity<RecommendContract.Presenter> 
 
     @Override
     public void finshLoadRecommend(List<BookDetailRecommendBookBean> bookBean) {
-        KLog.d(TAG,"finshLoadRecommend");
+        KLog.d(TAG, "finshLoadRecommend");
         if (null == bookBean) {
             AppManager.getInstance().finishActivity(this);
         }
@@ -153,11 +173,5 @@ public class RecommendActivity extends MvpActivity<RecommendContract.Presenter> 
         mRefreshView.setRefreshing(false);
 
         if (mRecommendBooks.size() <= 0) mStatusView.showEmpty();
-    }
-
-    @Override
-    public void error() {
-        super.error();
-        mStatusView.showError();
     }
 }
