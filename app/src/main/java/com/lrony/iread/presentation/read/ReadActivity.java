@@ -46,6 +46,7 @@ import com.lrony.iread.pref.ReadSettingManager;
 import com.lrony.iread.presentation.book.detail.BookDetailActivity;
 import com.lrony.iread.ui.adapter.CategoryAdapter;
 import com.lrony.iread.ui.help.ReadSettingDialog;
+import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.ui.widget.page.PageLoader;
 import com.lrony.iread.ui.widget.page.PageView;
 import com.lrony.iread.ui.widget.page.TxtChapter;
@@ -85,8 +86,6 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     private static final int WHAT_CATEGORY = 1;
     private static final int WHAT_CHAPTER = 2;
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
     @BindView(R.id.read_dl_slide)
     DrawerLayout mDlSlide;
     /*************top_menu_view*******************/
@@ -251,7 +250,7 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     private void initToolbar() {
         KLog.d(TAG, "initToolbar");
         //设置标题
-        mToolbar.setTitle(mCollBook.getTitle());
+        ToolbarHelper.initToolbar(this, R.id.toolbar, true, mCollBook.getTitle());
         //半透明化StatusBar
         SystemBarUtils.transparentStatusBar(this);
     }
