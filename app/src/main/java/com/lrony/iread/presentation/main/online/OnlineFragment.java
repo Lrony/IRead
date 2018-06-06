@@ -230,6 +230,13 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
     }
 
     @Override
+    public void nonetword() {
+        super.nonetword();
+        KLog.d(TAG, "complete");
+        mStatusView.showNoNetwork();
+    }
+
+    @Override
     public void error() {
         super.error();
         KLog.d(TAG, "error");

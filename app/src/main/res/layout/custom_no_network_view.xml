@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/no_network_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorForeground">
+    android:background="@color/colorForeground"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/no_network_retry_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@drawable/ic_no_network" />
+        app:srcCompat="@drawable/ic_vector_book_empty" />
 
     <TextView
-        android:id="@+id/no_network_view_tv"
-        style="@style/MultipleStatusView.Content"
-        android:layout_below="@id/no_network_retry_view"
-        android:text="@string/no_network_view_hint" />
-</RelativeLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/no_net_work"
+        android:textColor="@color/textAssist"
+        android:textSize="@dimen/text_size_medium" />
+</LinearLayout>

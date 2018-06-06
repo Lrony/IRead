@@ -2,6 +2,7 @@ package com.lrony.iread.presentation.main.online;
 
 import com.lrony.iread.model.remote.RemoteRepository;
 import com.lrony.iread.mvp.MvpBasePresenter;
+import com.lrony.iread.util.NetworkUtils;
 import com.lrony.iread.util.RxUtils;
 
 import io.reactivex.disposables.Disposable;
@@ -25,6 +26,11 @@ public class OnlinePresenter extends MvpBasePresenter<OnlineContract.View> imple
 
         getView().loading();
 
+        if (!NetworkUtils.isAvailable()) {
+            getView().nonetword();
+            return;
+        }
+
         Disposable disp = RemoteRepository.getInstance()
                 .getSortBookPackage("male", "hot", "玄幻", "", 0, num)
                 .compose(RxUtils::toSimpleSingle)
@@ -47,6 +53,11 @@ public class OnlinePresenter extends MvpBasePresenter<OnlineContract.View> imple
         if (!isViewAttached()) return;
 
         getView().loading();
+
+        if (!NetworkUtils.isAvailable()) {
+            getView().nonetword();
+            return;
+        }
 
         Disposable disp = RemoteRepository.getInstance()
                 .getSortBookPackage("female", "hot", "古代言情", "", 0, num)
