@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatDelegate;
@@ -19,7 +20,6 @@ import com.lrony.iread.AppManager;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.BookChapterBean;
 import com.lrony.iread.model.bean.CollBookBean;
-import com.lrony.iread.model.bean.packages.BookChapterPackage;
 import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
@@ -50,6 +50,10 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
     SwipeRefreshLayout mRefreshView;
     @BindView(R.id.multiple_status_view)
     MultipleStatusView mStatusView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.fab_up)
+    FloatingActionButton mFabUp;
 
     private String mBookId;
     private LinearLayoutManager mLinearLayoutManager;
@@ -119,6 +123,8 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
         mStatusView.setOnRetryClickListener((v ->
                 getPresenter().loadBookInfo(true, mBookId)
         ));
+
+        mFabUp.setOnClickListener((v -> mRecyclerView.scrollToPosition(0)));
 
     }
 
