@@ -111,7 +111,6 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
         mRefreshView.setOnRefreshListener(this);
 
         mAdapter.setOnItemClickListener(((adapter, view, position) -> {
-            showToast(mBookBean.get(position).getTitle());
             ReadActivity.startActivity(this, mCollBookBean, true, position + 1);
         }));
 
