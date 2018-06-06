@@ -20,11 +20,10 @@
         android:id="@+id/fab_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
         android:clickable="true"
+        app:layout_behavior="com.lrony.iread.ui.help.ScrollAwareFABBehavior"
         app:srcCompat="@drawable/ic_vct_arrow_up" />
 
 </android.support.design.widget.CoordinatorLayout>
