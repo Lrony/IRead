@@ -42,6 +42,7 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
     private final static String TAG = "BookCatalogActivity";
     private static final String K_EXTRA_BOOK = "book";
+    private static final String K_EXTRA_COLLBOOK = "collbook";
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -60,9 +61,10 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
     private boolean mIsReverserder = false;
 
-    public static Intent newIntent(Context context, String bookid) {
+    public static Intent newIntent(Context context, String bookid, CollBookBean bookBean) {
         Intent intent = new Intent(context, BookCatalogActivity.class);
         intent.putExtra(K_EXTRA_BOOK, bookid);
+        intent.putExtra(K_EXTRA_COLLBOOK, bookBean);
         return intent;
     }
 
@@ -94,6 +96,8 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
         mBookId = getIntent().getStringExtra(K_EXTRA_BOOK);
         KLog.d(TAG, "mBookId: " + mBookId);
+        mCollBookBean = getIntent().getParcelableExtra(K_EXTRA_COLLBOOK);
+        KLog.d(TAG, "mCollBookBean:" + mCollBookBean.toString());
 
         getPresenter().start();
         initView();
@@ -108,7 +112,7 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
         mAdapter.setOnItemClickListener(((adapter, view, position) -> {
             showToast(mBookBean.get(position).getTitle());
-            ReadActivity.startActivity(this, mCollBookBean, true, position+1);
+            ReadActivity.startActivity(this, mCollBookBean, true, position + 1);
         }));
 
         mStatusView.setOnRetryClickListener((v ->
@@ -163,7 +167,6 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
         if (null == bean) {
             AppManager.getInstance().finishActivity(this);
         }
-        mCollBookBean = DBManger.getInstance().loadBookTbById(mBookId);
         mBookBean.clear();
         mBookBean.addAll(bean);
         mAdapter.notifyDataSetChanged();
