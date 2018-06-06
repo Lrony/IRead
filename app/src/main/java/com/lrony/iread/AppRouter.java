@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lrony.iread.model.bean.CollBookBean;
+import com.lrony.iread.presentation.about.AboutActivity;
 import com.lrony.iread.presentation.book.catalog.BookCatalogActivity;
 import com.lrony.iread.presentation.book.catalog.BookCatalogContract;
 import com.lrony.iread.presentation.book.detail.BookDetailActivity;
@@ -91,5 +92,10 @@ public class AppRouter {
     //打开目录页面
     public static void showBookCatalogActivity(Context context, String bookid, CollBookBean bookBean) {
         context.startActivity(BookCatalogActivity.newIntent(context, bookid,bookBean));
+    }
+
+    //打开关于页面
+    public static void showAboutActivity(Context context) {
+        context.startActivity(AboutActivity.newIntent(context));
     }
 }

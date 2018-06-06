@@ -66,6 +66,13 @@
     <string name="share_content">发现了一款非常好用的小说App「悦读小说&amp;xxxxxx.com」，绿色健康、无广告，而且完全开源不收费，实在是太赞了! 推荐~：https://www.xxxxxx.com </string>
     <string name="share_end">--来自于</string>
 
+    <string name="app_introduce">悦读致力于打造绿色健康、无广告的阅读平台，为广大读者提供优质健康的阅读服务。
+        \n\n数据内容来源于 http://www.xxxxxx.com</string>
+    <string name="open_source_related">com.android.support:appcompat-v7:26.0.2
+        \ncom.android.support:recyclerview-v7:26.0.2
+        \ncom.android.support:cardview-v7:26.0.2
+        \ncom.android.support:design:26.0.2</string>
+
     <!-- read -->
     <string name="read_catalog">目录</string>
     <string name="read_night">夜间</string>

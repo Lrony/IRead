@@ -159,6 +159,9 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
                 // 加个延时，等待侧边栏关闭后再切换模式
                 new Handler().postDelayed(() -> swichNightMode(), 500);
                 break;
+            case R.id.action_about:
+                AppRouter.showAboutActivity(this);
+                break;
         }
         return false;
     }
