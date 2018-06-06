@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.lrony.iread.AppRouter;
 import com.lrony.iread.BuildConfig;
 import com.lrony.iread.R;
+import com.lrony.iread.base.BaseActivity;
 import com.lrony.iread.util.DisplayUtil;
 
 import java.text.SimpleDateFormat;
@@ -22,7 +23,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends BaseActivity {
 
     private static final String TAG = "StartActivity";
 
