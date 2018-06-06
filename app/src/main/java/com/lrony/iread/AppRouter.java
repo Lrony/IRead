@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.presentation.book.catalog.BookCatalogActivity;
 import com.lrony.iread.presentation.book.catalog.BookCatalogContract;
 import com.lrony.iread.presentation.book.detail.BookDetailActivity;
@@ -88,7 +89,7 @@ public class AppRouter {
     }
 
     //打开目录页面
-    public static void showBookCatalogActivity(Context context, String bookid) {
-        context.startActivity(BookCatalogActivity.newIntent(context, bookid));
+    public static void showBookCatalogActivity(Context context, String bookid, CollBookBean bookBean) {
+        context.startActivity(BookCatalogActivity.newIntent(context, bookid,bookBean));
     }
 }
