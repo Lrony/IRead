@@ -11,7 +11,7 @@
 
     <!-- 由于加入了夜间模式，背景色和前景色都需要注意 -->
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,10 +19,10 @@
             android:id="@+id/fab_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_gravity="right|bottom"
             android:layout_margin="16dp"
             android:clickable="true"
+            app:layout_behavior="com.lrony.iread.ui.help.ScrollAwareFABBehavior"
             app:srcCompat="@drawable/ic_vct_arrow_up" />
 
 
@@ -65,5 +65,5 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
-    </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </com.classic.common.MultipleStatusView>

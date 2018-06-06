@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".presentation.book.recommend.RecommendActivity">
 
-    <android.support.design.widget.CoordinatorLayout
+    <include layout="@layout/include_toolbar_bar_scroll" />
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.book.recommend.RecommendActivity">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/view_toolbar_bar" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <include layout="@layout/recycler_status_view" />
-        </FrameLayout>
-    </android.support.design.widget.CoordinatorLayout>
-
+        <include layout="@layout/recycler_status_view" />
+    </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
         android:clickable="true"
+        app:layout_behavior="com.lrony.iread.ui.help.ScrollAwareFABBehavior"
         app:srcCompat="@drawable/ic_vct_arrow_up" />
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
