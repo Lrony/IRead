@@ -13,6 +13,7 @@ import com.lrony.iread.presentation.book.catalog.BookCatalogActivity;
 import com.lrony.iread.presentation.book.catalog.BookCatalogContract;
 import com.lrony.iread.presentation.book.detail.BookDetailActivity;
 import com.lrony.iread.presentation.book.recommend.RecommendActivity;
+import com.lrony.iread.presentation.main.MainActivity;
 import com.lrony.iread.presentation.main.online.more.OnlineMoreActivity;
 import com.lrony.iread.presentation.search.SearchActivity;
 import com.lrony.iread.presentation.settings.SettingsActivity;
@@ -49,6 +50,11 @@ public class AppRouter {
             localIntent.putExtra("com.android.settings.ApplicationPkgName", context.getPackageName());
         }
         context.startActivity(localIntent);
+    }
+
+    public static void showMainActivity(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
     }
 
     // 打开搜索

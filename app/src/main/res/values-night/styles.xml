@@ -14,4 +14,13 @@
         <item name="android:textColorSecondary">@color/textSecondary</item>
     </style>
 
+    <style name="AppBaseTheme.Translucent" />
+
+    <style name="AppBaseTheme.Translucent.StateBar" />
+
+    <!-- 启动界面style -->
+    <style name="AppBaseTheme.Launcher" parent="AppBaseTheme.Translucent">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+
 </resources>

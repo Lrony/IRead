@@ -14,13 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.main.MainActivity">
+        <activity
+            android:name=".presentation.StartActivity"
+            android:theme="@style/AppBaseTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.main.MainActivity" />
         <activity android:name=".presentation.search.SearchActivity" />
         <activity android:name=".presentation.settings.SettingsActivity" />
         <activity android:name=".presentation.book.detail.BookDetailActivity" />
@@ -28,7 +31,7 @@
         <activity android:name=".presentation.read.ReadActivity" />
         <activity android:name=".presentation.main.online.more.OnlineMoreActivity" />
         <activity android:name=".presentation.book.catalog.BookCatalogActivity" />
-        <activity android:name=".presentation.about.AboutActivity"></activity>
+        <activity android:name=".presentation.about.AboutActivity" />
     </application>
 
 </manifest>
