@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IRead</string>
+    <string name="app_name">悦读</string>
     <string name="app_double_click_exit">再按一次退出</string>
 
     <string name="tab_main_local">本地书架</string>
