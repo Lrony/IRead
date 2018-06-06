@@ -195,7 +195,7 @@ public class PageView extends View {
         canvas.drawColor(mBgColor);
 
         //绘制动画
-        mPageAnim.draw(canvas);
+        if (mPageAnim != null) mPageAnim.draw(canvas);
     }
 
     @Override
@@ -276,7 +276,7 @@ public class PageView extends View {
     @Override
     public void computeScroll() {
         //进行滑动
-        mPageAnim.scrollAnim();
+        if (mPageAnim != null) mPageAnim.scrollAnim();
         super.computeScroll();
     }
 

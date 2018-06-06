@@ -34,6 +34,7 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.lrony.iread.AppManager;
 import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.BookChapterBean;
@@ -772,14 +773,14 @@ public class ReadActivity extends MvpActivity<ReadContract.Presenter> implements
     protected void onResume() {
         super.onResume();
         KLog.d(TAG, "onResume");
-        mWakeLock.acquire();
+        if (mWakeLock != null) mWakeLock.acquire();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         KLog.d(TAG, "onPause");
-        mWakeLock.release();
+        if (mWakeLock != null) mWakeLock.release();
         if (isCollected) {
             mPageLoader.saveRecord();
         }
