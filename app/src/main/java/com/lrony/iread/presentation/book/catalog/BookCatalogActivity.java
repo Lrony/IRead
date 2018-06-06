@@ -111,7 +111,9 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
         mRefreshView.setOnRefreshListener(this);
 
         mAdapter.setOnItemClickListener(((adapter, view, position) -> {
-            ReadActivity.startActivity(this, mCollBookBean, true, position + 1);
+            // 需要获取下本地书架是否存在
+            boolean isCollected = DBManger.getInstance().hasBookTb(mCollBookBean);
+            ReadActivity.startActivity(this, mCollBookBean, isCollected, position + 1);
         }));
 
         mStatusView.setOnRetryClickListener((v ->

@@ -40,14 +40,11 @@ public class ReadPresenter extends MvpBasePresenter<ReadContract.View> implement
     public void loadCategory(String bookId) {
         Disposable disposable = RemoteRepository.getInstance()
                 .getBookChapters(bookId)
-                .doOnSuccess(new Consumer<List<BookChapterBean>>() {
-                    @Override
-                    public void accept(List<BookChapterBean> bookChapterBeen) throws Exception {
-                        //进行设定BookChapter所属的书的id。
-                        for (BookChapterBean bookChapter : bookChapterBeen) {
-                            bookChapter.setId(MD5Utils.strToMd5By16(bookChapter.getLink()));
-                            bookChapter.setBookId(bookId);
-                        }
+                .doOnSuccess(bookChapterBeans -> {
+                    //进行设定BookChapter所属的书的id。
+                    for (BookChapterBean bookChapter : bookChapterBeans) {
+                        bookChapter.setId(MD5Utils.strToMd5By16(bookChapter.getLink()));
+                        bookChapter.setBookId(bookId);
                     }
                 })
                 .compose(RxUtils::toSimpleSingle)
