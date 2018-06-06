@@ -1,4 +1,4 @@
-package com.lrony.iread.presentation;
+package com.lrony.iread.presentation.start;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
