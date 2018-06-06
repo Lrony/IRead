@@ -91,6 +91,10 @@ public class LocalFragment extends MvpFragment<LocalContract.Presenter> implemen
             mMultipleStatusView.setOnRetryClickListener(mRetryClickListener);
         }
 
+        if (null != mSwipeRefreshLayout) {
+            mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        }
+
         if (null != mRecyclerView) {
             mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, ScreenUtil.isLAndscape(mContext) ? 4 : 3));
             mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorForeground));
