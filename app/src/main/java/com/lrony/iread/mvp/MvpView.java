@@ -22,5 +22,7 @@ public interface MvpView {
 
     void empty();
 
+    void nonetword();
+
     void complete();
 }

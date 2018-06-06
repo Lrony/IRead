@@ -50,6 +50,11 @@ public abstract class MvpFragment<P extends MvpPresenter> extends BaseFragment i
     }
 
     @Override
+    public void nonetword() {
+
+    }
+
+    @Override
     public void complete() {
 
     }

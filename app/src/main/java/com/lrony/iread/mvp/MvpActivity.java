@@ -49,6 +49,11 @@ public abstract class MvpActivity<P extends MvpPresenter> extends BaseActivity i
     }
 
     @Override
+    public void nonetword() {
+
+    }
+
+    @Override
     public void complete() {
 
     }
