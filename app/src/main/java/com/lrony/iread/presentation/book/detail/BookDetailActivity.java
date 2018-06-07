@@ -403,7 +403,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         KLog.d(TAG, "jugeCloseDialog mInfoLoadOK: " + mInfoLoadOK + ",mRecommendLoadOK: " + mRecommendLoadOK);
         if (mInfoLoadOK == true && mRecommendLoadOK == true) {
             if (mDialogHandler != null) {
-//                mDialogHandler.dismissProgressDialog();
+                mDialogHandler.dismissProgressDialog();
             }
         }
     }
