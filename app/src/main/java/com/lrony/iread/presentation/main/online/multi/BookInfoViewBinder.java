@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.ui.widget.ShapeTextView;
 import com.lrony.iread.util.ImageLoader;
 import com.lrony.iread.util.KLog;
@@ -76,13 +77,16 @@ public class BookInfoViewBinder extends ItemViewBinder<BookInfo, BookInfoViewBin
             this.majorCate = itemView.findViewById(R.id.tv_type);
             this.retentionRatio = itemView.findViewById(R.id.tv_retention_ratio);
 
-            itemView.setOnClickListener(v -> {
-                if (bookInfo != null) {
-                    String bookid = bookInfo.id;
-                    KLog.d(TAG, "bookid: " + bookid);
-                    AppRouter.showBookDetailActivity(context, bookid);
-                } else {
-                    KLog.d(TAG, "bookInfo is null !!!");
+            itemView.setOnClickListener(new OnMultiClickListener() {
+                @Override
+                public void onMultiClick(View v) {
+                    if (bookInfo != null) {
+                        String bookid = bookInfo.id;
+                        KLog.d(TAG, "bookid: " + bookid);
+                        AppRouter.showBookDetailActivity(context, bookid);
+                    } else {
+                        KLog.d(TAG, "bookInfo is null !!!");
+                    }
                 }
             });
         }
