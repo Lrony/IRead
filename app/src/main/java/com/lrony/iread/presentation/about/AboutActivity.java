@@ -49,7 +49,7 @@ public class AboutActivity extends BaseActivity {
         setContentView(R.layout.activity_about);
         // 使用ButterKnife代替findview
         ButterKnife.bind(this);
-        ToolbarHelper.initToolbar(this, R.id.toolbar, true, "关于悦读");
+        ToolbarHelper.initToolbar(this, R.id.toolbar, true, R.string.about_title);
         mTvVersion.setText(getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME);
     }
 

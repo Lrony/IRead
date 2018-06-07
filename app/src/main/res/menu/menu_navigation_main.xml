@@ -11,7 +11,7 @@
             android:title="@string/menu_main_night" />
         <item
             android:id="@+id/action_about"
-            android:icon="@drawable/ic_vct_emoticon"
+            android:icon="@drawable/ic_vct_help"
             android:title="@string/menu_main_about" />
     </group>
 </menu>

@@ -7,6 +7,7 @@
     <string name="menu_main_settings">系统设置</string>
     <string name="menu_main_night">夜间模式</string>
     <string name="menu_main_about">关于软件</string>
+    <string name="about_title">关于悦读</string>
 
     <string name="search_edit_hint">搜索在线书城</string>
     <string name="search_error">搜索失败</string>
@@ -109,5 +110,6 @@
     <string name="read_setting_flip_over_none">无</string>
 
     <string name="format_skip">跳过 %d</string>
+    <string name="start_tip">遇见你,真美好</string>
 
 </resources>

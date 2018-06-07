@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="188dp"
             android:layout_marginTop="10dp"
-            android:text="遇见你,真美好"
+            android:text="@string/start_tip"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_extra_large" />
 
