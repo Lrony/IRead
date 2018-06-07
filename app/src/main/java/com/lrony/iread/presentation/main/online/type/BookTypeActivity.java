@@ -24,6 +24,7 @@ import com.lrony.iread.presentation.main.online.multi.TypeViewBinder;
 import com.lrony.iread.presentation.main.online.type.multi.BookTypeItem;
 import com.lrony.iread.presentation.main.online.type.multi.BookTypeItemViewBinder;
 import com.lrony.iread.presentation.main.online.type.multi.BookTypeTitleViewBinder;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
 
@@ -32,7 +33,7 @@ import butterknife.ButterKnife;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 
-public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> implements BookTypeContract.View, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> implements BookTypeContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "BookTypeActivity";
 
@@ -109,7 +110,19 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
     private void initListener() {
         KLog.d(TAG, "initListener");
         mRefreshView.setOnRefreshListener(this);
-        mStatusView.setOnRetryClickListener(this);
+        mStatusView.setOnRetryClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                switch (v.getId()) {
+                    case R.id.empty_retry_view:
+                    case R.id.error_retry_view:
+                    case R.id.no_network_retry_view:
+                        KLog.d(TAG, "Retry");
+                        loadData(true);
+                        break;
+                }
+            }
+        });
     }
 
     private void loadData(boolean showRefreshView) {
@@ -158,17 +171,5 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
     @Override
     public void onRefresh() {
         loadData(false);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.empty_retry_view:
-            case R.id.error_retry_view:
-            case R.id.no_network_retry_view:
-                KLog.d(TAG, "Retry");
-                loadData(true);
-                break;
-        }
     }
 }

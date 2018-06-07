@@ -161,7 +161,12 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         KLog.d(TAG, "initListener");
         bindOnMultiClickListener(onMultiClickListener, mLeaderboard, mType);
         // 加载失败重试监听
-        mStatusView.setOnRetryClickListener((view) -> loadData());
+        mStatusView.setOnRetryClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                loadData();
+            }
+        });
 
         mFloatingBtnUp.setOnClickListener(new OnMultiClickListener() {
             @Override

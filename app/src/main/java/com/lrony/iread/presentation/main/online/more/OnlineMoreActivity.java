@@ -130,12 +130,16 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
         });
 
         // 加载失败重试监听
-        mStatusView.setOnRetryClickListener((view) -> loadData(true));
+        mStatusView.setOnRetryClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                loadData(true);
+            }
+        });
 
         mAdapter.setOnLoadMoreListener(this);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             AppRouter.showBookDetailActivity(this, mBooks.get(position).get_id());
-            AppManager.getInstance().finishActivity();
         });
     }
 
