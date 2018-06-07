@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.classic.common.MultipleStatusView;
+import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.BannerBean;
 import com.lrony.iread.model.bean.SortBookBean;
@@ -40,7 +41,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
 /**
  * Created by Lrony on 18-5-22.
  */
-public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implements OnlineContract.View {
+public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implements OnlineContract.View, View.OnClickListener {
 
     private static final String TAG = "OnlineFragment";
 
@@ -56,6 +57,10 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
     Banner mBanner;
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
+    @BindView(R.id.ll_online_type_leaderboard)
+    LinearLayout mLeaderboard;
+    @BindView(R.id.ll_online_type_type)
+    LinearLayout mType;
 
     // 轮播图滚动间隔
     private static final int BANNER_SCROLL_TIME = 2300;
@@ -153,6 +158,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
     private void initListener() {
         KLog.d(TAG, "initListener");
+        bindOnClickLister(this, mLeaderboard, mType);
         // 加载失败重试监听
         mStatusView.setOnRetryClickListener((view) -> loadData());
 
@@ -173,6 +179,20 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         KLog.d(TAG, "onStop");
         //结束轮播
         if (mBanner != null) mBanner.stopAutoPlay();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_online_type_leaderboard:
+                KLog.d(TAG, "onClick leaderboard");
+
+                break;
+            case R.id.ll_online_type_type:
+                KLog.d(TAG, "onClick type");
+                AppRouter.showBookTypeActivity(getContext());
+                break;
+        }
     }
 
     /**

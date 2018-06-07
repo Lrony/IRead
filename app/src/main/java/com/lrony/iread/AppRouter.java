@@ -17,6 +17,7 @@ import com.lrony.iread.presentation.book.detail.BookDetailActivity;
 import com.lrony.iread.presentation.book.recommend.RecommendActivity;
 import com.lrony.iread.presentation.main.MainActivity;
 import com.lrony.iread.presentation.main.online.more.OnlineMoreActivity;
+import com.lrony.iread.presentation.main.online.type.BookTypeActivity;
 import com.lrony.iread.presentation.search.SearchActivity;
 import com.lrony.iread.presentation.settings.SettingsActivity;
 import com.lrony.iread.util.DensityUtil;
@@ -91,11 +92,16 @@ public class AppRouter {
 
     //打开目录页面
     public static void showBookCatalogActivity(Context context, String bookid, CollBookBean bookBean) {
-        context.startActivity(BookCatalogActivity.newIntent(context, bookid,bookBean));
+        context.startActivity(BookCatalogActivity.newIntent(context, bookid, bookBean));
     }
 
     //打开关于页面
     public static void showAboutActivity(Context context) {
         context.startActivity(AboutActivity.newIntent(context));
+    }
+
+    //打开书籍分类页面
+    public static void showBookTypeActivity(Context context) {
+        context.startActivity(BookTypeActivity.newIntent(context));
     }
 }

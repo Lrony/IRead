@@ -8,6 +8,7 @@
     android:paddingTop="16dp">
 
     <LinearLayout
+        android:id="@+id/ll_online_type_leaderboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -29,6 +30,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_online_type_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
