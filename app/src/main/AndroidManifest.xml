@@ -32,7 +32,8 @@
         <activity android:name=".presentation.main.online.more.OnlineMoreActivity" />
         <activity android:name=".presentation.book.catalog.BookCatalogActivity" />
         <activity android:name=".presentation.about.AboutActivity" />
-        <activity android:name=".presentation.main.online.type.BookTypeActivity"></activity>
+        <activity android:name=".presentation.main.online.type.BookTypeActivity" />
+        <activity android:name=".presentation.ranking.RankingActivity"></activity>
     </application>
 
 </manifest>

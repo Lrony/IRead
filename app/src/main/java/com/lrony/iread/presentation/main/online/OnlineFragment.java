@@ -186,7 +186,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         switch (v.getId()) {
             case R.id.ll_online_type_leaderboard:
                 KLog.d(TAG, "onClick leaderboard");
-
+                AppRouter.showRankingActivity(getContext());
                 break;
             case R.id.ll_online_type_type:
                 KLog.d(TAG, "onClick type");

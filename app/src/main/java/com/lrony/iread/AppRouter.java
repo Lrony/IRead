@@ -18,6 +18,7 @@ import com.lrony.iread.presentation.book.recommend.RecommendActivity;
 import com.lrony.iread.presentation.main.MainActivity;
 import com.lrony.iread.presentation.main.online.more.OnlineMoreActivity;
 import com.lrony.iread.presentation.main.online.type.BookTypeActivity;
+import com.lrony.iread.presentation.ranking.RankingActivity;
 import com.lrony.iread.presentation.search.SearchActivity;
 import com.lrony.iread.presentation.settings.SettingsActivity;
 import com.lrony.iread.util.DensityUtil;
@@ -103,5 +104,10 @@ public class AppRouter {
     //打开书籍分类页面
     public static void showBookTypeActivity(Context context) {
         context.startActivity(BookTypeActivity.newIntent(context));
+    }
+
+    //打开排行榜页面
+    public static void showRankingActivity(Context context) {
+        context.startActivity(RankingActivity.newIntent(context));
     }
 }
