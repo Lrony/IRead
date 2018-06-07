@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.classic.common.MultipleStatusView;
@@ -20,6 +21,7 @@ import com.lrony.iread.R;
 import com.lrony.iread.model.bean.SortBookBean;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
@@ -120,7 +122,12 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
         KLog.d(TAG, "initListener");
 
         mRefreshView.setOnRefreshListener(this);
-        mFloatingBtnUp.setOnClickListener(v -> mRecyclerView.smoothScrollToPosition(0));
+        mFloatingBtnUp.setOnClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                mRecyclerView.smoothScrollToPosition(0);
+            }
+        });
 
         // 加载失败重试监听
         mStatusView.setOnRetryClickListener((view) -> loadData(true));

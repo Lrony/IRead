@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 
 import me.drakeet.multitype.ItemViewBinder;
 
@@ -52,8 +53,11 @@ public class TypeViewBinder extends ItemViewBinder<Type, TypeViewBinder.ViewHold
             this.title = itemView.findViewById(R.id.tv_title);
             this.more = itemView.findViewById(R.id.rl_recommend_more);
 
-            more.setOnClickListener(v -> {
-                AppRouter.showOnlineMoreActivity(context, type.title);
+            more.setOnClickListener(new OnMultiClickListener() {
+                @Override
+                public void onMultiClick(View v) {
+                    AppRouter.showOnlineMoreActivity(context, type.title);
+                }
             });
         }
     }

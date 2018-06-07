@@ -163,7 +163,12 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         // 加载失败重试监听
         mStatusView.setOnRetryClickListener((view) -> loadData());
 
-        mFloatingBtnUp.setOnClickListener(v -> mNestedScrollView.scrollTo(0, 0));
+        mFloatingBtnUp.setOnClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                mNestedScrollView.scrollTo(0, 0);
+            }
+        });
     }
 
     @Override

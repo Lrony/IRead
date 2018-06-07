@@ -12,6 +12,7 @@ import com.lrony.iread.AppRouter;
 import com.lrony.iread.BuildConfig;
 import com.lrony.iread.R;
 import com.lrony.iread.base.BaseActivity;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.util.DisplayUtil;
 
 import java.text.SimpleDateFormat;
@@ -42,7 +43,12 @@ public class StartActivity extends BaseActivity {
 
     private void initDisPlay() {
         mTvSkip = findViewById(R.id.tv_skip);
-        mTvSkip.setOnClickListener(v -> skip());
+        mTvSkip.setOnClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                skip();
+            }
+        });
         View contentView = findViewById(R.id.content_view);
         if (DisplayUtil.hasVirtualNavigationBar(this)) {
             contentView.setPadding(0, 0, 0, DisplayUtil.getNavigationBarHeight(this));

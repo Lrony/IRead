@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 
 import com.lrony.iread.pref.AppConfig;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.util.KLog;
 
 /**
@@ -51,6 +52,30 @@ public class BaseActivity extends BaseSuperActivity {
     }
 
     public void bindOnClickLister(View.OnClickListener listener, View... views) {
+        for (View view : views) {
+            view.setOnClickListener(listener);
+        }
+    }
+
+    public void bindOnMultiClickLister(OnMultiClickListener listener, @IdRes int... ids) {
+        for (int id : ids) {
+            View view = findViewById(id);
+            if (view != null) {
+                view.setOnClickListener(listener);
+            }
+        }
+    }
+
+    public void bindOnMultiClickLister(View rootView, OnMultiClickListener listener, @IdRes int... ids) {
+        for (int id : ids) {
+            View view = rootView.findViewById(id);
+            if (view != null) {
+                view.setOnClickListener(listener);
+            }
+        }
+    }
+
+    public void bindOnMultiClickLister(OnMultiClickListener listener, View... views) {
         for (View view : views) {
             view.setOnClickListener(listener);
         }

@@ -27,6 +27,7 @@ import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.model.db.table.SearchHistory;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.util.DensityUtil;
 import com.lrony.iread.util.InputMethodUtils;
@@ -136,11 +137,14 @@ public class SearchActivity extends MvpActivity<SearchContract.Presenter> implem
                             )
                     );
             tvClearSearchHistory.setGravity(Gravity.CENTER);
-            tvClearSearchHistory.setOnClickListener(v -> {
-                mSearchHistoryAdapter.removeAllFooterView();
-                DBManger.getInstance().clearSearchKeyword();
-                mSearchHistoryAdapter.getData().clear();
-                mSearchHistoryAdapter.notifyDataSetChanged();
+            tvClearSearchHistory.setOnClickListener(new OnMultiClickListener() {
+                @Override
+                public void onMultiClick(View v) {
+                    mSearchHistoryAdapter.removeAllFooterView();
+                    DBManger.getInstance().clearSearchKeyword();
+                    mSearchHistoryAdapter.getData().clear();
+                    mSearchHistoryAdapter.notifyDataSetChanged();
+                }
             });
             mSearchHistoryAdapter.addFooterView(tvClearSearchHistory);
         }
