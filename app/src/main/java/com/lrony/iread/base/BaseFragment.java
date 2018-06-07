@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.util.ToastUtil;
 
 import butterknife.ButterKnife;
@@ -59,6 +60,21 @@ public abstract class BaseFragment extends BaseSuperFragment {
     }
 
     public void bindOnClickLister(View.OnClickListener listener, View... views) {
+        for (View view : views) {
+            view.setOnClickListener(listener);
+        }
+    }
+
+    public void bindOnMultiClickListener(View rootView, OnMultiClickListener listener, @IdRes int... ids) {
+        for (int id : ids) {
+            View view = rootView.findViewById(id);
+            if (view != null) {
+                view.setOnClickListener(listener);
+            }
+        }
+    }
+
+    public void bindOnMultiClickListener(OnMultiClickListener listener, View... views) {
         for (View view : views) {
             view.setOnClickListener(listener);
         }

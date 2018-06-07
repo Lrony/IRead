@@ -25,6 +25,7 @@ import com.lrony.iread.presentation.main.online.multi.BookInfoViewBinder;
 import com.lrony.iread.presentation.main.online.multi.Type;
 import com.lrony.iread.presentation.main.online.multi.TypeViewBinder;
 import com.lrony.iread.ui.help.BannerImageLoader;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.util.KLog;
 import com.youth.banner.Banner;
@@ -41,7 +42,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
 /**
  * Created by Lrony on 18-5-22.
  */
-public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implements OnlineContract.View, View.OnClickListener {
+public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implements OnlineContract.View {
 
     private static final String TAG = "OnlineFragment";
 
@@ -158,7 +159,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
     private void initListener() {
         KLog.d(TAG, "initListener");
-        bindOnClickLister(this, mLeaderboard, mType);
+        bindOnMultiClickListener(onMultiClickListener, mLeaderboard, mType);
         // 加载失败重试监听
         mStatusView.setOnRetryClickListener((view) -> loadData());
 
@@ -181,19 +182,21 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         if (mBanner != null) mBanner.stopAutoPlay();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ll_online_type_leaderboard:
-                KLog.d(TAG, "onClick leaderboard");
-                AppRouter.showRankingActivity(getContext());
-                break;
-            case R.id.ll_online_type_type:
-                KLog.d(TAG, "onClick type");
-                AppRouter.showBookTypeActivity(getContext());
-                break;
+    private OnMultiClickListener onMultiClickListener = new OnMultiClickListener() {
+        @Override
+        public void onMultiClick(View v) {
+            switch (v.getId()) {
+                case R.id.ll_online_type_leaderboard:
+                    KLog.d(TAG, "onClick leaderboard");
+                    AppRouter.showRankingActivity(getContext());
+                    break;
+                case R.id.ll_online_type_type:
+                    KLog.d(TAG, "onClick type");
+                    AppRouter.showBookTypeActivity(getContext());
+                    break;
+            }
         }
-    }
+    };
 
     /**
      * 设置Adapter的Items
