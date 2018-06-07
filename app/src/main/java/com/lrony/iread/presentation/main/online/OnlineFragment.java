@@ -23,6 +23,8 @@ import com.lrony.iread.mvp.MvpFragment;
 import com.lrony.iread.pref.Constant;
 import com.lrony.iread.presentation.main.online.multi.BookInfo;
 import com.lrony.iread.presentation.main.online.multi.BookInfoViewBinder;
+import com.lrony.iread.presentation.main.online.multi.More;
+import com.lrony.iread.presentation.main.online.multi.OpenMoreViewBinder;
 import com.lrony.iread.presentation.main.online.multi.Type;
 import com.lrony.iread.presentation.main.online.multi.TypeViewBinder;
 import com.lrony.iread.ui.help.BannerImageLoader;
@@ -148,6 +150,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         mAdapter = new MultiTypeAdapter();
         mAdapter.register(Type.class, new TypeViewBinder(getContext()));
         mAdapter.register(BookInfo.class, new BookInfoViewBinder(getContext()));
+        mAdapter.register(More.class, new OpenMoreViewBinder(getContext()));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setSmoothScrollbarEnabled(true);
         layoutManager.setAutoMeasureEnabled(true);
@@ -216,6 +219,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
             mItems.add(new BookInfo(bean.get_id(), bean.getTitle(), bean.getShortIntro(), bean.getAuthor()
                     , Constant.IMG_BASE_URL + bean.getCover(), bean.getLatelyFollower() + "", bean.getRetentionRatio()));
         }
+
         mItems.add(new Type(getString(R.string.noline_female_hot_recommend)));
         for (CollBookBean bean : femaleData) {
             mItems.add(new BookInfo(bean.get_id(), bean.getTitle(), bean.getShortIntro(), bean.getAuthor()

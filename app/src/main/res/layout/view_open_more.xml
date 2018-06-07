@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorForeground">
+
+    <TextView
+        android:id="@+id/tv_open_more"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="查看更多"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size_medium" />
+</RelativeLayout>
