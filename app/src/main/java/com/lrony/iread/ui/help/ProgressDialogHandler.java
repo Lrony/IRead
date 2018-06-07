@@ -29,6 +29,7 @@ public class ProgressDialogHandler {
         this.mContext = context;
         this.mProgressCancelListener = mProgressCancelListener;
         this.mCancelable = cancelable;
+        initProgressDialog();
     }
 
     public void initProgressDialog() {
@@ -51,9 +52,14 @@ public class ProgressDialogHandler {
                 });
             }
 
-            if (!mDialog.isShowing()) {
-                mDialog.show();
-            }
+        }
+    }
+
+    public void showProgressDialog() {
+
+        if (null != mDialog && !mDialog.isShowing()) {
+            mDialog.show();
+
         }
     }
 

@@ -229,8 +229,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         super.loading();
         if (mDialogHandler != null) {
             KLog.e(TAG, "loading SHOW_PROGRESS_DIALOG");
-            mDialogHandler.initProgressDialog();
+            mDialogHandler.showProgressDialog();
         } else {
+            mDialogHandler.initProgressDialog();
             KLog.e(TAG, "loading mDialogHandler is null");
         }
     }
@@ -273,8 +274,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void addBookLoading() {
         if (mAddDialogHandler != null) {
-            mAddDialogHandler.initProgressDialog();
+            mAddDialogHandler.showProgressDialog();
         } else {
+            mAddDialogHandler.initProgressDialog();
             KLog.e(TAG, "loading mAddDialogHandler is null");
         }
     }
@@ -291,7 +293,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void succeed() {
         super.succeed();
-        if(mAddDialogHandler!=null){
+        if (mAddDialogHandler != null) {
             mAddDialogHandler.dismissProgressDialog();
         }
         isCollected = true;
