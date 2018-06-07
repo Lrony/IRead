@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.classic.common.MultipleStatusView;
 import com.lrony.iread.AppManager;
 import com.lrony.iread.AppRouter;
@@ -22,6 +23,7 @@ import com.lrony.iread.model.bean.BookDetailRecommendBookBean;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.ui.help.OnMultiClickListener;
+import com.lrony.iread.ui.help.OnMultiItemClickListener;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
@@ -122,15 +124,13 @@ public class RecommendActivity extends MvpActivity<RecommendContract.Presenter> 
                 })
         );
 
-        mAdapter.setOnItemClickListener(((adapter, view, position) -> {
-            view.setOnClickListener(new OnMultiClickListener() {
-                @Override
-                public void onMultiClick(View v) {
-                    AppRouter.showBookDetailActivity(
-                            RecommendActivity.this, mRecommendBooks.get(position).get_id());
-                }
-            });
-        }));
+        mAdapter.setOnItemClickListener(new OnMultiItemClickListener() {
+            @Override
+            public void OnMultiItemClick(BaseQuickAdapter adapter, View view, int position) {
+                AppRouter.showBookDetailActivity(
+                        RecommendActivity.this, mRecommendBooks.get(position).get_id());
+            }
+        });
 
         mFabUp.setOnClickListener(new OnMultiClickListener() {
             @Override

@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.BookDetailBean;
@@ -34,6 +35,7 @@ import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.pref.Constant;
 import com.lrony.iread.presentation.read.ReadActivity;
 import com.lrony.iread.ui.help.OnMultiClickListener;
+import com.lrony.iread.ui.help.OnMultiItemClickListener;
 import com.lrony.iread.ui.help.ProgressCancelListener;
 import com.lrony.iread.ui.help.ProgressDialogHandler;
 import com.lrony.iread.ui.help.ToolbarHelper;
@@ -203,15 +205,13 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
             }
         });
 
-        mRecommendAdapter.setOnItemClickListener((adapter, view, position) ->
-                view.setOnClickListener(new OnMultiClickListener() {
-                    @Override
-                    public void onMultiClick(View v) {
-                        AppRouter.showBookDetailActivity(
-                                BookDetailActivity.this, mRecommendBooks.get(position).get_id());
-                    }
-                })
-        );
+        mRecommendAdapter.setOnItemClickListener(new OnMultiItemClickListener() {
+            @Override
+            public void OnMultiItemClick(BaseQuickAdapter adapter, View view, int position) {
+                AppRouter.showBookDetailActivity(
+                        BookDetailActivity.this, mRecommendBooks.get(position).get_id());
+            }
+        });
 
         mIvCover.setOnClickListener(onMultiClickListener);
         mRlRecommendMore.setOnClickListener(onMultiClickListener);

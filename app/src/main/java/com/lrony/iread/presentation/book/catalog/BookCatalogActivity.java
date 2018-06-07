@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.classic.common.MultipleStatusView;
 import com.lrony.iread.AppManager;
 import com.lrony.iread.R;
@@ -26,6 +27,7 @@ import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.presentation.read.ReadActivity;
 import com.lrony.iread.ui.help.OnMultiClickListener;
+import com.lrony.iread.ui.help.OnMultiItemClickListener;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
@@ -116,16 +118,14 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
 
         mRefreshView.setOnRefreshListener(this);
 
-        mAdapter.setOnItemClickListener(((adapter, view, position) -> {
-            view.setOnClickListener(new OnMultiClickListener() {
-                @Override
-                public void onMultiClick(View v) {
-                    // 需要获取下本地书架是否存在
-                    boolean isCollected = DBManger.getInstance().hasBookTb(mCollBookBean);
-                    ReadActivity.startActivity(BookCatalogActivity.this, mCollBookBean, isCollected, position + 1);
-                }
-            });
-        }));
+        mAdapter.setOnItemClickListener(new OnMultiItemClickListener() {
+            @Override
+            public void OnMultiItemClick(BaseQuickAdapter adapter, View view, int position) {
+                // 需要获取下本地书架是否存在
+                boolean isCollected = DBManger.getInstance().hasBookTb(mCollBookBean);
+                ReadActivity.startActivity(BookCatalogActivity.this, mCollBookBean, isCollected, position + 1);
+            }
+        });
 
         mStatusView.setOnRetryClickListener((v ->
                 v.setOnClickListener(new OnMultiClickListener() {
