@@ -113,4 +113,5 @@
     <string name="format_skip">跳过 %d</string>
     <string name="start_tip">遇见你,真美好</string>
 
+    <string name="book_type_count">%1$d 本</string>
 </resources>

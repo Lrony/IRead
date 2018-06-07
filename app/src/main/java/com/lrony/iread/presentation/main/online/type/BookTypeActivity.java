@@ -4,18 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.classic.common.MultipleStatusView;
 import com.lrony.iread.R;
+import com.lrony.iread.model.bean.BookSortBean;
 import com.lrony.iread.model.bean.packages.BookSortPackage;
 import com.lrony.iread.model.bean.packages.BookSubSortPackage;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
+import com.lrony.iread.presentation.main.online.multi.Type;
+import com.lrony.iread.presentation.main.online.multi.TypeViewBinder;
+import com.lrony.iread.presentation.main.online.type.multi.BookTypeItem;
+import com.lrony.iread.presentation.main.online.type.multi.BookTypeItemViewBinder;
+import com.lrony.iread.presentation.main.online.type.multi.BookTypeTitleViewBinder;
 import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
 
@@ -36,6 +44,8 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
     SwipeRefreshLayout mRefreshView;
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
+
+    private static final int SPAN_COUNT = 3;
 
     private MultiTypeAdapter mAdapter;
     private Items mItems = new Items();
@@ -81,6 +91,19 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
 
         mRefreshView.setColorSchemeResources(R.color.colorAccent);
 
+        mRecyclerView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorForeground));
+        GridLayoutManager layoutManager = new GridLayoutManager(this, SPAN_COUNT);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return (mItems.get(position) instanceof Type) ? SPAN_COUNT : 1;
+            }
+        });
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new MultiTypeAdapter();
+        mAdapter.register(Type.class, new BookTypeTitleViewBinder());
+        mAdapter.register(BookTypeItem.class, new BookTypeItemViewBinder());
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void initListener() {
@@ -97,7 +120,16 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
     @Override
     public void finishLoadType(BookSortPackage sort, BookSubSortPackage subSort) {
         KLog.d(TAG, "finishLoadType");
-
+        mItems.add(new Type("男生"));
+        for (BookSortBean bean : sort.getMale()) {
+            mItems.add(new BookTypeItem(bean.getName(), bean.getBookCount() + ""));
+        }
+        mItems.add(new Type("女生"));
+        for (BookSortBean bean : sort.getFemale()) {
+            mItems.add(new BookTypeItem(bean.getName(), bean.getBookCount() + ""));
+        }
+        mAdapter.setItems(mItems);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

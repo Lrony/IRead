@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorForeground"
     tools:context=".presentation.main.online.type.BookTypeActivity">
 
     <include layout="@layout/include_toolbar_bar_scroll" />
