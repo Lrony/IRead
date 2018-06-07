@@ -8,6 +8,8 @@ import com.lrony.iread.model.bean.BookDetailRecommendBookBean;
 import com.lrony.iread.model.bean.ChapterInfoBean;
 import com.lrony.iread.model.bean.SortBookBean;
 import com.lrony.iread.model.bean.packages.BookChapterPackage;
+import com.lrony.iread.model.bean.packages.BookSortPackage;
+import com.lrony.iread.model.bean.packages.BookSubSortPackage;
 import com.lrony.iread.model.bean.packages.SearchBookPackage;
 
 import java.util.ArrayList;
@@ -87,6 +89,24 @@ public class RemoteRepository {
     public Single<List<BookDetailRecommendBookBean>> getDetailRecommendBookPackage(String bookId) {
         return mBookApi.getDetailRecommendBookPackage(bookId)
                 .map(bean -> bean.getBooks());
+    }
+
+    /**
+     * 获取书籍的分类
+     *
+     * @return
+     */
+    public Single<BookSortPackage> getBookSortPackage() {
+        return mBookApi.getBookSortPackage();
+    }
+
+    /**
+     * 获取书籍的子分类
+     *
+     * @return
+     */
+    public Single<BookSubSortPackage> getBookSubSortPackage() {
+        return mBookApi.getBookSubSortPackage();
     }
 
     /**
