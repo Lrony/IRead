@@ -102,7 +102,7 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new MultiTypeAdapter();
         mAdapter.register(Type.class, new BookTypeTitleViewBinder());
-        mAdapter.register(BookTypeItem.class, new BookTypeItemViewBinder());
+        mAdapter.register(BookTypeItem.class, new BookTypeItemViewBinder(this));
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -123,11 +123,11 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
         mItems.clear();
         mItems.add(new Type("男生"));
         for (BookSortBean bean : sort.getMale()) {
-            mItems.add(new BookTypeItem(bean.getName(), bean.getBookCount() + ""));
+            mItems.add(new BookTypeItem(bean.getName(), bean.getBookCount()));
         }
         mItems.add(new Type("女生"));
         for (BookSortBean bean : sort.getFemale()) {
-            mItems.add(new BookTypeItem(bean.getName(), bean.getBookCount() + ""));
+            mItems.add(new BookTypeItem(bean.getName(), bean.getBookCount()));
         }
         mAdapter.setItems(mItems);
         mAdapter.notifyDataSetChanged();

@@ -10,9 +10,9 @@ public class BookTypeItem {
     @NonNull
     public final String title;
     @NonNull
-    public final String num;
+    public final int num;
 
-    public BookTypeItem(@NonNull String title, @NonNull String num) {
+    public BookTypeItem(@NonNull String title, @NonNull int num) {
         this.title = title;
         this.num = num;
     }

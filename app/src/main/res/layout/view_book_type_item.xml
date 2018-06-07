@@ -21,7 +21,7 @@
         android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/textPrimary"
-        android:textSize="@dimen/text_size_medium"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_small"
         tools:text="@string/book_type_count" />
 </LinearLayout>
