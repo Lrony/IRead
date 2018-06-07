@@ -17,6 +17,7 @@ import com.classic.common.MultipleStatusView;
 import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.BannerBean;
+import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.model.bean.SortBookBean;
 import com.lrony.iread.mvp.MvpFragment;
 import com.lrony.iread.pref.Constant;
@@ -106,8 +107,7 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
 
     private void loadData() {
         KLog.d(TAG, "loadData");
-        getPresenter().loadFemaleHotBooks(HOT_BOOK_GET_NUMBER);
-        getPresenter().loadMaleHotBooks(HOT_BOOK_GET_NUMBER);
+        getPresenter().loadRemoteBooks();
     }
 
     private void initView() {
@@ -208,44 +208,21 @@ public class OnlineFragment extends MvpFragment<OnlineContract.Presenter> implem
         }
     };
 
-    /**
-     * 设置Adapter的Items
-     * 只有全部的数据获取到了才能设置
-     */
-    private void jugeSetItems() {
-        KLog.d(TAG, "jugeSetItems");
-        if (isLoadMaleBooks == true && isLoadFemaleBooks == true) {
-            KLog.d(TAG, "load ok");
-            mAdapter.setItems(mItems);
-            mAdapter.notifyDataSetChanged();
-            complete();
-        } else {
-            KLog.d(TAG, "loading data... isLoadMaleBooks: " + isLoadMaleBooks + ",isLoadFemaleBooks: " + isLoadFemaleBooks);
-        }
-    }
-
     @Override
-    public void finishLoadMaleBooks(List<SortBookBean> books) {
-        KLog.d(TAG, "finishLoadMaleBooks");
+    public void finishLoad(List<CollBookBean> maleData, List<CollBookBean> femaleData) {
+        KLog.d(TAG, "finishLoad");
         mItems.add(new Type(getString(R.string.noline_male_hot_recommend)));
-        for (SortBookBean bean : books) {
+        for (CollBookBean bean : maleData) {
             mItems.add(new BookInfo(bean.get_id(), bean.getTitle(), bean.getShortIntro(), bean.getAuthor()
-                    , Constant.IMG_BASE_URL + bean.getCover(), bean.getMajorCate(), bean.getRetentionRatio()));
+                    , Constant.IMG_BASE_URL + bean.getCover(), bean.getLatelyFollower() + "", bean.getRetentionRatio()));
         }
-        isLoadMaleBooks = true;
-        jugeSetItems();
-    }
-
-    @Override
-    public void finishLoadFemaleBooks(List<SortBookBean> books) {
-        KLog.d(TAG, "finishLoadFemaleBooks");
         mItems.add(new Type(getString(R.string.noline_female_hot_recommend)));
-        for (SortBookBean bean : books) {
+        for (CollBookBean bean : femaleData) {
             mItems.add(new BookInfo(bean.get_id(), bean.getTitle(), bean.getShortIntro(), bean.getAuthor()
-                    , Constant.IMG_BASE_URL + bean.getCover(), bean.getMajorCate(), bean.getRetentionRatio()));
+                    , Constant.IMG_BASE_URL + bean.getCover(), bean.getLatelyFollower() + "", bean.getRetentionRatio()));
         }
-        isLoadFemaleBooks = true;
-        jugeSetItems();
+        mAdapter.setItems(mItems);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

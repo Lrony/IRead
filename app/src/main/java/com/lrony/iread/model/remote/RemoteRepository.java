@@ -6,6 +6,7 @@ import com.lrony.iread.model.bean.BookChapterBean;
 import com.lrony.iread.model.bean.BookDetailBean;
 import com.lrony.iread.model.bean.BookDetailRecommendBookBean;
 import com.lrony.iread.model.bean.ChapterInfoBean;
+import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.model.bean.SortBookBean;
 import com.lrony.iread.model.bean.packages.BookChapterPackage;
 import com.lrony.iread.model.bean.packages.BookSortPackage;
@@ -57,6 +58,17 @@ public class RemoteRepository {
         return mBookApi.getKeyWordPacakge(query)
                 .map(bean -> bean.getKeywords());
 
+    }
+
+    /**
+     * 获取推荐书籍
+     *
+     * @param gender
+     * @return
+     */
+    public Single<List<CollBookBean>> getRecommendBooks(String gender) {
+        return mBookApi.getRecommendBookPackage(gender)
+                .map(bean -> bean.getBooks());
     }
 
     /**

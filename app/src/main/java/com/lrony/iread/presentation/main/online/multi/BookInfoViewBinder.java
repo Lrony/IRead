@@ -3,6 +3,7 @@ package com.lrony.iread.presentation.main.online.multi;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,8 @@ public class BookInfoViewBinder extends ItemViewBinder<BookInfo, BookInfoViewBin
         holder.title.setText(item.title);
         holder.author.setText(item.author);
         holder.shortIntro.setText(item.shortIntro);
-        holder.majorCate.setText(item.majorCate);
-        holder.retentionRatio.setText(item.retentionRatio + "");
+        holder.majorCate.setText(item.majorCate + "活跃");
+        holder.retentionRatio.setText(item.retentionRatio + "%留存");
 
         ImageLoader.load(context, item.cover, holder.cover);
     }
