@@ -8,9 +8,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.classic.common.MultipleStatusView;
 import com.lrony.iread.R;
+import com.lrony.iread.model.bean.packages.BookSortPackage;
+import com.lrony.iread.model.bean.packages.BookSubSortPackage;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.ui.help.ToolbarHelper;
@@ -18,8 +21,10 @@ import com.lrony.iread.util.KLog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.drakeet.multitype.Items;
+import me.drakeet.multitype.MultiTypeAdapter;
 
-public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> implements BookTypeContract.View {
+public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> implements BookTypeContract.View, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     private static final String TAG = "BookTypeActivity";
 
@@ -31,6 +36,9 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
     SwipeRefreshLayout mRefreshView;
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
+
+    private MultiTypeAdapter mAdapter;
+    private Items mItems = new Items();
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, BookTypeActivity.class);
@@ -58,6 +66,7 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
         getPresenter().start();
         initView();
         initListener();
+        loadData(true);
     }
 
     @NonNull
@@ -76,5 +85,57 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
 
     private void initListener() {
         KLog.d(TAG, "initListener");
+        mRefreshView.setOnRefreshListener(this);
+        mStatusView.setOnRetryClickListener(this);
+    }
+
+    private void loadData(boolean showRefreshView) {
+        KLog.d(TAG, "initListener");
+        getPresenter().loadTypeData(showRefreshView);
+    }
+
+    @Override
+    public void finishLoadType(BookSortPackage sort, BookSubSortPackage subSort) {
+        KLog.d(TAG, "finishLoadType");
+
+    }
+
+    @Override
+    public void complete() {
+        super.complete();
+        KLog.d(TAG, "complete");
+        mStatusView.showContent();
+        mRefreshView.setRefreshing(false);
+    }
+
+    @Override
+    public void loading() {
+        super.loading();
+        KLog.d(TAG, "loading");
+        mStatusView.showLoading();
+    }
+
+    @Override
+    public void error() {
+        super.error();
+        KLog.d(TAG, "error");
+        mStatusView.showError();
+    }
+
+    @Override
+    public void onRefresh() {
+        loadData(false);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.empty_retry_view:
+            case R.id.error_retry_view:
+            case R.id.no_network_retry_view:
+                KLog.d(TAG, "Retry");
+                loadData(true);
+                break;
+        }
     }
 }
