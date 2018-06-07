@@ -71,6 +71,4 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:' + libs.retrofitVersion
     // Db
     implementation 'org.greenrobot:greendao:' + libs.greendaoVersion
-    // Other
-    implementation 'com.orhanobut:logger:' + libs.loggerVersion
 }

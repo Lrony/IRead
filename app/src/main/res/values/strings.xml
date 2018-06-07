@@ -68,10 +68,28 @@
 
     <string name="app_introduce">悦读致力于打造绿色健康、无广告的阅读平台，为广大读者提供优质健康的阅读服务。
         \n\n数据内容来源于 http://www.xxxxxx.com</string>
-    <string name="open_source_related">com.android.support:appcompat-v7:26.0.2
-        \ncom.android.support:recyclerview-v7:26.0.2
-        \ncom.android.support:cardview-v7:26.0.2
-        \ncom.android.support:design:26.0.2</string>
+    <string name="open_source_related">
+        com.android.support:support-v4:27.1.1
+        \ncom.android.support:appcompat-v7:27.1.1
+        \ncom.android.support:recyclerview-v7:27.1.1
+        \ncom.android.support:cardview-v7:27.1.1
+        \ncom.android.support:design:27.1.1
+        \nme.yokeyword:fragmentation:1.3.3
+        \ncom.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40
+        \ncom.github.bumptech.glide:compiler:4.6.1
+        \ncom.jakewharton:butterknife:8.8.1
+        \nme.zhanghai.android.materialprogressbar:library:1.4.1
+        \ncom.classic.common:multiple-status-view:1.4
+        \ncom.wang.avi:library:2.1.3
+        \ncom.youth.banner:banner:1.4.10
+        \nme.drakeet.multitype:multitype:3.4.4
+        \nio.reactivex.rxjava2:rxandroid:2.0.1
+        \nio.reactivex.rxjava2:rxjava:2.0.1
+        \ncom.squareup.retrofit2:retrofit:2.4.0
+        \ncom.squareup.retrofit2:converter-gson:2.4.0
+        \ncom.squareup.retrofit2:adapter-rxjava2:2.4.0
+        \norg.greenrobot:greendao:3.2.2
+    </string>
 
     <!-- read -->
     <string name="read_catalog">目录</string>

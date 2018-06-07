@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.online.more.OnlineMoreActivity">
 
+    <include layout="@layout/include_toolbar_bar_scroll" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <include layout="@layout/include_recycler_status_view" />
+    </FrameLayout>
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_up"
         android:layout_width="wrap_content"
@@ -15,14 +26,4 @@
         android:clickable="true"
         app:layout_behavior="com.lrony.iread.ui.help.ScrollAwareFABBehavior"
         app:srcCompat="@drawable/ic_vct_arrow_up" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <include layout="@layout/include_toolbar_bar_scroll" />
-
-        <include layout="@layout/include_recycler_status_view" />
-    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
