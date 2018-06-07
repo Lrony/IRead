@@ -30,6 +30,7 @@ public class LocalAdapter extends CommonAdapter<CollBookBean> {
     @Override
     protected void convert(CommonViewHolder helper, CollBookBean item) {
         helper.setText(R.id.tv_title, item.getTitle());
+        helper.setVisible(R.id.tv_updated, item.getIsUpdate());
         ImageLoader.load(mContext, Constant.IMG_BASE_URL + item.getCover(), helper.getView(R.id.iv_cover));
     }
 }
