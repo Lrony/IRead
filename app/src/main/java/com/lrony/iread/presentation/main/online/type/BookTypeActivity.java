@@ -120,6 +120,7 @@ public class BookTypeActivity extends MvpActivity<BookTypeContract.Presenter> im
     @Override
     public void finishLoadType(BookSortPackage sort, BookSubSortPackage subSort) {
         KLog.d(TAG, "finishLoadType");
+        mItems.clear();
         mItems.add(new Type("男生"));
         for (BookSortBean bean : sort.getMale()) {
             mItems.add(new BookTypeItem(bean.getName(), bean.getBookCount() + ""));
