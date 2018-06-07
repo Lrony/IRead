@@ -3,13 +3,15 @@ package com.lrony.iread.ui.help;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Handler;
-import android.os.Message;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.lrony.iread.AppRouter;
+import com.lrony.iread.R;
+import com.lrony.iread.util.DensityUtil;
 import com.lrony.iread.util.KLog;
 
-public class ProgressDialogHandler extends Handler {
+public class ProgressDialogHandler {
 
     private final static String TAG = "ProgressDialogHandler";
     public static final int SHOW_PROGRESS_DIALOG = 1;
@@ -29,9 +31,10 @@ public class ProgressDialogHandler extends Handler {
         this.mCancelable = cancelable;
     }
 
-    private void initProgressDialog() {
+    public void initProgressDialog() {
         if (mDialog == null) {
-            mDialog = AppRouter.getLoadingDialog(mContext);
+            initDialog();
+//            mDialog = AppRouter.getLoadingDialog(mContext);
             mDialog.setCancelable(mCancelable);
 
             if (mCancelable) {
@@ -44,9 +47,6 @@ public class ProgressDialogHandler extends Handler {
                 mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        mDialog.dismiss();
-                        mContext = null;
-                        mDialog = null;
                     }
                 });
             }
@@ -57,7 +57,7 @@ public class ProgressDialogHandler extends Handler {
         }
     }
 
-    private void dismissProgressDialog() {
+    public void dismissProgressDialog() {
         KLog.d(TAG, "dismissProgressDialog");
         if (mDialog != null && mDialog.isShowing()) {
             KLog.d(TAG, "dismiss");
@@ -65,16 +65,13 @@ public class ProgressDialogHandler extends Handler {
         }
     }
 
-    @Override
-    public void handleMessage(Message msg) {
-        switch (msg.what) {
-            case SHOW_PROGRESS_DIALOG:
-                initProgressDialog();
-                break;
-            case DISMISS_PROGRESS_DIALOG:
-                KLog.d(TAG, "DISMISS_PROGRESS_DIALOG");
-                dismissProgressDialog();
-                break;
-        }
+    private void initDialog() {
+        // 首先得到整个View
+        View view = LayoutInflater.from(mContext).inflate(
+                R.layout.dialog_loading, null);
+        // 创建自定义样式的Dialog
+        mDialog = new Dialog(mContext, R.style.AlertDialogStyle);
+        mDialog.setContentView(view, new ViewGroup.LayoutParams(
+                DensityUtil.dp2px(mContext, 96), DensityUtil.dp2px(mContext, 96)));
     }
 }
