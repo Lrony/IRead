@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.lrony.iread.AppManager;
 import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.model.bean.BookDetailBean;
@@ -37,7 +36,6 @@ import com.lrony.iread.presentation.read.ReadActivity;
 import com.lrony.iread.ui.help.ProgressCancelListener;
 import com.lrony.iread.ui.help.ProgressDialogHandler;
 import com.lrony.iread.ui.help.ToolbarHelper;
-import com.lrony.iread.ui.widget.LoadingDialog;
 import com.lrony.iread.ui.widget.ShapeTextView;
 import com.lrony.iread.util.ImageLoader;
 import com.lrony.iread.util.KLog;
@@ -45,7 +43,6 @@ import com.lrony.iread.util.ScreenUtil;
 import com.lrony.iread.util.Shares;
 import com.lrony.iread.util.StringUtils;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,10 +66,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     //传入的书籍ID
     private String mBookId;
 
-    //    private ProgressDialogHandler mDialogHandler;
-//    private ProgressDialogHandler mAddDialogHandler;
-    private LoadingDialog mLoadDialog;
-    private LoadingDialog mAddDialog;
+    private ProgressDialogHandler mDialogHandler;
+    private ProgressDialogHandler mAddDialogHandler;
+
     private BookDetailRecommendAdapter mRecommendAdapter;
     private BookDetailBean mBook;
     private CollBookBean mCollBookBean;
@@ -217,10 +213,8 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     private void initView() {
         KLog.d(TAG, "initView");
-//        mDialogHandler = new ProgressDialogHandler(this, this, true);
-//        mAddDialogHandler = new ProgressDialogHandler(this, this, false);
-        mLoadDialog = new LoadingDialog(this);
-        mAddDialog = new LoadingDialog(this);
+        mDialogHandler = new ProgressDialogHandler(this, this, true);
+        mAddDialogHandler = new ProgressDialogHandler(this, this, false);
         mRvRecommendBook.setNestedScrollingEnabled(false);
         //设置layoutManager,根据横屏竖屏分别设置每行item数量
         mRvRecommendBook.setLayoutManager(new GridLayoutManager(
@@ -233,10 +227,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void loading() {
         super.loading();
-        if (mLoadDialog != null) {
+        if (mDialogHandler != null) {
             KLog.e(TAG, "loading SHOW_PROGRESS_DIALOG");
-//            mDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
-            mLoadDialog.show();
+            mDialogHandler.initProgressDialog();
         } else {
             KLog.e(TAG, "loading mDialogHandler is null");
         }
@@ -251,17 +244,15 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void onCancelProgress() {
         KLog.d(TAG, "onCancelProgress");
-        mLoadDialog.close();
-
+        if (mDialogHandler != null) {
+            mDialogHandler.dismissProgressDialog();
+        }
 //        AppManager.getInstance().finishActivity();
     }
 
     @Override
     public void finshLoadBookInfo(BookDetailBean book) {
         KLog.d(TAG, "finshLoadBookInfo");
-        if (null == book) {
-            AppManager.getInstance().finishActivity(this);
-        }
         mBook = book;
         refreshBookInfo();
         mInfoLoadOK = true;
@@ -281,9 +272,8 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     @Override
     public void addBookLoading() {
-        if (mAddDialog != null) {
-//            mAddDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
-            mAddDialog.show();
+        if (mAddDialogHandler != null) {
+            mAddDialogHandler.initProgressDialog();
         } else {
             KLog.e(TAG, "loading mAddDialogHandler is null");
         }
@@ -291,7 +281,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 
     @Override
     public void addBookError() {
-        mAddDialog.close();
+        if (mAddDialogHandler != null) {
+            mAddDialogHandler.dismissProgressDialog();
+        }
         isCollected = false;
         showToast("加入书架失败，请检查网络");
     }
@@ -299,7 +291,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     @Override
     public void succeed() {
         super.succeed();
-        mAddDialog.close();
+        if(mAddDialogHandler!=null){
+            mAddDialogHandler.dismissProgressDialog();
+        }
         isCollected = true;
 
     }
@@ -408,7 +402,9 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     private void jugeCloseDialog() {
         KLog.d(TAG, "jugeCloseDialog mInfoLoadOK: " + mInfoLoadOK + ",mRecommendLoadOK: " + mRecommendLoadOK);
         if (mInfoLoadOK == true && mRecommendLoadOK == true) {
-            mLoadDialog.close();
+            if (mDialogHandler != null) {
+//                mDialogHandler.dismissProgressDialog();
+            }
         }
     }
 
