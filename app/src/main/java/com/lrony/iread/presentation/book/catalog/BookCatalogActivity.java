@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.classic.common.MultipleStatusView;
 import com.lrony.iread.AppManager;
@@ -24,6 +25,7 @@ import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.presentation.read.ReadActivity;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
@@ -115,16 +117,31 @@ public class BookCatalogActivity extends MvpActivity<BookCatalogContract.Present
         mRefreshView.setOnRefreshListener(this);
 
         mAdapter.setOnItemClickListener(((adapter, view, position) -> {
-            // 需要获取下本地书架是否存在
-            boolean isCollected = DBManger.getInstance().hasBookTb(mCollBookBean);
-            ReadActivity.startActivity(this, mCollBookBean, isCollected, position + 1);
+            view.setOnClickListener(new OnMultiClickListener() {
+                @Override
+                public void onMultiClick(View v) {
+                    // 需要获取下本地书架是否存在
+                    boolean isCollected = DBManger.getInstance().hasBookTb(mCollBookBean);
+                    ReadActivity.startActivity(BookCatalogActivity.this, mCollBookBean, isCollected, position + 1);
+                }
+            });
         }));
 
         mStatusView.setOnRetryClickListener((v ->
-                getPresenter().loadBookInfo(true, mBookId)
+                v.setOnClickListener(new OnMultiClickListener() {
+                    @Override
+                    public void onMultiClick(View v) {
+                        getPresenter().loadBookInfo(true, mBookId);
+                    }
+                })
         ));
 
-        mFabUp.setOnClickListener((v -> mRecyclerView.scrollToPosition(0)));
+        mFabUp.setOnClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                mRecyclerView.scrollToPosition(0);
+            }
+        });
 
     }
 

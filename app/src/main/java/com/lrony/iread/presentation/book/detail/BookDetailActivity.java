@@ -33,6 +33,7 @@ import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.pref.Constant;
 import com.lrony.iread.presentation.read.ReadActivity;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.ui.help.ProgressCancelListener;
 import com.lrony.iread.ui.help.ProgressDialogHandler;
 import com.lrony.iread.ui.help.ToolbarHelper;
@@ -53,7 +54,7 @@ import butterknife.ButterKnife;
  * Created by liuxiaobin on 18-5-23.
  */
 
-public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter> implements BookDetailContract.View, ProgressCancelListener, View.OnClickListener {
+public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter> implements BookDetailContract.View, ProgressCancelListener {
 
     private final static String TAG = "BookDetailActivity";
 
@@ -150,7 +151,7 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
     private void initListener() {
         KLog.d(TAG, "initListener");
 
-        bindOnClickLister(this, R.id.fl_add_bookcase, R.id.fl_download_book,
+        bindOnMultiClickLister(onMultiClickListener, R.id.fl_add_bookcase, R.id.fl_download_book,
                 R.id.fl_open_book, R.id.ll_book_detail_catalog, R.id.rl_recommend_more);
         mTvDescribe.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
             @Override
@@ -203,12 +204,17 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         });
 
         mRecommendAdapter.setOnItemClickListener((adapter, view, position) ->
-                AppRouter.showBookDetailActivity(
-                        BookDetailActivity.this, mRecommendBooks.get(position).get_id())
+                view.setOnClickListener(new OnMultiClickListener() {
+                    @Override
+                    public void onMultiClick(View v) {
+                        AppRouter.showBookDetailActivity(
+                                BookDetailActivity.this, mRecommendBooks.get(position).get_id());
+                    }
+                })
         );
 
-        mIvCover.setOnClickListener(this);
-        mRlRecommendMore.setOnClickListener(this);
+        mIvCover.setOnClickListener(onMultiClickListener);
+        mRlRecommendMore.setOnClickListener(onMultiClickListener);
     }
 
     private void initView() {
@@ -349,16 +355,13 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
         }
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fl_add_bookcase:
-                KLog.d(TAG, "onClick: fl_add_bookcase");
+
+    private OnMultiClickListener onMultiClickListener = new OnMultiClickListener() {
+        @Override
+        public void onMultiClick(View v) {
+            switch (v.getId()) {
+                case R.id.fl_add_bookcase:
+                    KLog.d(TAG, "onClick: fl_add_bookcase");
 //                boolean hasBook = DBManger.getInstance().hasBookTb(mBookId);
 //                KLog.d(TAG, "onClick: fl_add_bookcase hasBook = " + hasBook);
 //                if (hasBook) {
@@ -368,38 +371,41 @@ public class BookDetailActivity extends MvpActivity<BookDetailContract.Presenter
 //                    refreshBookAddStatus();
 //                }
 
-                //点击存储
-                if (isCollected) {
-                    showComfirmDialog();
-                } else {
-                    getPresenter().addToBookShelf(mCollBookBean);
-                }
+                    //点击存储
+                    if (isCollected) {
+                        showComfirmDialog();
+                    } else {
+                        getPresenter().addToBookShelf(mCollBookBean);
+                    }
 
-                break;
-            case R.id.fl_download_book:
-                KLog.d(TAG, "onClick: fl_download_book");
-                break;
-            case R.id.fl_open_book:
-                KLog.d(TAG, "onClick: fl_open_book");
-                startActivityForResult(new Intent(this, ReadActivity.class)
-                        .putExtra(ReadActivity.EXTRA_IS_COLLECTED, isCollected)
-                        .putExtra(ReadActivity.EXTRA_COLL_BOOK, mCollBookBean), REQUEST_READ);
-                break;
-            case R.id.ll_book_detail_catalog:
-                KLog.d(TAG, "onClick: ll_book_detail_catalog");
+                    break;
+                case R.id.fl_download_book:
+                    KLog.d(TAG, "onClick: fl_download_book");
+                    break;
+                case R.id.fl_open_book:
+                    KLog.d(TAG, "onClick: fl_open_book");
+                    startActivityForResult(new Intent(BookDetailActivity.this, ReadActivity.class)
+                            .putExtra(ReadActivity.EXTRA_IS_COLLECTED, isCollected)
+                            .putExtra(ReadActivity.EXTRA_COLL_BOOK, mCollBookBean), REQUEST_READ);
+                    break;
+                case R.id.ll_book_detail_catalog:
+                    KLog.d(TAG, "onClick: ll_book_detail_catalog");
 //                ReadActivity.startActivity(this, mCollBookBean, true);
-                AppRouter.showBookCatalogActivity(this, mBookId, mCollBookBean);
-                break;
-            case R.id.rl_recommend_more:
-                KLog.d(TAG, "onClick: rl_recommend_more");
-                AppRouter.showRecommendActivity(
-                        BookDetailActivity.this, mBookId);
-                break;
-            case R.id.iv_cover:
-                KLog.d(TAG, "onClick: iv_cover");
-                break;
+                    AppRouter.showBookCatalogActivity(BookDetailActivity.this, mBookId, mCollBookBean);
+                    break;
+                case R.id.rl_recommend_more:
+                    KLog.d(TAG, "onClick: rl_recommend_more");
+                    AppRouter.showRecommendActivity(
+                            BookDetailActivity.this, mBookId);
+                    break;
+                case R.id.iv_cover:
+                    KLog.d(TAG, "onClick: iv_cover");
+                    break;
+            }
+
         }
-    }
+    };
+
 
     private void jugeCloseDialog() {
         KLog.d(TAG, "jugeCloseDialog mInfoLoadOK: " + mInfoLoadOK + ",mRecommendLoadOK: " + mRecommendLoadOK);
