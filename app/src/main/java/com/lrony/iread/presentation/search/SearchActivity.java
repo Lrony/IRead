@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.classic.common.MultipleStatusView;
 import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
@@ -28,6 +29,7 @@ import com.lrony.iread.model.db.table.SearchHistory;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.ui.help.OnMultiClickListener;
+import com.lrony.iread.ui.help.OnMultiItemClickListener;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.util.DensityUtil;
 import com.lrony.iread.util.InputMethodUtils;
@@ -196,12 +198,15 @@ public class SearchActivity extends MvpActivity<SearchContract.Presenter> implem
         });
         mEtSearch.post(() -> InputMethodUtils.showSoftInput(mEtSearch));
 
-        mKeyWordAdapter.setOnItemClickListener((adapter, view, position) -> {
-            String keyWord = mKeyWords.get(position);
-            KLog.d(TAG, keyWord);
-            mEtSearch.setText(keyWord);
-            mEtSearch.setSelection(keyWord.length());
-            goSearchResult();
+        mKeyWordAdapter.setOnItemClickListener(new OnMultiItemClickListener() {
+            @Override
+            public void OnMultiItemClick(BaseQuickAdapter adapter, View view, int position) {
+                String keyWord = mKeyWords.get(position);
+                KLog.d(TAG, keyWord);
+                mEtSearch.setText(keyWord);
+                mEtSearch.setSelection(keyWord.length());
+                goSearchResult();
+            }
         });
 
         mSearchBookAdapter.setOnItemClickListener((adapter, view, position) -> {

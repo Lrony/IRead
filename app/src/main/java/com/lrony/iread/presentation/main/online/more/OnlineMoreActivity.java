@@ -22,6 +22,7 @@ import com.lrony.iread.model.bean.SortBookBean;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
 import com.lrony.iread.ui.help.OnMultiClickListener;
+import com.lrony.iread.ui.help.OnMultiItemClickListener;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.ui.help.ToolbarHelper;
 import com.lrony.iread.util.KLog;
@@ -138,8 +139,11 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
         });
 
         mAdapter.setOnLoadMoreListener(this);
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            AppRouter.showBookDetailActivity(this, mBooks.get(position).get_id());
+        mAdapter.setOnItemClickListener(new OnMultiItemClickListener() {
+            @Override
+            public void OnMultiItemClick(BaseQuickAdapter adapter, View view, int position) {
+                AppRouter.showBookDetailActivity(OnlineMoreActivity.this, mBooks.get(position).get_id());
+            }
         });
     }
 
