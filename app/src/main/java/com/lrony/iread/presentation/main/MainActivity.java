@@ -20,12 +20,13 @@ import com.lrony.iread.AppRouter;
 import com.lrony.iread.R;
 import com.lrony.iread.mvp.MvpActivity;
 import com.lrony.iread.pref.AppConfig;
+import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.util.KLog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends MvpActivity<MainContract.Presenter> implements MainContract.View, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends MvpActivity<MainContract.Presenter> implements MainContract.View, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
@@ -91,7 +92,8 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
 
     private void initListener() {
         // 绑定一些View的点击事件
-        bindOnClickLister(this, mIvMenu, mIvSearch, mTvLocal, mTvOnline);
+        bindOnClickLister(this, mTvLocal, mTvOnline);
+        bindOnMultiClickLister(onMultiClickListener, mIvMenu, mIvSearch);
 
         // ViewPager切换事件
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -120,12 +122,6 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_menu:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                break;
-            case R.id.iv_search:
-                AppRouter.showSearchActivity(this);
-                break;
             case R.id.tv_local:
                 mViewPager.setCurrentItem(0);
                 break;
@@ -134,6 +130,20 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
                 break;
         }
     }
+
+    private OnMultiClickListener onMultiClickListener = new OnMultiClickListener() {
+        @Override
+        public void onMultiClick(View v) {
+            switch (v.getId()) {
+                case R.id.iv_menu:
+                    mDrawerLayout.openDrawer(GravityCompat.START);
+                    break;
+                case R.id.iv_search:
+                    AppRouter.showSearchActivity(MainActivity.this);
+                    break;
+            }
+        }
+    };
 
     // 切换Tab
     private void swichTab(int position) {

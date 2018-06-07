@@ -39,7 +39,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends MvpActivity<SearchContract.Presenter> implements SearchContract.View, View.OnClickListener {
+public class SearchActivity extends MvpActivity<SearchContract.Presenter> implements SearchContract.View {
 
     private static final String TAG = "SearchActivity";
 
@@ -154,7 +154,7 @@ public class SearchActivity extends MvpActivity<SearchContract.Presenter> implem
     private void initListener() {
         // 下面用到了lambda表达式简化Listener的写法
 
-        bindOnClickLister(this, mIvActionSearch, mIvArrowBack, mIvActionClear);
+        bindOnMultiClickLister(onMultiClickListener, mIvActionSearch, mIvArrowBack, mIvActionClear);
 
         // 搜索框内文字改变事件
         mEtSearch.setOnEditorActionListener((v, actionId, event) -> {
@@ -229,21 +229,23 @@ public class SearchActivity extends MvpActivity<SearchContract.Presenter> implem
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_arrow_back:
-                onBackPressed();
-                InputMethodUtils.hideSoftInput(this);
-                break;
-            case R.id.iv_action_search:
-                goSearchResult();
-                break;
-            case R.id.iv_action_clear:
-                mEtSearch.setText("");
-                break;
+    private OnMultiClickListener onMultiClickListener = new OnMultiClickListener() {
+        @Override
+        public void onMultiClick(View v) {
+            switch (v.getId()) {
+                case R.id.iv_arrow_back:
+                    onBackPressed();
+                    InputMethodUtils.hideSoftInput(SearchActivity.this);
+                    break;
+                case R.id.iv_action_search:
+                    goSearchResult();
+                    break;
+                case R.id.iv_action_clear:
+                    mEtSearch.setText("");
+                    break;
+            }
         }
-    }
+    };
 
     private void goSearchResult() {
         KLog.d(TAG, "goSearchResult");
