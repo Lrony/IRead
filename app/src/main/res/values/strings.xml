@@ -59,6 +59,9 @@
     <string name="menu_book_catalog_swich">倒序</string>
     <string name="menu_bookdetail_share">分享</string>
 
+    <string name="load_more_failure">加载失败，点击重试</string>
+    <string name="list_the_end">没有更多数据</string>
+
     <!--mode-->
     <string name="nb.mode.night">夜间</string>
     <string name="nb.mode.morning">日间</string>

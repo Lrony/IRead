@@ -25,6 +25,7 @@ import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.ui.help.OnMultiItemClickListener;
 import com.lrony.iread.ui.help.RecyclerViewItemDecoration;
 import com.lrony.iread.ui.help.ToolbarHelper;
+import com.lrony.iread.ui.widget.CustomLoadMoreView;
 import com.lrony.iread.util.KLog;
 
 import java.util.ArrayList;
@@ -116,6 +117,7 @@ public class OnlineMoreActivity extends MvpActivity<OnlineMoreContract.Presenter
                 .create());
 
         mAdapter = new OnlineMoreAdapter(this, mBooks);
+        mAdapter.setLoadMoreView(new CustomLoadMoreView());
         mRecyclerView.setAdapter(mAdapter);
     }
 
