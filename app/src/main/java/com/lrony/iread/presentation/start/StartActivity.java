@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,6 +41,19 @@ public class StartActivity extends BaseActivity {
     TextView mTvName;
     @BindView(R.id.tv_username)
     TextView mTvUserName;
+    @BindView(R.id.tv_date_normal)
+    TextView mTvDateNormal;
+    @BindView(R.id.tv_date_hot)
+    TextView mTvDateHot;
+    @BindView(R.id.ll_welcome_normal)
+    LinearLayout mLlWelcomeNormal;
+    @BindView(R.id.ll_welcome_hot)
+    LinearLayout mLlWelcomeHot;
+    @BindView(R.id.tv_version_name)
+    TextView mTvVersion;
+    @BindView(R.id.content_view)
+    FrameLayout mFrmContent;
+
 
     private Disposable mSubscribe;
 
@@ -63,28 +77,31 @@ public class StartActivity extends BaseActivity {
                 skip();
             }
         });
-        View contentView = findViewById(R.id.content_view);
         if (DisplayUtil.hasVirtualNavigationBar(this)) {
-            contentView.setPadding(0, 0, 0, DisplayUtil.getNavigationBarHeight(this));
+            mFrmContent.setPadding(0, 0, 0, DisplayUtil.getNavigationBarHeight(this));
         }
-        TextView tvVersionName = findViewById(R.id.tv_version_name);
-        tvVersionName.setText(BuildConfig.VERSION_NAME);
-        LinearLayout llWelcome = findViewById(R.id.ll_welcome);
-        TextView tvDate = findViewById(R.id.tv_date);
+        mTvVersion.setText(BuildConfig.VERSION_NAME);
         SimpleDateFormat format2 = new SimpleDateFormat("yyyy年MM月dd日，EEEE");
-        tvDate.setText(format2.format(new Date()));
+        mTvDateNormal.setText(format2.format(new Date()));
+        mTvDateHot.setText(format2.format(new Date()));
 
         mWYHotDatas = DBManger.getInstance().loadWYHotData();
         KLog.d(TAG, "mWYHotDatas size " + mWYHotDatas.size());
-        if (mWYHotDatas != null) {
+        if (mWYHotDatas != null && mWYHotDatas.size() > 0) {
+            mLlWelcomeNormal.setVisibility(View.GONE);
+            mLlWelcomeHot.setVisibility(View.VISIBLE);
             WYHotBean bean = mWYHotDatas.get(mWYHotDatas.size() - 1);
             mTvContent.setText(bean.getContent());
             mTvName.setText("歌曲《" + bean.getName() + "》");
             mTvUserName.setText("摘自网易云用户 " + bean.getUsername());
+        } else {
+            mLlWelcomeNormal.setVisibility(View.VISIBLE);
+            mLlWelcomeHot.setVisibility(View.GONE);
         }
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_in);
-        llWelcome.startAnimation(animation);
+        mLlWelcomeNormal.startAnimation(animation);
+        mLlWelcomeHot.startAnimation(animation);
     }
 
     private void startCountDown(int second) {

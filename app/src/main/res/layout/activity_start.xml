@@ -6,57 +6,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/ll_welcome"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
+    <LinearLayout
+        android:id="@+id/ll_welcome_normal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <!--<android.support.v7.widget.AppCompatImageView-->
-    <!--android:id="@+id/iv_smile"-->
-    <!--android:layout_width="128dp"-->
-    <!--android:layout_height="128dp"-->
-    <!--app:srcCompat="@drawable/ic_vector_smile" />-->
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_smile"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            app:srcCompat="@drawable/ic_vector_smile" />
 
-    <!--<TextView-->
-    <!--android:id="@+id/tv_date"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="24dp"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_extra_large"-->
-    <!--tools:text="2017年11月3日,星期五" />-->
+        <TextView
+            android:id="@+id/tv_date_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_extra_large"
+            tools:text="2017年11月3日,星期五" />
 
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="188dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="@string/start_tip"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_extra_large" />-->
-
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
-
-    <!--</RelativeLayout>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="188dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/start_tip"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_extra_large" />
 
 
-    <!--</LinearLayout>-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_welcome"
+        android:id="@+id/ll_welcome_hot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tv_date_hot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
