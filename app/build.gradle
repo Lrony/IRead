@@ -21,7 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         greendao {
-            schemaVersion 4
+            schemaVersion 5
         }
     }
     //是否移除lint检查的error

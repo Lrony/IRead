@@ -68,6 +68,8 @@ public class MainActivity extends MvpActivity<MainContract.Presenter> implements
         getPresenter().start();
         initView();
         initListener();
+
+        getPresenter().loadWYHotData();
     }
 
     @NonNull

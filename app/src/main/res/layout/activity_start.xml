@@ -6,45 +6,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_welcome"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<android.support.v7.widget.AppCompatImageView-->
+    <!--android:id="@+id/iv_smile"-->
+    <!--android:layout_width="128dp"-->
+    <!--android:layout_height="128dp"-->
+    <!--app:srcCompat="@drawable/ic_vector_smile" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_date"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="24dp"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="@dimen/text_size_extra_large"-->
+    <!--tools:text="2017年11月3日,星期五" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="188dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:text="@string/start_tip"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="@dimen/text_size_extra_large" />-->
+
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--</RelativeLayout>-->
+
+
+    <!--</LinearLayout>-->
+
     <LinearLayout
         android:id="@+id/ll_welcome"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
         android:orientation="vertical">
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/iv_smile"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            app:srcCompat="@drawable/ic_vector_smile" />
 
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_extra_large"
             tools:text="2017年11月3日,星期五" />
 
         <TextView
+            android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="188dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/start_tip"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="18dp"
+            android:lineSpacingExtra="8dp"
+            android:text="昨天，我和我最喜欢的人成了恋人。"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_extra_large" />
+            android:textSize="@dimen/text_size_medium" />
 
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="好きなので。"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </RelativeLayout>
-
-
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="雨宮天"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium" />
     </LinearLayout>
 
     <LinearLayout

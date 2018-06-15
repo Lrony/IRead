@@ -1,6 +1,5 @@
 package com.lrony.iread.presentation.start;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -12,14 +11,19 @@ import com.lrony.iread.AppRouter;
 import com.lrony.iread.BuildConfig;
 import com.lrony.iread.R;
 import com.lrony.iread.base.BaseActivity;
+import com.lrony.iread.model.bean.WYHotBean;
+import com.lrony.iread.model.db.DBManger;
 import com.lrony.iread.ui.help.OnMultiClickListener;
 import com.lrony.iread.util.DisplayUtil;
+import com.lrony.iread.util.KLog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -30,13 +34,23 @@ public class StartActivity extends BaseActivity {
 
     @BindView(R.id.tv_skip)
     TextView mTvSkip;
+    @BindView(R.id.tv_content)
+    TextView mTvContent;
+    @BindView(R.id.tv_name)
+    TextView mTvName;
+    @BindView(R.id.tv_username)
+    TextView mTvUserName;
 
     private Disposable mSubscribe;
+
+    private List<WYHotBean> mWYHotDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        // 使用ButterKnife代替findview
+        ButterKnife.bind(this);
         initDisPlay();
         startCountDown(3);
     }
@@ -55,10 +69,20 @@ public class StartActivity extends BaseActivity {
         }
         TextView tvVersionName = findViewById(R.id.tv_version_name);
         tvVersionName.setText(BuildConfig.VERSION_NAME);
-        LinearLayout llWelcome = (LinearLayout) findViewById(R.id.ll_welcome);
+        LinearLayout llWelcome = findViewById(R.id.ll_welcome);
         TextView tvDate = findViewById(R.id.tv_date);
         SimpleDateFormat format2 = new SimpleDateFormat("yyyy年MM月dd日，EEEE");
         tvDate.setText(format2.format(new Date()));
+
+        mWYHotDatas = DBManger.getInstance().loadWYHotData();
+        KLog.d(TAG, "mWYHotDatas size " + mWYHotDatas.size());
+        if (mWYHotDatas != null) {
+            WYHotBean bean = mWYHotDatas.get(mWYHotDatas.size() - 1);
+            mTvContent.setText(bean.getContent());
+            mTvName.setText("摘自《" + bean.getName() + "》");
+            mTvUserName.setText("摘自网易云用户 " + bean.getUsername());
+        }
+
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_in);
         llWelcome.startAnimation(animation);
     }

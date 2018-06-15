@@ -1,5 +1,6 @@
 package com.lrony.iread.model.remote;
 
+import com.lrony.iread.model.bean.WYHotBean;
 import com.lrony.iread.model.bean.WeatherBean;
 
 import retrofit2.Call;
@@ -20,4 +21,7 @@ public interface OtherApi {
      */
     @GET("weather/json.shtml")
     Call<WeatherBean> getWeatherInfo(@Query("city") String city);
+
+    @GET("music/wy.php")
+    Call<WYHotBean> getWYHotData();
 }

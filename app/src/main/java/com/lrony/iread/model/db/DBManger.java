@@ -10,6 +10,8 @@ import com.lrony.iread.model.bean.BookRecordBean;
 import com.lrony.iread.model.bean.BookRecordBeanDao;
 import com.lrony.iread.model.bean.CollBookBean;
 import com.lrony.iread.model.bean.CollBookBeanDao;
+import com.lrony.iread.model.bean.WYHotBean;
+import com.lrony.iread.model.bean.WYHotBeanDao;
 import com.lrony.iread.model.db.table.DaoSession;
 import com.lrony.iread.model.db.table.SearchHistory;
 import com.lrony.iread.model.db.table.SearchHistoryDao;
@@ -84,6 +86,35 @@ public final class DBManger {
         return searchHistoryDao
                 .queryBuilder()
                 .orderDesc(SearchHistoryDao.Properties.Timestamp)
+                .list();
+    }
+
+    //********************************************************************
+
+    public void saveWYHotData(WYHotBean bean) {
+        if (bean != null) {
+            WYHotBeanDao wyHotBeanDao = mDaoSession.getWYHotBeanDao();
+            boolean hasKey = wyHotBeanDao.hasKey(bean);
+            wyHotBeanDao.insert(bean);
+        }
+    }
+
+    public void deleteWYHotData(WYHotBean bean) {
+        if (bean != null) {
+            WYHotBeanDao wyHotBeanDao = mDaoSession.getWYHotBeanDao();
+            wyHotBeanDao.delete(bean);
+        }
+    }
+
+    public void clearWYHotData() {
+        WYHotBeanDao wyHotBeanDao = mDaoSession.getWYHotBeanDao();
+        wyHotBeanDao.deleteAll();
+    }
+
+    public List<WYHotBean> loadWYHotData() {
+        WYHotBeanDao wyHotBeanDao = mDaoSession.getWYHotBeanDao();
+        return wyHotBeanDao
+                .queryBuilder()
                 .list();
     }
 

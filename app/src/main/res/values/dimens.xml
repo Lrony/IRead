@@ -6,7 +6,7 @@
     <dimen name="text_size_medium">14.0sp</dimen>
     <dimen name="text_size_large">16.0sp</dimen>
     <dimen name="text_size_xlarge">18.0sp</dimen>
-    <dimen name="text_size_extra_large">22.0sp</dimen>
+    <dimen name="text_size_extra_large">20.0sp</dimen>
 
     <dimen name="elevation_app_bar">0dp</dimen>
     <dimen name="compat_bottom_navigation_shadow_height">1dp</dimen>
