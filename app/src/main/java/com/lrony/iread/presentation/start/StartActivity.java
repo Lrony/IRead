@@ -66,7 +66,7 @@ public class StartActivity extends BaseActivity {
         // 使用ButterKnife代替findview
         ButterKnife.bind(this);
         initDisPlay();
-        startCountDown(3);
+        startCountDown(4);
     }
 
     private void initDisPlay() {
