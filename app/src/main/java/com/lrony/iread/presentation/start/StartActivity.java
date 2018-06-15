@@ -79,7 +79,7 @@ public class StartActivity extends BaseActivity {
         if (mWYHotDatas != null) {
             WYHotBean bean = mWYHotDatas.get(mWYHotDatas.size() - 1);
             mTvContent.setText(bean.getContent());
-            mTvName.setText("摘自《" + bean.getName() + "》");
+            mTvName.setText("歌曲《" + bean.getName() + "》");
             mTvUserName.setText("摘自网易云用户 " + bean.getUsername());
         }
 
