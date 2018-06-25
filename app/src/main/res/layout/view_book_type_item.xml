@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/textPrimary"
-        android:textSize="@dimen/text_size_large"
+        android:textSize="@dimen/text_size_medium"
         tools:text="玄幻" />
 
     <TextView
@@ -22,6 +22,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/textSecondary"
-        android:textSize="@dimen/text_size_small"
+        android:textSize="@dimen/text_size_micro"
         tools:text="@string/book_type_count" />
 </LinearLayout>
